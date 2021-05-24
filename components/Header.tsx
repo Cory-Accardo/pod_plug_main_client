@@ -1,3 +1,8 @@
+/**
+ * Created by Haowen Liu in 2021
+ * A header component
+ */
+
 import Link from "next/link";
 
 import Image from "../components/Image";

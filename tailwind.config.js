@@ -7,9 +7,15 @@ module.exports = {
       colors: {
         "theme-dark": "#08457D",
         white: "#FFFFFF",
+        "title-black": "#12172B",
+        "subtitle-gray": "#61636E",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
+        acumin: ["acumin-pro", "sans-serif"],
+      },
+      borderWidth: {
+        3: "3px",
       },
     },
   },

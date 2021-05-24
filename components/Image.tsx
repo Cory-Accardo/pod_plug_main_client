@@ -1,5 +1,5 @@
 /**
- * Made by Haowen Liu in 2021
+ * Created by Haowen Liu in 2021
  * This is an replacement for next/image using images optimized and on build time.
  *
  * Design is inspired by next/image.
