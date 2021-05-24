@@ -4,6 +4,7 @@
  */
 
 import Head from "next/head";
+import Footer from "../components/Footer";
 
 import Header from "../components/Header";
 import Image from "../components/Image";
@@ -17,54 +18,168 @@ export default function Home() {
       </Head>
       {/* Header */}
       <Header current="/" />
-      <div className="text-center text-black text-thin font-raleway text-lg shadow-md">
+      <div className="text-lg text-center text-black shadow-md text-thin font-raleway">
         Cashless Convenience in Age-gated Venues
       </div>
 
-      {/* Main content */}
-      <div
-        className="flex flex-row justify-around relative"
-        style={{ height: "52rem" }}
-      >
-        <div className="flex flex-col relative">
+      {/* Main */}
+      <main className="bg-background-blue">
+        {/* First page */}
+        <div className="relative flex flex-row justify-around h-page">
+          <div className="relative flex flex-col">
+            <div
+              className="mt-48 font-bold font-acumin text-7xl text-title-black"
+              style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+            >
+              Join Pod Rewards
+            </div>
+            <div className="mt-4 text-3xl font-semibold font-raleway text-subtitle-gray">
+              Get exclusive offers, discounts, and rebates
+            </div>
+            <input
+              type="text"
+              className="self-start w-3/4 p-1 mt-2 text-lg rounded-lg border-3 border-subtitle-gray text-subtitle-gray"
+            ></input>
+            <button className="self-start px-8 py-1 mt-3 text-lg font-semibold rounded-lg border-3 border-subtitle-gray text-subtitle-gray font-raleway">
+              Sign Up
+            </button>
+          </div>
           <div
-            className="font-acumin font-bold text-7xl text-title-black mt-48"
-            style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
+            className="absolute bottom-0 block w-full"
+            style={{
+              backgroundImage: 'url("skyline_full_1080p.png")',
+              backgroundSize: "contain",
+              backgroundRepeat: "repeat-x",
+              height: "24rem",
+            }}
+          ></div>
+          <div
+            className="relative"
+            style={{ width: "calc(52rem / 2249 * 1315)" }}
           >
-            Join Pod Rewards
+            <Image
+              src="/kiosk_full"
+              alt="Pod Plug kiosk"
+              layout="responsive"
+              height={2249}
+              width={1315}
+            />
           </div>
-          <div className="text-3xl font-raleway font-semibold mt-4 text-subtitle-gray">
-            Get exclusive offers, discounts, and rebates
+        </div>
+
+        {/* Second page */}
+        <div className="relative mt-32 h-page">
+          <div
+            className="relative flex flex-col w-1/2 p-16 bg-white transform -translate-y-1/2 top-1/2 pr-60"
+            style={{ borderRadius: "60px 0px 0px 60px", left: "15%" }}
+          >
+            <div className="text-5xl">Convenience When Out</div>
+            <div className="mt-6 text-lg leading-loose">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </div>
           </div>
-          <input
-            type="text"
-            className="border-3 border-subtitle-gray rounded-lg mt-2 text-lg p-1 text-subtitle-gray w-3/4 self-start"
-          ></input>
-          <button className="border-3 border-subtitle-gray rounded-lg mt-3 text-lg py-1 text-subtitle-gray self-start px-8 font-raleway font-semibold">
-            Sign Up
-          </button>
         </div>
-        <div
-          className="w-full bottom-0 h-96 block absolute"
-          style={{
-            backgroundImage: 'url("skyline_full_1080p.png")',
-            backgroundSize: "contain",
-            backgroundRepeat: "repeat-x",
-          }}
-        ></div>
-        <div
-          className="relative"
-          style={{ width: "calc(52rem / 2249 * 1315)" }}
-        >
-          <Image
-            src="/kiosk_full"
-            alt="Pod Plug kiosk"
-            layout="responsive"
-            height={2249}
-            width={1315}
-          />
+
+        {/* Third page */}
+        <div className="relative flex flex-col mt-16 h-page">
+          <div className="w-full mt-16 text-5xl text-center text-white">
+            Our Brand Partners
+          </div>
+          <div className="flex flex-col items-center mt-24">
+            <div className="grid grid-flow-row grid-cols-3 gap-8">
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="w-32 h-32"
+                  style={{
+                    backgroundImage: 'url("/juul.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="w-32 h-32"
+                  style={{
+                    backgroundImage: 'url("/hqd.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="w-32 h-32"
+                  style={{
+                    backgroundImage: 'url("/fume.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="w-32 h-32"
+                  style={{
+                    backgroundImage: 'url("/fume.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="w-40 h-40"
+                  style={{
+                    backgroundImage: 'url("/airbar.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+              <div
+                className="flex items-center justify-center w-64 h-64 bg-white"
+                style={{ borderRadius: "1.5rem" }}
+              >
+                <div
+                  className="h-36 w-36"
+                  style={{
+                    backgroundImage: 'url("/vuse.png")',
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "contain",
+                    backgroundPosition: "center center",
+                  }}
+                ></div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+        <div className="pt-64"></div>
+      </main>
+      <Footer />
     </>
   );
 }

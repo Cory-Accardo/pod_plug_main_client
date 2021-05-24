@@ -13,7 +13,7 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   return (
-    <div className="bg-theme-dark flex flex-row px-32 py-4 items-center">
+    <div className="flex flex-row items-center px-32 py-4 bg-theme-dark">
       <div className="relative w-20 mr-auto">
         <Image
           src="/logo_small"
@@ -24,35 +24,35 @@ export default function Header(props: HeaderProps) {
         />
       </div>
       <div
-        className={`text-white text-md mx-5 font-raleway font-semibold ${
+        className={`text-white mx-5 font-raleway font-semibold ${
           props.current === "/" && "font-black"
         }`}
       >
         <Link href="/">Home</Link>
       </div>
       <div
-        className={`text-white text-md mx-5 font-raleway font-semibold ${
+        className={`text-white mx-5 font-raleway font-semibold ${
           props.current === "/rewards" && "font-black"
         }`}
       >
         <Link href="/rewards">Rewards</Link>
       </div>
       <div
-        className={`text-white text-md mx-5 font-raleway font-semibold ${
+        className={`text-white mx-5 font-raleway font-semibold ${
           props.current === "/partners" && "font-black"
         }`}
       >
         <Link href="/partners">Venue Partners</Link>
       </div>
       <div
-        className={`text-white text-md mx-5 font-raleway font-semibold ${
+        className={`text-white mx-5 font-raleway font-semibold ${
           props.current === "/about" && "font-black"
         }`}
       >
         <Link href="/about">About Us</Link>
       </div>
       <div
-        className={`text-white text-md mx-5 font-raleway font-semibold ${
+        className={`text-white mx-5 font-raleway font-semibold ${
           props.current === "/contact" && "font-black"
         }`}
       >

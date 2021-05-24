@@ -9,13 +9,18 @@ module.exports = {
         white: "#FFFFFF",
         "title-black": "#12172B",
         "subtitle-gray": "#61636E",
+        "background-blue": "#2D6EB7",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
         acumin: ["acumin-pro", "sans-serif"],
+        roboto: ["roboto", "sans-serif"],
       },
       borderWidth: {
         3: "3px",
+      },
+      height: {
+        page: "52rem",
       },
     },
   },
