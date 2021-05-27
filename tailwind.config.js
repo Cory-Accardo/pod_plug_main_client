@@ -23,6 +23,10 @@ module.exports = {
         page: "52rem",
         136: "34rem",
       },
+      inset: {
+        240: "60rem",
+        "40px": "40px",
+      },
     },
   },
   variants: {

@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 
 const containerStyle = {
   height: "52rem",
@@ -35,9 +35,37 @@ export default function Home() {
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback(function callback(map) {
+  const onUnmount = useCallback(function callback(_) {
     setMap(null);
   }, []);
+
+  const kioskContainer = useRef<HTMLDivElement>();
+  const textContainer = useRef<HTMLDivElement>();
+
+  // 0: original position
+  // 1: fixed to top of page
+  // 2: final position
+  const [kioskState, setKioskState] = useState(0);
+
+  useEffect(() => {
+    const listener = () => {
+      if (window.scrollY >= textContainer.current.offsetTop) {
+        setKioskState(2);
+        return;
+      }
+      if (kioskContainer.current.offsetTop - window.scrollY <= 40) {
+        setKioskState(1);
+        return;
+      }
+      setKioskState(0);
+    };
+
+    window.addEventListener("scroll", listener);
+
+    return () => {
+      window.removeEventListener("scroll", listener);
+    };
+  }, [kioskContainer]);
 
   return (
     <>
@@ -60,6 +88,7 @@ export default function Home() {
             backgroundImage:
               "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
           }}
+          ref={kioskContainer}
         >
           <div className="relative flex flex-col">
             <div
@@ -89,21 +118,28 @@ export default function Home() {
             }}
           ></div>
           <div
-            className="sticky"
+            className="h-full"
             style={{ width: "calc(52rem / 2249 * 1315)" }}
           >
-            <Image
-              src="/kiosk_full"
-              alt="Pod Plug kiosk"
-              layout="responsive"
-              height={2249}
-              width={1315}
-            />
+            <div
+              className={`${kioskState === 0 && "relative"} ${
+                kioskState === 1 && "fixed top-40px"
+              } ${kioskState === 2 && "relative top-240"}`}
+              style={{ width: "calc(52rem / 2249 * 1315)" }}
+            >
+              <Image
+                src="/kiosk_full"
+                alt="Pod Plug kiosk"
+                layout="responsive"
+                height={2249}
+                width={1315}
+              />
+            </div>
           </div>
         </div>
 
         {/* Second page */}
-        <div className="relative mt-32 h-page">
+        <div className="relative mt-32 h-page" ref={textContainer}>
           <div
             className="relative flex flex-col w-1/2 p-16 bg-white transform -translate-y-1/2 top-1/2 pr-60 font-raleway"
             style={{ borderRadius: "60px 0px 0px 60px", left: "15%" }}
