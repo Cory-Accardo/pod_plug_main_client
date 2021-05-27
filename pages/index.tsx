@@ -13,7 +13,6 @@ import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useState } from "react";
 
 const containerStyle = {
-  width: "100vw",
   height: "52rem",
 };
 
@@ -55,7 +54,13 @@ export default function Home() {
       {/* Main */}
       <main className="bg-background-blue">
         {/* First page */}
-        <div className="relative flex flex-row justify-around h-page bg-gradient-to-b from-white to-background-blue">
+        <div
+          className="relative flex flex-row justify-around h-page"
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
+          }}
+        >
           <div className="relative flex flex-col">
             <div
               className="mt-48 font-bold font-acumin text-7xl text-title-black"
@@ -84,7 +89,7 @@ export default function Home() {
             }}
           ></div>
           <div
-            className="relative"
+            className="sticky"
             style={{ width: "calc(52rem / 2249 * 1315)" }}
           >
             <Image
@@ -119,107 +124,123 @@ export default function Home() {
             Our Brand Partners
           </div>
           <div className="flex flex-col items-center mt-24">
-            <div className="grid grid-flow-row grid-cols-3 gap-8">
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+            <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-136">
+              <div className="grid grid-flow-row grid-cols-3 gap-8">
                 <div
-                  className="w-32 h-32"
-                  style={{
-                    backgroundImage: 'url("/juul.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
-              </div>
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/juul.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
                 <div
-                  className="w-32 h-32"
-                  style={{
-                    backgroundImage: 'url("/hqd.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
-              </div>
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/juul.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
                 <div
-                  className="w-32 h-32"
-                  style={{
-                    backgroundImage: 'url("/fume.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
-              </div>
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/hqd.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
                 <div
-                  className="w-32 h-32"
-                  style={{
-                    backgroundImage: 'url("/fume.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
-              </div>
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/fume.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
                 <div
-                  className="w-40 h-40"
-                  style={{
-                    backgroundImage: 'url("/airbar.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
-              </div>
-              <div
-                className="flex items-center justify-center w-64 h-64 bg-white"
-                style={{ borderRadius: "1.5rem" }}
-              >
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/fume.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
                 <div
-                  className="h-36 w-36"
-                  style={{
-                    backgroundImage: 'url("/vuse.png")',
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "contain",
-                    backgroundPosition: "center center",
-                  }}
-                ></div>
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-40 h-40"
+                    style={{
+                      backgroundImage: 'url("/airbar.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="h-36 w-36"
+                    style={{
+                      backgroundImage: 'url("/vuse.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div className="pt-64"></div>
+        {isLoaded && (
+          <div className="w-full h-page">
+            <GoogleMap
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+              mapContainerStyle={containerStyle}
+              clickableIcons={false}
+              options={mapOptions}
+            ></GoogleMap>
+          </div>
+        )}
       </main>
-      {isLoaded && (
-        <div className="w-screen h-page">
-          <GoogleMap
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-            mapContainerStyle={containerStyle}
-            clickableIcons={false}
-            options={mapOptions}
-          ></GoogleMap>
-        </div>
-      )}
       <Footer />
     </>
   );
