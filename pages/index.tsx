@@ -4,10 +4,11 @@
  */
 
 import Head from "next/head";
-import Footer from "../components/Footer";
 
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from "../components/Image";
+import Clouds from "../components/Clouds";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
@@ -81,6 +82,8 @@ export default function Home() {
 
       {/* Main */}
       <main className="bg-background-blue">
+        <Clouds id={1} />
+        <Clouds id={2} />
         {/* First page */}
         <div
           className="relative flex flex-row justify-around h-page"
@@ -90,7 +93,7 @@ export default function Home() {
           }}
           ref={kioskContainer}
         >
-          <div className="relative flex flex-col">
+          <div className="relative flex flex-col z-content">
             <div
               className="mt-48 font-bold font-acumin text-7xl text-title-black"
               style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
@@ -102,14 +105,14 @@ export default function Home() {
             </div>
             <input
               type="text"
-              className="self-start w-3/4 p-1 mt-2 text-lg rounded-lg border-3 border-subtitle-gray text-subtitle-gray"
+              className="self-start w-3/4 p-1 mt-2 text-lg bg-white rounded-lg border-3 border-subtitle-gray text-subtitle-gray"
             ></input>
-            <button className="self-start px-8 py-1 mt-3 text-lg font-semibold rounded-lg border-3 border-subtitle-gray text-subtitle-gray font-raleway">
+            <button className="self-start px-8 py-1 mt-3 text-lg font-semibold bg-white rounded-lg border-3 border-subtitle-gray text-subtitle-gray font-raleway">
               Sign Up
             </button>
           </div>
           <div
-            className="absolute bottom-0 block w-full"
+            className="absolute bottom-0 block w-full z-bg"
             style={{
               backgroundImage: 'url("skyline_full_1080p.png")',
               backgroundSize: "contain",
@@ -118,13 +121,13 @@ export default function Home() {
             }}
           ></div>
           <div
-            className="h-full"
+            className="relative h-full z-content"
             style={{ width: "calc(52rem / 2249 * 1315)" }}
           >
             <div
               className={`${kioskState === 0 && "relative"} ${
                 kioskState === 1 && "fixed top-40px"
-              } ${kioskState === 2 && "relative top-240"}`}
+              } ${kioskState === 2 && "relative top-272"}`}
               style={{ width: "calc(52rem / 2249 * 1315)" }}
             >
               <Image
@@ -139,7 +142,7 @@ export default function Home() {
         </div>
 
         {/* Second page */}
-        <div className="relative mt-32 h-page" ref={textContainer}>
+        <div className="relative mt-gap h-page" ref={textContainer}>
           <div
             className="relative flex flex-col w-1/2 p-16 bg-white transform -translate-y-1/2 top-1/2 pr-60 font-raleway"
             style={{ borderRadius: "60px 0px 0px 60px", left: "15%" }}
@@ -155,7 +158,7 @@ export default function Home() {
         </div>
 
         {/* Third page */}
-        <div className="relative flex flex-col mt-16 h-page">
+        <div className="relative flex flex-col mt-gap h-page">
           <div className="w-full mt-16 text-5xl text-center text-white">
             Our Brand Partners
           </div>
@@ -266,7 +269,7 @@ export default function Home() {
         </div>
         <div className="pt-64"></div>
         {isLoaded && (
-          <div className="w-full h-page">
+          <div className="relative w-full z-content h-page">
             <GoogleMap
               onLoad={onLoad}
               onUnmount={onUnmount}

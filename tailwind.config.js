@@ -24,8 +24,16 @@ module.exports = {
         136: "34rem",
       },
       inset: {
-        240: "60rem",
+        272: "68rem",
         "40px": "40px",
+      },
+      margin: {
+        gap: "16rem",
+      },
+      zIndex: {
+        bg: "1",
+        clouds: "2",
+        content: "3",
       },
     },
   },

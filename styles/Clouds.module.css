@@ -1,0 +1,57 @@
+@keyframes cloud1_keyframes {
+  0% {
+    transform: translateX(0);
+    display: block;
+  }
+  49.99% {
+    transform: translateX(100vw);
+    display: block;
+  }
+  49.991% {
+    transform: translateX(100vw);
+    display: none;
+  }
+  49.999% {
+    transform: translateX(-100vw);
+    display: none;
+  }
+  50% {
+    transform: translateX(-100vw);
+    display: block;
+  }
+  100% {
+    transform: translateX(0);
+    display: block;
+  }
+}
+
+.cloud1 {
+  animation: cloud1_keyframes 30s linear infinite;
+}
+
+@keyframes cloud2_keyframes {
+  0% {
+    transform: translateX(-100vw);
+    display: block;
+  }
+  99.99% {
+    transform: translateX(100vw);
+    display: block;
+  }
+  99.991% {
+    transform: translateX(100vw);
+    display: none;
+  }
+  99.999% {
+    transform: translateX(-100vw);
+    display: none;
+  }
+  100% {
+    transform: translateX(-100vw);
+    display: block;
+  }
+}
+
+.cloud2 {
+  animation: cloud2_keyframes 30s linear infinite;
+}
