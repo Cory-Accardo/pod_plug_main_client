@@ -210,7 +210,7 @@ export default function Home() {
             Our Brand Partners
           </div>
           <div className="flex flex-col items-center mt-24">
-            <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-136">
+            <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-136 z-content">
               <div className="grid grid-flow-row grid-cols-3 gap-8">
                 <div
                   className="flex items-center justify-center w-64 h-64 bg-white"
