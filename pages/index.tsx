@@ -12,6 +12,22 @@ import Clouds from "../components/Clouds";
 
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
+
+interface Location {
+  index: number;
+  name: string;
+  coord: {
+    latitude: number;
+    logitude: number;
+  };
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    zip: number;
+  };
+}
 
 const containerStyle = {
   height: "52rem",
@@ -21,9 +37,11 @@ const mapOptions = {
   mapTypeControl: false,
   fullscreenControl: false,
   streetViewControl: false,
+  scrollwheel: false,
 };
 
 export default function Home() {
+  // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
   });
@@ -39,7 +57,9 @@ export default function Home() {
   const onUnmount = useCallback(function callback(_) {
     setMap(null);
   }, []);
+  // end: Google Maps
 
+  // begin: Kiosk scrolling effect
   const kioskContainer = useRef<HTMLDivElement>();
   const textContainer = useRef<HTMLDivElement>();
 
@@ -67,6 +87,33 @@ export default function Home() {
       window.removeEventListener("scroll", listener);
     };
   }, [kioskContainer]);
+  // end: Kiosk scrolling effect
+
+  // begin: Venues
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [currentSearch, setCurrentSearch] = useState("");
+  const searchBox = useRef<HTMLInputElement>();
+
+  const submitSearch = useCallback(() => {
+    setCurrentSearch(searchBox.current.value.toLowerCase());
+  }, [searchBox]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/venues/listall")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        json = json
+          .concat(json)
+          .concat(json)
+          .map((location, index) => {
+            return { ...location, index: index };
+          });
+        setLocations(json);
+      });
+  }, []);
+  // end: Venues
 
   return (
     <>
@@ -277,6 +324,77 @@ export default function Home() {
               clickableIcons={false}
               options={mapOptions}
             ></GoogleMap>
+            <div className="absolute top-40 left-32 z-content">
+              <div className="text-4xl font-semibold font-raleway">
+                Our Kiosk Locations
+              </div>
+              <div className="flex flex-col px-8 pt-4 mt-8 bg-white rounded-xl max-h-96">
+                <div className="text-lg font-medium font-raleway">
+                  Your Location
+                </div>
+                <div className="flex flex-row mt-2">
+                  <input
+                    ref={searchBox}
+                    className="px-2 py-1 border-2 rounded-lg border-theme-light"
+                  ></input>
+                  <button
+                    className="px-6 py-1 ml-4 text-white rounded-lg bg-theme-light"
+                    onClick={submitSearch}
+                  >
+                    Search
+                  </button>
+                </div>
+                <div className="mt-4 text-xs font-medium font-raleway">
+                  12 SEARCH RESULTS
+                </div>
+                <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray"></hr>
+                <div className="flex-shrink my-3 overflow-y-scroll">
+                  <AnimateSharedLayout>
+                    <motion.div layout>
+                      {locations
+                        .filter(
+                          (location) =>
+                            currentSearch === "" ||
+                            location.name
+                              .toLowerCase()
+                              .includes(currentSearch) ||
+                            location.address.street
+                              .toLowerCase()
+                              .includes(currentSearch)
+                        )
+                        .map((location) => {
+                          return (
+                            <AnimatePresence key={location.index}>
+                              <motion.div
+                                className="flex flex-row items-center py-3"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                key={location.index}
+                                layout
+                              >
+                                <img
+                                  src="/marker.svg"
+                                  alt="Marker"
+                                  className="h-8"
+                                />
+                                <div className="flex flex-col ml-16">
+                                  <div className="text-base font-normal font-raleway">
+                                    {location.address.street}
+                                  </div>
+                                  <div className="text-sm font-medium font-raleway">
+                                    0.1 mi
+                                  </div>
+                                </div>
+                              </motion.div>
+                            </AnimatePresence>
+                          );
+                        })}
+                    </motion.div>
+                  </AnimateSharedLayout>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </main>

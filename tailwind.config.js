@@ -6,9 +6,11 @@ module.exports = {
     extend: {
       colors: {
         "theme-dark": "#08457D",
+        "theme-light": "#0086CB",
         white: "#FFFFFF",
         "title-black": "#12172B",
         "subtitle-gray": "#61636E",
+        "hr-gray": "#F1F1F1",
         "background-blue": "#2D6EB7",
       },
       fontFamily: {
@@ -34,6 +36,9 @@ module.exports = {
         bg: "1",
         clouds: "2",
         content: "3",
+      },
+      fontSize: {
+        "4xl": "2.25rem",
       },
     },
   },
