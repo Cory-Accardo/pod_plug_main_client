@@ -26,7 +26,7 @@
 }
 
 .cloud1 {
-  animation: cloud1_keyframes 30s linear infinite;
+  animation: cloud1_keyframes 85s linear infinite;
 }
 
 @keyframes cloud2_keyframes {
@@ -53,5 +53,5 @@
 }
 
 .cloud2 {
-  animation: cloud2_keyframes 30s linear infinite;
+  animation: cloud2_keyframes 85s linear infinite;
 }
