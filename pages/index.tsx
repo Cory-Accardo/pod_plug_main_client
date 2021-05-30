@@ -10,16 +10,16 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 
 interface Location {
   index: number;
   name: string;
-  coord: {
+  coords: {
     latitude: number;
-    logitude: number;
+    longitude: number;
   };
   address: {
     street: string;
@@ -93,6 +93,7 @@ export default function Home() {
   const [locations, setLocations] = useState<Location[]>([]);
   const [currentSearch, setCurrentSearch] = useState("");
   const searchBox = useRef<HTMLInputElement>();
+  const [coords, setCoords] = useState<google.maps.LatLng[]>([]);
 
   const submitSearch = useCallback(() => {
     setCurrentSearch(searchBox.current.value.toLowerCase());
@@ -107,13 +108,43 @@ export default function Home() {
         json = json
           .concat(json)
           .concat(json)
-          .map((location, index) => {
+          .map((location: Location, index: number) => {
             return { ...location, index: index };
           });
         setLocations(json);
       });
   }, []);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    setCoords(
+      locations
+        .filter(
+          (location) =>
+            currentSearch === "" ||
+            location.name.toLowerCase().includes(currentSearch) ||
+            location.address.street.toLowerCase().includes(currentSearch)
+        )
+        .map((location) => {
+          return new google.maps.LatLng(
+            location.coords.latitude,
+            location.coords.longitude
+          );
+        })
+    );
+  }, [currentSearch, locations, isLoaded]);
   // end: Venues
+
+  // begin: Google Map auto zoom
+  useEffect(() => {
+    if (!map) return;
+    let bounds = new google.maps.LatLngBounds();
+    for (const index in coords) {
+      bounds = bounds.extend(coords[index]);
+      map.fitBounds(bounds);
+    }
+  }, [map, coords]);
+  // end: Google Map auto zoom
 
   return (
     <>
@@ -327,7 +358,11 @@ export default function Home() {
               mapContainerStyle={containerStyle}
               clickableIcons={false}
               options={mapOptions}
-            ></GoogleMap>
+            >
+              {coords.map((latlng, index) => (
+                <Marker position={latlng} key={index} />
+              ))}
+            </GoogleMap>
             <div className="absolute top-40 left-32 z-content">
               <div className="text-4xl font-semibold font-raleway">
                 Our Kiosk Locations
@@ -337,10 +372,17 @@ export default function Home() {
                   Your Location
                 </div>
                 <div className="flex flex-row mt-2">
-                  <input
-                    ref={searchBox}
-                    className="px-2 py-1 border-2 rounded-lg border-theme-light"
-                  ></input>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      submitSearch();
+                    }}
+                  >
+                    <input
+                      ref={searchBox}
+                      className="px-2 py-1 border-2 rounded-lg border-theme-light"
+                    ></input>
+                  </form>
                   <button
                     className="px-6 py-1 ml-4 text-white rounded-lg bg-theme-light"
                     onClick={submitSearch}
