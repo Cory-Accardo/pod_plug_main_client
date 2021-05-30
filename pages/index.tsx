@@ -205,6 +205,7 @@ export default function Home() {
         </div>
 
         {/* Third page */}
+        {/*
         <div className="relative flex flex-col mt-gap h-page">
           <div className="w-full mt-16 text-5xl text-center text-white">
             Our Brand Partners
@@ -314,6 +315,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+        */}
+
+        {/* Google Maps */}
         <div className="pt-64"></div>
         {isLoaded && (
           <div className="relative w-full z-content h-page">
