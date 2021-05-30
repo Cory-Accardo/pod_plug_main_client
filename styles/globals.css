@@ -22,3 +22,7 @@ a {
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600;900&family=Roboto&display=swap");
 @import url("https://use.typekit.net/mas8oru.css");
+
+.container {
+    @apply self-center max-w-7xl;
+}
