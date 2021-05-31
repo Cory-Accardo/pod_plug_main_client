@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 5000",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test": "rtest tests.json"
   },
   "dependencies": {
     "next": "10.2.2",

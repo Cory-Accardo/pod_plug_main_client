@@ -36,6 +36,7 @@ module.exports = {
         bg: "1",
         clouds: "2",
         content: "3",
+        overlay: "4",
       },
       fontSize: {
         "4xl": "2.25rem",
