@@ -2,8 +2,29 @@
   width: calc(42rem / 2249 * 1315);
 }
 
+@media (min-width: 768px) {
+  .image_start {
+    @apply relative;
+  }
+
+  .image_moving {
+    @apply fixed;
+    top: 40px;
+  }
+
+  .image_end {
+    @apply relative;
+    top: 58rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .image_width {
     width: calc(52rem / 2249 * 1315);
+  }
+
+  .image_end {
+    @apply relative;
+    top: 68rem;
   }
 }

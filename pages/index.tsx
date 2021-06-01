@@ -164,7 +164,7 @@ export default function Home() {
         <Clouds id={2} />
         {/* First page */}
         <div
-          className="relative flex flex-col items-center page outer-container"
+          className="relative flex flex-col items-center pl-16 pr-16 md:pr-0 page"
           style={{
             backgroundImage:
               "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
@@ -184,7 +184,7 @@ export default function Home() {
               </div>
               <input
                 type="text"
-                className="self-start w-3/4 w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-auto"
+                className="self-start w-3/4 w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
               ></input>
               <button className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway">
                 Sign Up
@@ -192,9 +192,9 @@ export default function Home() {
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
               <div
-                className={`${kioskState === 0 && "relative"} ${
-                  kioskState === 1 && "fixed top-40px"
-                } ${kioskState === 2 && "relative top-272"} ${
+                className={`${kioskState === 0 ? styles.image_start : ""} ${
+                  kioskState === 1 ? styles.image_moving : ""
+                } ${kioskState === 2 ? styles.image_end : ""} ${
                   styles.image_width
                 }`}
               >
@@ -209,9 +209,19 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="absolute bottom-0 block w-full z-bg"
+            className="absolute bottom-0 hidden block w-full z-bg md:block"
             style={{
-              backgroundImage: 'url("skyline_full_1080p.png")',
+              backgroundImage: 'url("skyline_full.png")',
+              backgroundSize: "contain",
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "bottom",
+              height: "24rem",
+            }}
+          ></div>
+          <div
+            className="absolute bottom-0 block w-full z-bg md:hidden"
+            style={{
+              backgroundImage: 'url("skyline_half.png")',
               backgroundSize: "contain",
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",

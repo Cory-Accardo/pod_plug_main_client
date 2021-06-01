@@ -26,10 +26,6 @@ module.exports = {
         page_md: "42rem",
         136: "34rem",
       },
-      inset: {
-        272: "68rem",
-        "40px": "40px",
-      },
       margin: {
         gap: "16rem",
       },
