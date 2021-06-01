@@ -32,7 +32,8 @@ interface Location {
 }
 
 const containerStyle = {
-  height: "52rem",
+  height: "100%",
+  width: "100%",
 };
 
 const mapOptions = {
