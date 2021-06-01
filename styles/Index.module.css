@@ -17,6 +17,22 @@
   top: -2rem;
 }
 
+.bg_focused {
+  @apply bg-white;
+}
+
+.title_focused {
+  @apply opacity-0;
+}
+
+.search_focused {
+  @apply -translate-y-12;
+}
+
+.results_unfocused {
+  @apply opacity-0;
+}
+
 @media (min-width: 768px) {
   .image_start {
     @apply relative;
@@ -30,6 +46,22 @@
   .image_end {
     @apply relative;
     top: 58rem;
+  }
+
+  .bg_focused {
+    @apply bg-transparent;
+  }
+
+  .title_focused {
+    @apply opacity-100;
+  }
+
+  .search_focused {
+    @apply translate-y-0;
+  }
+
+  .results_unfocused {
+    @apply opacity-100;
   }
 }
 

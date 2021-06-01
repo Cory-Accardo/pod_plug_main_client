@@ -146,6 +146,10 @@ export default function Home() {
   }, [map, coords]);
   // end: Google Map auto zoom
 
+  // begin: mobile search focus
+  const [searchFocused, setSearchFocused] = useState(false);
+  // end: mobile search focus
+
   return (
     <>
       <Head>
@@ -383,21 +387,34 @@ export default function Home() {
               options={mapOptions}
             >
               {coords.map((latlng, index) => (
-                <Marker position={latlng} key={index} />
+                <Marker position={latlng} key={index} icon="/marker.svg" />
               ))}
             </GoogleMap>
-            <div className="absolute top-0 left-0 flex flex-col w-full h-full outer-container">
+            <div
+              className={`absolute top-0 left-0 flex flex-col w-full h-full outer-container transition-colors ${
+                searchFocused ? styles.bg_focused : ""
+              }`}
+            >
               <div className="container relative h-full">
-                <div className="absolute left-0 top-36 z-content">
-                  <div className="text-4xl font-semibold font-raleway">
+                <div className="absolute left-0 right-0 top-8 md:top-36 z-content md:right-auto">
+                  <div
+                    className={`text-4xl font-semibold text-center font-raleway md:text-left transition-opacity ${
+                      searchFocused ? styles.title_focused : ""
+                    }`}
+                  >
                     Our Kiosk Locations
                   </div>
-                  <div className="flex flex-col px-8 pt-4 mt-8 bg-white rounded-xl max-h-96">
-                    <div className="text-lg font-medium font-raleway">
+                  <div
+                    className={`flex flex-col px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform ${
+                      searchFocused ? styles.search_focused : ""
+                    }`}
+                  >
+                    <div className="hidden text-lg font-medium font-raleway md:block">
                       Your Location
                     </div>
                     <div className="flex flex-row mt-2">
                       <form
+                        className="w-full md:w-auto"
                         onSubmit={(e) => {
                           e.preventDefault();
                           submitSearch();
@@ -405,64 +422,76 @@ export default function Home() {
                       >
                         <input
                           ref={searchBox}
-                          className="px-2 py-1 border-2 rounded-lg border-theme-light"
+                          onFocus={() => {
+                            setSearchFocused(true);
+                          }}
+                          onBlur={() => {
+                            setSearchFocused(false);
+                          }}
+                          className="w-full px-2 py-1 border-2 rounded-lg border-subtitle-gray md:border-theme-light md:w-auto"
                         ></input>
                       </form>
                       <button
-                        className="px-6 py-1 ml-4 text-white rounded-lg bg-theme-light"
+                        className="hidden px-6 py-1 ml-4 text-white rounded-lg bg-theme-light md:block"
                         onClick={submitSearch}
                       >
                         Search
                       </button>
                     </div>
-                    <div className="mt-4 text-xs font-medium font-raleway">
-                      12 SEARCH RESULTS
-                    </div>
-                    <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray"></hr>
-                    <div className="flex-shrink my-3 overflow-y-scroll">
-                      <AnimateSharedLayout>
-                        <motion.div layout>
-                          {locations
-                            .filter(
-                              (location) =>
-                                currentSearch === "" ||
-                                location.name
-                                  .toLowerCase()
-                                  .includes(currentSearch) ||
-                                location.address.street
-                                  .toLowerCase()
-                                  .includes(currentSearch)
-                            )
-                            .map((location) => {
-                              return (
-                                <AnimatePresence key={location.index}>
-                                  <motion.div
-                                    className="flex flex-row items-center py-3"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    key={location.index}
-                                    layout
-                                  >
-                                    <img
-                                      src="/marker.svg"
-                                      alt="Marker"
-                                      className="h-8"
-                                    />
-                                    <div className="flex flex-col ml-16">
-                                      <div className="text-base font-normal font-raleway">
-                                        {location.address.street}
+                    <div
+                      className={`transition-opacity ${
+                        searchFocused ? "" : styles.results_unfocused
+                      }`}
+                    >
+                      <div className="mt-4 text-xs font-medium font-raleway">
+                        {coords.length} SEARCH RESULTS
+                      </div>
+                      <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray"></hr>
+                      <div className="flex-shrink my-3 overflow-y-scroll">
+                        <AnimateSharedLayout>
+                          <motion.div layout>
+                            {locations
+                              .filter(
+                                (location) =>
+                                  currentSearch === "" ||
+                                  location.name
+                                    .toLowerCase()
+                                    .includes(currentSearch) ||
+                                  location.address.street
+                                    .toLowerCase()
+                                    .includes(currentSearch)
+                              )
+                              .map((location) => {
+                                return (
+                                  <AnimatePresence key={location.index}>
+                                    <motion.div
+                                      className="flex flex-row items-center py-3"
+                                      initial={{ opacity: 0 }}
+                                      animate={{ opacity: 1 }}
+                                      exit={{ opacity: 0 }}
+                                      key={location.index}
+                                      layout
+                                    >
+                                      <img
+                                        src="/marker.svg"
+                                        alt="Marker"
+                                        className="h-8"
+                                      />
+                                      <div className="flex flex-col ml-16">
+                                        <div className="text-base font-normal font-raleway">
+                                          {location.address.street}
+                                        </div>
+                                        <div className="text-sm font-medium font-raleway">
+                                          0.1 mi
+                                        </div>
                                       </div>
-                                      <div className="text-sm font-medium font-raleway">
-                                        0.1 mi
-                                      </div>
-                                    </div>
-                                  </motion.div>
-                                </AnimatePresence>
-                              );
-                            })}
-                        </motion.div>
-                      </AnimateSharedLayout>
+                                    </motion.div>
+                                  </AnimatePresence>
+                                );
+                              })}
+                          </motion.div>
+                        </AnimateSharedLayout>
+                      </div>
                     </div>
                   </div>
                 </div>
