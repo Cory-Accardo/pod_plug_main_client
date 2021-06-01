@@ -14,6 +14,8 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 
+import styles from "../styles/Index.module.css";
+
 interface Location {
   index: number;
   name: string;
@@ -152,7 +154,7 @@ export default function Home() {
       </Head>
       {/* Header */}
       <Header current="/" />
-      <div className="mb-4 text-lg text-center text-black shadow-md text-thin font-raleway">
+      <div className="py-2 mb-4 text-sm text-center text-black shadow-md md:py-0 sm:text-base md:text-lg text-thin font-raleway">
         Cashless Convenience in Age-gated Venues
       </div>
 
@@ -162,41 +164,39 @@ export default function Home() {
         <Clouds id={2} />
         {/* First page */}
         <div
-          className="flex flex-col h-page"
+          className="relative flex flex-col items-center page outer-container"
           style={{
             backgroundImage:
               "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
           }}
           ref={kioskContainer}
         >
-          <div className="container relative flex flex-row justify-around ">
+          <div className="container relative flex flex-col items-center justify-around md:items-start md:flex-row">
             <div className="relative flex flex-col z-content">
               <div
-                className="mt-48 font-bold font-acumin text-7xl text-title-black"
+                className="mt-16 text-5xl font-bold md:mt-32 lg:text-6xl lg:mt-48 font-acumin xl:text-7xl text-title-black"
                 style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
               >
                 Join Pod Rewards
               </div>
-              <div className="mt-4 text-3xl font-semibold font-raleway text-subtitle-gray">
+              <div className="mt-4 text-xl font-semibold lg:text-2xl xl:text-3xl font-raleway text-subtitle-gray">
                 Get exclusive offers, discounts, and rebates
               </div>
               <input
                 type="text"
-                className="self-start w-3/4 p-1 mt-2 text-lg bg-white rounded-lg border-3 border-subtitle-gray text-subtitle-gray"
+                className="self-start w-3/4 w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-auto"
               ></input>
-              <button className="self-start px-8 py-1 mt-3 text-lg font-semibold bg-white rounded-lg border-3 border-subtitle-gray text-subtitle-gray font-raleway">
+              <button className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway">
                 Sign Up
               </button>
             </div>
-            <div
-              className="relative h-full z-content"
-              style={{ width: "calc(52rem / 2249 * 1315)" }}
-            >
+            <div className={`relative h-full z-content ${styles.image_width}`}>
               <div
                 className={`${kioskState === 0 && "relative"} ${
                   kioskState === 1 && "fixed top-40px"
-                } ${kioskState === 2 && "relative top-272"}`}
-                style={{ width: "calc(52rem / 2249 * 1315)" }}
+                } ${kioskState === 2 && "relative top-272"} ${
+                  styles.image_width
+                }`}
               >
                 <Image
                   src="/kiosk_full"
@@ -214,6 +214,7 @@ export default function Home() {
               backgroundImage: 'url("skyline_full_1080p.png")',
               backgroundSize: "contain",
               backgroundRepeat: "repeat-x",
+              backgroundPosition: "bottom",
               height: "24rem",
             }}
           ></div>

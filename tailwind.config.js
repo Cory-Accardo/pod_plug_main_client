@@ -23,6 +23,7 @@ module.exports = {
       },
       height: {
         page: "52rem",
+        page_md: "42rem",
         136: "34rem",
       },
       inset: {

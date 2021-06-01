@@ -24,5 +24,13 @@ a {
 @import url("https://use.typekit.net/mas8oru.css");
 
 .container {
-    @apply self-center max-w-7xl;
+  @apply self-center mx-16 max-w-7xl;
+}
+
+.outer-container {
+    @apply px-16;
+}
+
+.page {
+    @apply lg:h-page h-page_md;
 }

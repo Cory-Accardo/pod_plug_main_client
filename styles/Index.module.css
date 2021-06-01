@@ -1,0 +1,9 @@
+.image_width {
+  width: calc(42rem / 2249 * 1315);
+}
+
+@media (min-width: 1024px) {
+  .image_width {
+    width: calc(52rem / 2249 * 1315);
+  }
+}
