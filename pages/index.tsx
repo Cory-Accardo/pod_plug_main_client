@@ -164,22 +164,22 @@ export default function Home() {
         <Clouds id={2} />
         {/* First page */}
         <div
-          className="relative flex flex-col items-center pl-16 pr-16 md:pr-0 page"
+          className="relative flex flex-col items-center px-8 sm:px-16 md:px-0 page"
           style={{
             backgroundImage:
               "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
           }}
           ref={kioskContainer}
         >
-          <div className="container relative flex flex-col items-center justify-around md:items-start md:flex-row">
-            <div className="relative flex flex-col z-content">
+          <div className="container relative flex flex-col items-center justify-around text-center md:items-start md:flex-row md:text-left">
+            <div className="relative flex flex-col md:pl-16 z-content">
               <div
-                className="mt-16 text-5xl font-bold md:mt-32 lg:text-6xl lg:mt-48 font-acumin xl:text-7xl text-title-black"
+                className="mt-16 text-4xl font-bold sm:text-5xl md:mt-32 lg:text-6xl lg:mt-48 font-acumin xl:text-7xl text-title-black"
                 style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
               >
                 Join Pod Rewards
               </div>
-              <div className="mt-4 text-xl font-semibold lg:text-2xl xl:text-3xl font-raleway text-subtitle-gray">
+              <div className="mt-4 text-lg font-semibold sm:text-xl lg:text-2xl xl:text-3xl font-raleway text-subtitle-gray">
                 Get exclusive offers, discounts, and rebates
               </div>
               <input
@@ -191,6 +191,11 @@ export default function Home() {
               </button>
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
+              <div
+                className={`${styles.image_width} ${
+                  kioskState === 0 ? "hidden" : "block"
+                }`}
+              ></div>
               <div
                 className={`${kioskState === 0 ? styles.image_start : ""} ${
                   kioskState === 1 ? styles.image_moving : ""
@@ -232,16 +237,18 @@ export default function Home() {
 
         {/* Second page */}
         <div
-          className="flex flex-col justify-center mt-gap h-page"
+          className="flex flex-col justify-center mt-40 md:mt-gap md:h-page_md lg:h-page outer-container"
           ref={textContainer}
         >
           <div className="container relative">
             <div
-              className="relative flex flex-col p-16 mr-64 bg-white pr-60 font-raleway"
+              className="relative flex flex-col p-16 bg-transparent md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60 font-raleway"
               style={{ borderRadius: "60px 0px 0px 60px" }}
             >
-              <div className="text-5xl font-semibold">Convenience When Out</div>
-              <div className="mt-6 text-lg font-normal leading-loose">
+              <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
+                Convenience When Out
+              </div>
+              <div className="mt-6 text-base font-normal leading-loose text-center text-white md:leading-normal lg:leading-loose xl:text-lg md:text-black md:text-left">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -253,7 +260,7 @@ export default function Home() {
 
         {/* Third page */}
         {/*
-        <div className="relative flex flex-col mt-gap h-page">
+        <div className="relative flex flex-col mt-gap page">
           <div className="w-full mt-16 text-5xl text-center text-white">
             Our Brand Partners
           </div>
@@ -365,9 +372,9 @@ export default function Home() {
         */}
 
         {/* Google Maps */}
-        <div className="pt-64"></div>
+        <div className="hidden pt-64 md:block"></div>
         {isLoaded && (
-          <div className="relative w-full z-content h-page">
+          <div className="relative w-full z-content page">
             <GoogleMap
               onLoad={onLoad}
               onUnmount={onUnmount}
@@ -379,7 +386,7 @@ export default function Home() {
                 <Marker position={latlng} key={index} />
               ))}
             </GoogleMap>
-            <div className="absolute top-0 left-0 flex flex-col w-full h-full">
+            <div className="absolute top-0 left-0 flex flex-col w-full h-full outer-container">
               <div className="container relative h-full">
                 <div className="absolute left-0 top-36 z-content">
                   <div className="text-4xl font-semibold font-raleway">
