@@ -20,7 +20,7 @@ export default function Clouds(props: CloudsProps) {
       <img
         src="/clouds_blue.png"
         alt="Clouds"
-        className="relative opacity-80"
+        className="relative opacity-80 hidden md:block"
         style={{ top: "6rem", left: "65vw" }}
       />
       <img
