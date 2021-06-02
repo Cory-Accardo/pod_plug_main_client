@@ -26,7 +26,7 @@ export default function Footer() {
               </div>
               <div>
                 <div className="relative mt-6 text-base font-roboto z-content">
-                  Copyright &copy; 2021 PodPlug
+                  Copyright &copy; 2021 Pod Plug
                 </div>
                 <div className="relative text-base font-roboto z-content">
                   <Link href="/copyright">Privacy Policy</Link>
