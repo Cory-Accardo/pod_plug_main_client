@@ -78,13 +78,13 @@ export default function Header(props: HeaderProps) {
       <AnimatePresence>
         {showMenu && (
           <motion.div
-            className="absolute top-0 bottom-0 right-0 flex flex-col w-64 p-6 bg-theme-dark z-overlay gap-8"
+            className="absolute top-0 bottom-0 right-0 flex flex-col w-64 p-6 bg-theme-dark z-overlay"
             initial={{ transform: "translateX(16rem)" }}
             animate={{ transform: "translateX(2rem)" }}
             exit={{ transform: "translateX(16rem)" }}
           >
             <div
-              className="w-6 h-6 text-white cursor-pointer"
+              className="w-6 h-6 mb-10 text-white cursor-pointer"
               onClick={() => {
                 setShowMenu(false);
               }}
@@ -92,35 +92,35 @@ export default function Header(props: HeaderProps) {
               <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
             </div>
             <div
-              className={`text-white font-raleway font-semibold ${
+              className={`text-white font-raleway font-semibold mb-8 ${
                 props.current === "/" && "font-black"
               }`}
             >
               <Link href="/">Home</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold ${
+              className={`text-white font-raleway font-semibold mb-8 ${
                 props.current === "/rewards" && "font-black"
               }`}
             >
               <Link href="/rewards">Rewards</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold ${
+              className={`text-white font-raleway font-semibold mb-8 ${
                 props.current === "/partners" && "font-black"
               }`}
             >
               <Link href="/partners">Venue Partners</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold ${
+              className={`text-white font-raleway font-semibold mb-8 ${
                 props.current === "/about" && "font-black"
               }`}
             >
               <Link href="/about">About Us</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold ${
+              className={`text-white font-raleway font-semibold mb-8 ${
                 props.current === "/contact" && "font-black"
               }`}
             >
