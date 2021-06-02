@@ -206,7 +206,7 @@ export default function Home() {
                   kioskState === 1 ? styles.image_moving : ""
                 } ${kioskState === 2 ? styles.image_end : ""} ${
                   styles.image_width
-                }`}
+                } transform scale-75 md:scale-100`}
               >
                 <Image
                   src="/kiosk_full"
@@ -247,7 +247,7 @@ export default function Home() {
         >
           <div className="container relative">
             <div
-              className="relative flex flex-col p-16 bg-transparent md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60 font-raleway"
+              className="relative flex flex-col py-16 bg-transparent md:px-16 md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60 font-raleway"
               style={{ borderRadius: "60px 0px 0px 60px" }}
             >
               <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
@@ -377,7 +377,7 @@ export default function Home() {
         */}
 
         {/* Google Maps */}
-        <div className="hidden pt-64 md:block"></div>
+        <div className="pt-32 md:pt-64"></div>
         {isLoaded && (
           <div className="relative w-full z-content page">
             <GoogleMap
@@ -406,7 +406,7 @@ export default function Home() {
                     Our Kiosk Locations
                   </div>
                   <div
-                    className={`flex flex-col px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform ${
+                    className={`flex flex-col md:px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform ${
                       searchFocused ? styles.search_focused : ""
                     }`}
                   >
