@@ -28,11 +28,11 @@ a {
 @import url("https://use.typekit.net/mas8oru.css");
 
 .container {
-  @apply self-center mx-16 max-w-7xl;
+  @apply self-center max-w-7xl;
 }
 
 .outer-container {
-  @apply px-8 md:px-16;
+  @apply px-16 md:px-24;
 }
 
 .page {
