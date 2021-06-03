@@ -24,7 +24,7 @@ a {
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600;900&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600;700;900&family=Roboto&display=swap");
 @import url("https://use.typekit.net/mas8oru.css");
 
 .container {
