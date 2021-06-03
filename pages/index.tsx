@@ -94,9 +94,11 @@ export default function Home() {
 
   // begin: Venues
   const [locations, setLocations] = useState<Location[]>([]);
-  const [currentSearch, setCurrentSearch] = useState("");
   const searchBox = useRef<HTMLInputElement>();
-  const [coords, setCoords] = useState<google.maps.LatLng[]>([]);
+  const [currentCoords, setCurrentCoords] = useState<google.maps.LatLng>(
+    new google.maps.LatLng(29.7278882819393, -95.41295100138362)
+  );
+  const [venueCoords, setVenueCoords] = useState<google.maps.LatLng[]>([]);
 
   const submitSearch = useCallback(() => {
     setCurrentSearch(searchBox.current.value.toLowerCase());
@@ -118,13 +120,17 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    setCoords(
+    setVenueCoords(
       locations
         .filter(
           (location) =>
-            currentSearch === "" ||
-            location.name.toLowerCase().includes(currentSearch) ||
-            location.address.street.toLowerCase().includes(currentSearch)
+            google.maps.geometry.spherical.computeDistanceBetween(
+              new google.maps.LatLng(
+                location.coords.latitude,
+                location.coords.longitude
+              ),
+              currentCoords
+            ) < 40233 // 25 miles in meters
         )
         .map((location) => {
           return new google.maps.LatLng(
@@ -133,18 +139,18 @@ export default function Home() {
           );
         })
     );
-  }, [currentSearch, locations, isLoaded]);
+  }, [currentCoords, locations, isLoaded]);
   // end: Venues
 
   // begin: Google Map auto zoom
   useEffect(() => {
     if (!map) return;
     let bounds = new google.maps.LatLngBounds();
-    for (const index in coords) {
-      bounds = bounds.extend(coords[index]);
+    for (const index in venueCoords) {
+      bounds = bounds.extend(venueCoords[index]);
       map.fitBounds(bounds);
     }
-  }, [map, coords]);
+  }, [map, venueCoords]);
   // end: Google Map auto zoom
 
   // begin: mobile search focus
