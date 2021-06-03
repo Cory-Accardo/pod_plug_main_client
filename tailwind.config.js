@@ -12,6 +12,7 @@ module.exports = {
         "subtitle-gray": "#61636E",
         "hr-gray": "#F1F1F1",
         "background-blue": "#2D6EB7",
+        "background-gray": "#F5F4F4",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
