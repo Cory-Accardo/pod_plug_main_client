@@ -379,18 +379,20 @@ export default function Home() {
         {/* Google Maps */}
         <div className="pt-32 md:pt-64"></div>
         {isLoaded && (
-          <div className="relative w-full z-content page">
-            <GoogleMap
-              onLoad={onLoad}
-              onUnmount={onUnmount}
-              mapContainerStyle={containerStyle}
-              clickableIcons={false}
-              options={mapOptions}
-            >
-              {coords.map((latlng, index) => (
-                <Marker position={latlng} key={index} icon="/marker.svg" />
-              ))}
-            </GoogleMap>
+          <div className="relative w-full z-content page z-bg">
+            <div className="relative w-full h-full z-content">
+              <GoogleMap
+                onLoad={onLoad}
+                onUnmount={onUnmount}
+                mapContainerStyle={containerStyle}
+                clickableIcons={false}
+                options={mapOptions}
+              >
+                {coords.map((latlng, index) => (
+                  <Marker position={latlng} key={index} icon="/marker.svg" />
+                ))}
+              </GoogleMap>
+            </div>
             <div
               className={`absolute top-0 left-0 flex flex-col w-full h-full outer-container transition-colors ${
                 searchFocused ? styles.bg_focused : ""
