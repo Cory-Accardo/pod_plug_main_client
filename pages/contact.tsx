@@ -56,9 +56,10 @@ export default function Contact() {
       <Header current="/contact" />
 
       {/* Main */}
-      <main className="flex flex-col items-center outer-container pt-36 bg-background-gray">
-        <div className="container flex flex-row items-center">
-          <div className="flex flex-col w-1/2 pr-16">
+      {/* Left page */}
+      <main className="flex flex-col items-center pt-16 outer-container md:pt-36 bg-background-gray">
+        <div className="container flex flex-col items-center md:flex-row">
+          <div className="flex flex-col w-full md:pr-16 md:w-1/2">
             <div className="text-5xl font-bold font-raleway">Let's Talk</div>
             <div className="text-lg font-raleway">
               <div className="mt-6">
@@ -77,7 +78,7 @@ export default function Contact() {
               onSubmit={(e) => {
                 e.preventDefault();
               }}
-              className="flex flex-col"
+              className="flex flex-col mt-4"
             >
               <div className="flex flex-col mt-4">
                 <label className="text-sm font-bold font-raleway">NAME</label>
@@ -113,7 +114,8 @@ export default function Contact() {
               />
             </form>
           </div>
-          <div className="w-1/2 h-full pl-16">
+          {/* Right page */}
+          <div className="w-screen h-full mt-16 md:w-full md:pl-16 md:w-1/2 md:mt-0">
             <div className="w-full h-96">
               {isLoaded && (
                 <GoogleMap
@@ -125,7 +127,7 @@ export default function Contact() {
                 ></GoogleMap>
               )}
             </div>
-            <div className="flex flex-row justify-around w-full mt-6 text-theme-dark">
+            <div className="flex-row justify-around hidden w-full mt-6 text-theme-dark md:flex">
               <div className="flex flex-col">
                 <div className="flex flex-row justify-between h-full">
                   <FontAwesomeIcon icon={faBuilding} className="w-6 h-6 mr-8" />
@@ -165,7 +167,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <div className="mt-48" />
+        <div className="md:pt-48" />
       </main>
       <Footer />
     </>
