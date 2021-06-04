@@ -189,7 +189,7 @@ export default function Home() {
               </div>
               <input
                 type="text"
-                className="self-start w-3/4 w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
+                className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
               ></input>
               <button className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway">
                 Sign Up
@@ -219,7 +219,7 @@ export default function Home() {
             </div>
           </div>
           <div
-            className="absolute bottom-0 hidden block w-full z-bg md:block"
+            className="absolute bottom-0 hidden w-full z-bg md:block"
             style={{
               backgroundImage: 'url("skyline_full.png")',
               backgroundSize: "contain",
@@ -379,7 +379,7 @@ export default function Home() {
         {/* Google Maps */}
         <div className="pt-32 md:pt-64"></div>
         {isLoaded && (
-          <div className="relative w-full z-content page z-bg">
+          <div className="relative w-full page z-bg">
             <div className="relative w-full h-full z-content">
               <GoogleMap
                 onLoad={onLoad}

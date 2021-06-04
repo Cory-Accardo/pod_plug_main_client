@@ -1,7 +1,6 @@
 import argparse
 import os
 import subprocess
-import colorama
 
 FULL_WDITH = [2560, 1920, 1280]
 HALF_WIDTH = [1280, 960, 640]
@@ -18,10 +17,10 @@ parser.add_argument("output_dir")
 args = parser.parse_args()
 
 if not os.path.isdir(args.input_dir):
-    print(colorama.Fore.RED + "Cannot access input_dir as a directory")
+    print("Cannot access input_dir as a directory")
     exit(1)
 if os.path.exists(args.output_dir) and not os.path.isdir(args.output_dir):
-    print(colorama.Fore.RED + "output_dir exists but is not a directory")
+    print("output_dir exists but is not a directory")
     exit(1)
 
 if not os.path.exists(args.output_dir):
@@ -30,19 +29,19 @@ if not os.path.exists(args.output_dir):
 for dirpath, dirnames, filenames in os.walk(args.input_dir):
     output_path = dirpath.replace(args.input_dir, args.output_dir, 1)
     if os.path.exists(output_path) and not os.path.isdir(output_path):
-        print(colorama.Fore.RED + output_path +
+        print(output_path +
               " exists and is not a directory")
         exit(1)
     if not os.path.exists(output_path):
         os.mkdir(output_path)
 
     for name in filenames:
-        print(colorama.Fore.RESET + "Processing " + os.path.join(dirpath, name))
+        print("Processing " + os.path.join(dirpath, name))
         basename, ext = os.path.splitext(name)
 
         # Check extension
         if ext.lower() not in [".png", ".jpg", ".webp", ".avif"]:
-            print(colorama.Fore.RED + "Image of type " +
+            print("Image of type " +
                   ext + " is not supported")
             err_count += 1
             continue
@@ -50,7 +49,7 @@ for dirpath, dirnames, filenames in os.walk(args.input_dir):
         # Check size
         size = basename.split("_")[-1]
         if size not in ["xsmall", "small", "half", "full"]:
-            print(colorama.Fore.RED + "Unknown size for " + name)
+            print("Unknown size for " + name)
             err_count += 1
             continue
 
@@ -85,8 +84,8 @@ for dirpath, dirnames, filenames in os.walk(args.input_dir):
                 str(width),
                 dest
             ])
-            print(colorama.Fore.GREEN + "===>" +
-                  colorama.Fore.RESET + " Successfully outputed " + dest)
+            print("===>" +
+                  " Successfully outputed " + dest)
 
         for index, width in enumerate(widths):
             src = os.path.join(dirpath, name)
@@ -111,8 +110,8 @@ for dirpath, dirnames, filenames in os.walk(args.input_dir):
                 str(width),
                 dest
             ])
-            print(colorama.Fore.GREEN + "===>" +
-                  colorama.Fore.RESET + " Successfully outputed " + dest)
+            print("===>" +
+                  " Successfully outputed " + dest)
 
 
 if err_count == 0:

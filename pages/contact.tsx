@@ -115,7 +115,7 @@ export default function Contact() {
             </form>
           </div>
           {/* Right page */}
-          <div className="w-screen h-full mt-16 md:w-full md:pl-16 md:w-1/2 md:mt-0">
+          <div className="h-full mt-16 w-full md:pl-16 md:w-1/2 md:mt-0">
             <div className="w-full h-96">
               {isLoaded && (
                 <GoogleMap
