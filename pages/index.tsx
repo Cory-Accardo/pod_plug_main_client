@@ -9,27 +9,13 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
+import { Location } from "../types/types";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 
 import styles from "../styles/Index.module.css";
-
-interface Location {
-  index: number;
-  name: string;
-  coords: {
-    latitude: number;
-    longitude: number;
-  };
-  address: {
-    street: string;
-    city: string;
-    state: string;
-    zip: number;
-  };
-}
 
 const containerStyle = {
   height: "100%",

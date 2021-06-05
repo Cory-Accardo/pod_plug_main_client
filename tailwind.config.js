@@ -13,6 +13,8 @@ module.exports = {
         "hr-gray": "#F1F1F1",
         "background-blue": "#2D6EB7",
         "background-gray": "#F5F4F4",
+        "title-blue-dark": "#12172B",
+        "title-blue-light": "#08457D",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
