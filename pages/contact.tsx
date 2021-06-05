@@ -37,8 +37,6 @@ export default function Contact() {
   const [map, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
     setMap(map);
   }, []);
 
@@ -110,7 +108,7 @@ export default function Contact() {
               <input
                 type="submit"
                 value="Send"
-                className="self-end p-1 px-12 mt-4 text-sm font-semibold border-black rounded-lg cursor-pointer font-raleway border-3"
+                className="bg-white self-end p-1 px-12 mt-4 text-sm font-semibold border-black rounded-lg cursor-pointer font-raleway border-3"
               />
             </form>
           </div>
