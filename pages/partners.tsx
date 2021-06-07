@@ -7,6 +7,7 @@ import Head from "next/head";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useState, useCallback, useEffect } from "react";
 import Card from "../components/Card";
+import Procedure from "../components/Procedure";
 
 const containerStyle = {
   height: "100%",
@@ -151,14 +152,23 @@ export default function Partners() {
               Did you know?
             </div>
             <div className="flex flex-row justify-around mt-16">
-              <Card />
-              <Card />
-              <Card />
+              <Card
+                title="11%"
+                content="of the US population uses nicotine products"
+              />
+              <Card
+                title="40%"
+                content="of nightlife participants use nicotine products"
+              />
+              <Card
+                title="5%"
+                content="of foot traffic at current venues buy from our kiosks"
+              />
             </div>
           </div>
         </div>
 
-        {/* Third page: We facilitate everything */}
+        {/* Fourth page: We facilitate everything */}
         <div className="outer-container flex flex-col items-center py-32">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
@@ -168,9 +178,11 @@ export default function Partners() {
               No need to break a sweat - we've got you sorted!
             </div>
             <div className="flex flex-row justify-around mt-16">
-              <Card />
-              <Card />
-              <Card />
+              <Procedure svg="/trans.svg" caption="DELIVERY" />
+              <Procedure svg="/tool.svg" caption="SET UP &amp; MAINTENANCE" />
+              <Procedure svg="/box.svg" caption="REPLENISHMENT" />
+              <Procedure svg="/campaign.svg" caption="ADVERTISING &amp; MARKETING" />
+              <Procedure svg="/shield.svg" caption="LICENSING &amp; PERMITTING" />
             </div>
           </div>
         </div>
