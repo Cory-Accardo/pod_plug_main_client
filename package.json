@@ -9,7 +9,7 @@
     "test": "rtest tests.json"
   },
   "dependencies": {
-    "next": "10.2.2",
+    "next": "10.2.3",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -20,7 +20,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@react-google-maps/api": "^2.2.0",
     "@types/google.maps": "^3.45.1",
-    "@types/react": "^17.0.9",
+    "@types/react": "^17.0.10",
     "autoprefixer": "^10.2.6",
     "framer-motion": "^4.1.17",
     "postcss": "^8.3.0",

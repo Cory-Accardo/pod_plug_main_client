@@ -2,12 +2,16 @@ import Header from "../components/Header";
 import { Location } from "../types/types";
 import Image from "../components/Image";
 import styles from "../styles/Index.module.css";
+import Card from "../components/Card";
+import Procedure from "../components/Procedure";
+import ResizableCard from "../components/ResizableCard";
 
 import Head from "next/head";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useState, useCallback, useEffect } from "react";
-import Card from "../components/Card";
-import Procedure from "../components/Procedure";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import Footer from "../components/Footer";
 
 const containerStyle = {
   height: "100%",
@@ -60,6 +64,11 @@ export default function Partners() {
   }, []);
   // end: Venues
 
+  // begin: form
+  const [agreeEmail, setAgreeEmail] = useState(false);
+  const [agreeSendInfo, setAgreeSendInfo] = useState(false);
+  // end: form
+
   return (
     <>
       <Head>
@@ -71,33 +80,106 @@ export default function Partners() {
 
       {/* First page */}
       <main className="bg-background-gray">
+        {/* Clouds */}
+        <div className="absolute z-clouds w-full page">
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-60 z-clouds transform scale-60"
+            style={{ top: "0rem", left: "75vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute opacity-60 z-clouds"
+            style={{ top: "2rem", left: "1vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute hidden opacity-80 md:block z-clouds transform scale-75"
+            style={{ top: "22rem", left: "47vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "40rem", left: "10vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "108rem", left: "55vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute hidden opacity-80 md:block z-clouds transform scale-75"
+            style={{ top: "120rem", left: "0vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "140rem", left: "65vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds transform scale-75"
+            style={{ top: "155rem", left: "5vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute hidden opacity-80 md:block z-clouds transform scale-75"
+            style={{ top: "180rem", left: "40vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "230rem", left: "75vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "235rem", left: "15vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute hidden opacity-80 md:block z-clouds transform scale-75"
+            style={{ top: "255rem", left: "40vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "275rem", left: "-5vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds"
+            style={{ top: "285rem", left: "65vw" }}
+          />
+          <img
+            src="/clouds_big.png"
+            alt="Clouds"
+            className="absolute opacity-80 z-clouds transform scale-75"
+            style={{ top: "290rem", left: "-5vw" }}
+          />
+          <img
+            src="/clouds_blue.png"
+            alt="Clouds"
+            className="absolute opacity-50 z-clouds"
+            style={{ top: "320rem", left: "55vw" }}
+          />
+        </div>
         <div className="outer-container flex flex-col items-center">
-          <div className="absolute z-clouds w-full page">
-            <img
-              src="/clouds_blue.png"
-              alt="Clouds"
-              className="absolute opacity-60 z-clouds transform scale-60"
-              style={{ top: "0rem", left: "75vw" }}
-            />
-            <img
-              src="/clouds_big.png"
-              alt="Clouds"
-              className="absolute opacity-60 z-clouds"
-              style={{ top: "2rem", left: "1vw" }}
-            />
-            <img
-              src="/clouds_big.png"
-              alt="Clouds"
-              className="absolute hidden opacity-80 md:block z-clouds transform scale-75"
-              style={{ top: "22rem", left: "47vw" }}
-            />
-            <img
-              src="/clouds_blue.png"
-              alt="Clouds"
-              className="absolute opacity-80 z-clouds"
-              style={{ top: "40rem", left: "10vw" }}
-            />
-          </div>
           <div className="page container relative z-content">
             <div className="w-full h-full flex flex-row items-center relative">
               <div className="flex flex-col font-raleway text-center flex-grow">
@@ -146,7 +228,7 @@ export default function Partners() {
         </div>
 
         {/* Third page: Did you know */}
-        <div className="outer-container flex flex-col items-center py-32">
+        <div className="outer-container flex flex-col items-center py-32 relative z-content">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               Did you know?
@@ -169,7 +251,7 @@ export default function Partners() {
         </div>
 
         {/* Fourth page: We facilitate everything */}
-        <div className="outer-container flex flex-col items-center py-32">
+        <div className="outer-container flex flex-col items-center py-32 relative z-content">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               We Facilitate <span className="font-extrabold">EVERYTHING</span>
@@ -177,16 +259,380 @@ export default function Partners() {
             <div className="font-raleway text-xl text-center my-6">
               No need to break a sweat - we've got you sorted!
             </div>
-            <div className="flex flex-row justify-around mt-16">
+            <div className="flex flex-row justify-around mt-16 items-center">
               <Procedure svg="/trans.svg" caption="DELIVERY" />
+              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
               <Procedure svg="/tool.svg" caption="SET UP &amp; MAINTENANCE" />
+              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
               <Procedure svg="/box.svg" caption="REPLENISHMENT" />
-              <Procedure svg="/campaign.svg" caption="ADVERTISING &amp; MARKETING" />
-              <Procedure svg="/shield.svg" caption="LICENSING &amp; PERMITTING" />
+              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <Procedure
+                svg="/campaign.svg"
+                caption="ADVERTISING &amp; MARKETING"
+              />
+              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <Procedure
+                svg="/shield.svg"
+                caption="LICENSING &amp; PERMITTING"
+              />
             </div>
           </div>
         </div>
+
+        {/* Fifth page: What we propose */}
+        <div className="outer-container flex flex-col items-center py-32 relative z-content">
+          <div className="container">
+            <div className="font-raleway font-bold text-4xl text-center">
+              Here is what we propose
+            </div>
+            <div className="flex flex-row justify-around mt-16">
+              <ResizableCard
+                header="PAY"
+                title="0%"
+                content="Upfront Costs"
+                footer=""
+              />
+              <ResizableCard
+                header="EARN UP TO"
+                title="$8,000<span>*</span>"
+                content="Profit a Year"
+                footer="*Based on the average of top 10 PodPlug accounts"
+              />
+              <ResizableCard
+                header="PROFIT"
+                title="10%"
+                content="of Total Sales"
+                footer=""
+              />
+              <div className="h-72 min-w-56 rounded-3xl bg-white flex flex-col items-center justify-center p-4 px-8">
+                <div className="font-raleway text-theme-light font-black text-xl mb-4">
+                  WE ACCEPT
+                </div>
+                <div className="font-raleway text-theme-light text-center text-lg h-38 flex flex-row items-center">
+                  <div>
+                    Credit, Debit,
+                    <br />
+                    Apple Pay,
+                    <br />
+                    Samsung Pay,
+                    <br />
+                    and other Cashless
+                    <br />
+                    Payments
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sixth page: Convenient products */}
+        <div className="flex flex-col py-32 outer-container items-center">
+          <div className="font-raleway font-bold text-4xl text-center">
+            Convenient products we provide
+          </div>
+          <div className="flex flex-col items-center mt-24">
+            <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-140 z-content py-2">
+              <div className="grid grid-flow-row grid-cols-3 gap-8 pb-4">
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/juul.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/juul.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/hqd.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/fume.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-32 h-32"
+                    style={{
+                      backgroundImage: 'url("/fume.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="w-40 h-40"
+                    style={{
+                      backgroundImage: 'url("/airbar.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
+                  style={{ borderRadius: "1.5rem" }}
+                >
+                  <div
+                    className="h-36 w-36"
+                    style={{
+                      backgroundImage: 'url("/vuse.png")',
+                      backgroundRepeat: "no-repeat",
+                      backgroundSize: "contain",
+                      backgroundPosition: "center center",
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Will you partner with us */}
+        <div className="relative z-content flex flex-col items-center outer-container py-32">
+          <div className="container">
+            <div className="font-raleway font-bold text-4xl text-center">
+              Will you partner with us?
+            </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+              className="flex flex-row mt-24"
+            >
+              <div className="flex flex-col w-1/2 pr-4">
+                <div className="flex flex-col">
+                  <label className="text-sm font-bold font-raleway">
+                    VENUE NAME<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    GENERAL MANAGER NAME<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    EMAIL<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="email"
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    NUMBER<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="tel"
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    SOCIAL MEDIA HANDLES<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="grid gap-4 mt-4"
+                  style={{ gridTemplateColumns: "max-content auto" }}
+                >
+                  <div className="font-raleway font-bold pr-4">
+                    What is your estimated monthly alcohol revenue?
+                  </div>
+                  <input
+                    className="p-1 border-black rounded-lg border-2 flex-grow"
+                    type="text"
+                  ></input>
+                  <div className="font-raleway font-bold pr-4">
+                    What is your average daily foot traffic?
+                  </div>
+                  <input
+                    className="p-1 border-black rounded-lg border-2 flex-grow"
+                    type="text"
+                  ></input>
+                </div>
+              </div>
+              <div className="w-1/2 pl-4">
+                <div className="flex flex-col">
+                  <label className="text-sm font-bold font-raleway">
+                    ADDRESS<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    CITY<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div className="flex flex-row">
+                  <div className="flex flex-col mt-4 w-1/2 pr-2">
+                    <label className="text-sm font-bold font-raleway">
+                      STATE<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      className="p-1 border-black rounded-lg border-2"
+                      type="text"
+                    />
+                  </div>
+                  <div className="flex flex-col mt-4 w-1/2 pl-2">
+                    <label className="text-sm font-bold font-raleway">
+                      ZIP<span className="text-red-600">*</span>
+                    </label>
+                    <input
+                      className="p-1 border-black rounded-lg border-2"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    COUNTRY<span className="text-red-600">*</span>
+                  </label>
+                  <input
+                    className="p-1 border-black rounded-lg border-2"
+                    type="text"
+                  />
+                </div>
+                <div className="flex flex-row mt-8 items-center">
+                  <button
+                    className="w-5 h-5 border-2 border-black rounded-md relative mr-4"
+                    onClick={() => setAgreeEmail((orig) => !orig)}
+                  >
+                    {agreeEmail && (
+                      <div className="absolute h-full w-full left-0 top-0 bg-black">
+                        <FontAwesomeIcon
+                          className="absolute text-white"
+                          style={{
+                            inset: "0.05rem",
+                          }}
+                          icon={faCheck}
+                        ></FontAwesomeIcon>
+                      </div>
+                    )}
+                  </button>
+                  <div className="font-raleway">
+                    I agree to receiving future offers in my email or via post.
+                    <span className="text-red-600">*</span>
+                  </div>
+                </div>
+                <div className="flex flex-row mt-4 items-center">
+                  <button
+                    className="w-5 h-5 border-2 border-black rounded-md relative mr-4"
+                    onClick={() => setAgreeSendInfo((orig) => !orig)}
+                  >
+                    {agreeSendInfo && (
+                      <div className="absolute h-full w-full left-0 top-0 bg-black">
+                        <FontAwesomeIcon
+                          className="absolute text-white"
+                          style={{
+                            inset: "0.05rem",
+                          }}
+                          icon={faCheck}
+                        ></FontAwesomeIcon>
+                      </div>
+                    )}
+                  </button>
+                  <div className="font-raleway">
+                    I agree to allow my information to be sent to future vendor
+                    and venue partners.
+                    <span className="text-red-600">*</span>
+                  </div>
+                </div>
+                <div className="flex flex-row mt-4 items-center">
+                  <div className="mr-auto">
+                    <span className="text-red-600">*</span>Required
+                  </div>
+                  <button className="bg-black text-white rounded-lg px-12 py-1">
+                    Yes!
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="relative h-64">
+          <div
+            className="absolute bottom-0 -top-12 left-0 right-0 opacity-20"
+            style={{
+              backgroundImage: 'url("skyline_full.png")',
+              backgroundSize: "contain",
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "bottom",
+            }}
+          ></div>
+        </div>
       </main>
+      <Footer />
     </>
   );
 }

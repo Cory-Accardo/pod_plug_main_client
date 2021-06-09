@@ -27,7 +27,9 @@ module.exports = {
       height: {
         page: "52rem",
         page_md: "42rem",
+        38: "9.5rem",
         136: "34rem",
+        140: "35rem",
       },
       margin: {
         gap: "16rem",
@@ -40,6 +42,9 @@ module.exports = {
       },
       fontSize: {
         "4xl": "2.25rem",
+      },
+      minWidth: {
+        56: "14rem",
       },
     },
   },
