@@ -27,6 +27,7 @@ module.exports = {
       height: {
         page: "52rem",
         page_md: "42rem",
+        29: "7.25rem",
         38: "9.5rem",
         136: "34rem",
         140: "35rem",
@@ -44,6 +45,7 @@ module.exports = {
         "4xl": "2.25rem",
       },
       minWidth: {
+        48: "12rem",
         56: "14rem",
       },
     },

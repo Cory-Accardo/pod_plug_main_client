@@ -12,6 +12,7 @@ import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../components/Footer";
+import { USER_MS } from "../constants";
 
 const containerStyle = {
   height: "100%",
@@ -19,9 +20,9 @@ const containerStyle = {
 };
 
 const mapOptions = {
-  gestureHandling: "none",
   scrollwheel: false,
   disableDefaultUI: true,
+  zoomControl: true,
 };
 
 export default function Partners() {
@@ -50,7 +51,7 @@ export default function Partners() {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/venues/listall")
+    fetch("http://" + USER_MS + "/venues/listall")
       .then((res) => {
         return res.json();
       })
@@ -181,17 +182,19 @@ export default function Partners() {
         </div>
         <div className="outer-container flex flex-col items-center">
           <div className="page container relative z-content">
-            <div className="w-full h-full flex flex-row items-center relative">
-              <div className="flex flex-col font-raleway text-center flex-grow">
-                <div className="text-8xl font-bold text-title-blue-dark">
+            <div className="w-full h-full flex flex-col md:flex-row items-center relative">
+              <div className="flex flex-col font-raleway text-center flex-grow mt-24 sm:mt-32 md:mt-0">
+                <div className="text-4xl sm:text-5xl md:text-5xl xl:text-7xl font-bold text-title-blue-dark">
                   Partner with us
                 </div>
-                <div className="text-3xl font-semibold text-title-blue-light mt-6">
+                <div className="text-xl md:text-2xl xl:text-3xl font-semibold text-title-blue-light mt-6">
                   <div>Convenience when out</div>
                   <div>Providing a WOW experience</div>
                 </div>
               </div>
-              <div className={styles.image_width}>
+              <div
+                className={`${styles.image_width} transform scale-75 -translate-y-8 md:translate-y-0 md:scale-90`}
+              >
                 <Image
                   src="/kiosk_2_full"
                   alt="Kiosk"
@@ -205,7 +208,7 @@ export default function Partners() {
         </div>
 
         {/* Second page: Map */}
-        <div className="page">
+        <div className="page hidden md:block">
           {isLoaded && (
             <GoogleMap
               onLoad={onLoad}
@@ -228,12 +231,12 @@ export default function Partners() {
         </div>
 
         {/* Third page: Did you know */}
-        <div className="outer-container flex flex-col items-center py-32 relative z-content">
+        <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content mt-12 sm:mt-24 md:mt-0">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               Did you know?
             </div>
-            <div className="flex flex-row justify-around mt-16">
+            <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
               <Card
                 title="11%"
                 content="of the US population uses nicotine products"
@@ -251,7 +254,7 @@ export default function Partners() {
         </div>
 
         {/* Fourth page: We facilitate everything */}
-        <div className="outer-container flex flex-col items-center py-32 relative z-content">
+        <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               We Facilitate <span className="font-extrabold">EVERYTHING</span>
@@ -259,18 +262,34 @@ export default function Partners() {
             <div className="font-raleway text-xl text-center my-6">
               No need to break a sweat - we've got you sorted!
             </div>
-            <div className="flex flex-row justify-around mt-16 items-center">
+            <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
               <Procedure svg="/trans.svg" caption="DELIVERY" />
-              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <img
+                src="/arrow.svg"
+                alt="Arrow"
+                className="w-24 h-24 hidden xl:block"
+              />
               <Procedure svg="/tool.svg" caption="SET UP &amp; MAINTENANCE" />
-              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <img
+                src="/arrow.svg"
+                alt="Arrow"
+                className="w-24 h-24 hidden xl:block"
+              />
               <Procedure svg="/box.svg" caption="REPLENISHMENT" />
-              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <img
+                src="/arrow.svg"
+                alt="Arrow"
+                className="w-24 h-24 hidden xl:block"
+              />
               <Procedure
                 svg="/campaign.svg"
                 caption="ADVERTISING &amp; MARKETING"
               />
-              <img src="/arrow.svg" alt="Arrow" className="w-24 h-24" />
+              <img
+                src="/arrow.svg"
+                alt="Arrow"
+                className="w-24 h-24 hidden xl:block"
+              />
               <Procedure
                 svg="/shield.svg"
                 caption="LICENSING &amp; PERMITTING"
@@ -280,12 +299,12 @@ export default function Partners() {
         </div>
 
         {/* Fifth page: What we propose */}
-        <div className="outer-container flex flex-col items-center py-32 relative z-content">
+        <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               Here is what we propose
             </div>
-            <div className="flex flex-row justify-around mt-16">
+            <div className="flex flex-col md:flex-row justify-around mt-16">
               <ResizableCard
                 header="PAY"
                 title="0%"
@@ -304,11 +323,11 @@ export default function Partners() {
                 content="of Total Sales"
                 footer=""
               />
-              <div className="h-72 min-w-56 rounded-3xl bg-white flex flex-col items-center justify-center p-4 px-8">
+              <div className="h-72 lg:min-w-48 xl:min-w-56 rounded-3xl bg-transparent md:bg-white flex-col items-center justify-center p-4 flex md:hidden lg:flex">
                 <div className="font-raleway text-theme-light font-black text-xl mb-4">
                   WE ACCEPT
                 </div>
-                <div className="font-raleway text-theme-light text-center text-lg h-38 flex flex-row items-center">
+                <div className="font-raleway text-theme-light text-center text-lg md:text-base xl:text-lg h-29 xl:h-38 flex flex-row items-center mt-4 md:mt-0">
                   <div>
                     Credit, Debit,
                     <br />
@@ -327,13 +346,13 @@ export default function Partners() {
         </div>
 
         {/* Sixth page: Convenient products */}
-        <div className="flex flex-col py-32 outer-container items-center">
+        <div className="flex flex-col pt-32 md:py-32 outer-container items-center">
           <div className="font-raleway font-bold text-4xl text-center">
             Convenient products we provide
           </div>
           <div className="flex flex-col items-center mt-24">
             <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-140 z-content py-2">
-              <div className="grid grid-flow-row grid-cols-3 gap-8 pb-4">
+              <div className="grid grid-flow-row grid-cols-2 md:grid-cols-3 gap-8 pb-4">
                 <div
                   className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
                   style={{ borderRadius: "1.5rem" }}
@@ -620,7 +639,7 @@ export default function Partners() {
             </form>
           </div>
         </div>
-        <div className="relative h-64">
+        <div className="relative h-32 lg:h-64">
           <div
             className="absolute bottom-0 -top-12 left-0 right-0 opacity-20"
             style={{

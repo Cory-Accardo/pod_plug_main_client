@@ -32,7 +32,7 @@ a {
 }
 
 .outer-container {
-  @apply px-16 md:px-24;
+  @apply px-8 md:px-16;
 }
 
 .page {

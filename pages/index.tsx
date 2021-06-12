@@ -16,6 +16,7 @@ import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 
 import styles from "../styles/Index.module.css";
+import { USER_MS } from "../constants";
 
 const containerStyle = {
   height: "100%",
@@ -87,7 +88,7 @@ export default function Home() {
   }, [searchBox]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/venues/listall")
+    fetch("http://" + USER_MS + "/venues/listall")
       .then((res) => {
         return res.json();
       })
