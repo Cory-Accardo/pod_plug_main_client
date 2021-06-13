@@ -5,14 +5,15 @@ import styles from "../styles/Index.module.css";
 import Card from "../components/Card";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
+import Footer from "../components/Footer";
+import { USER_MS } from "../constants";
+import BrandCard from "../components/BrandCard";
 
 import Head from "next/head";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../components/Footer";
-import { USER_MS } from "../constants";
 
 const containerStyle = {
   height: "100%",
@@ -351,106 +352,16 @@ export default function Partners() {
             Convenient products we provide
           </div>
           <div className="flex flex-col items-center mt-24">
-            <div className="w-auto pr-2 overflow-x-hidden overflow-y-scroll h-140 z-content py-2">
+            <div className="w-auto pr-2 overflow-x-hidden md:overflow-y-scroll md:h-140 z-content py-2">
               <div className="grid grid-flow-row grid-cols-2 md:grid-cols-3 gap-8 pb-4">
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-32 h-32"
-                    style={{
-                      backgroundImage: 'url("/juul.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-32 h-32"
-                    style={{
-                      backgroundImage: 'url("/juul.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-32 h-32"
-                    style={{
-                      backgroundImage: 'url("/hqd.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-32 h-32"
-                    style={{
-                      backgroundImage: 'url("/fume.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-32 h-32"
-                    style={{
-                      backgroundImage: 'url("/fume.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="w-40 h-40"
-                    style={{
-                      backgroundImage: 'url("/airbar.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
-                <div
-                  className="flex items-center justify-center w-64 h-64 bg-white shadow-md"
-                  style={{ borderRadius: "1.5rem" }}
-                >
-                  <div
-                    className="h-36 w-36"
-                    style={{
-                      backgroundImage: 'url("/vuse.png")',
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "contain",
-                      backgroundPosition: "center center",
-                    }}
-                  ></div>
-                </div>
+                <BrandCard url="/airbar.png" />
+                <BrandCard url="/fume.png" />
+                <BrandCard url="/fume.png" />
+                <BrandCard url="/juul.png" />
+                <BrandCard url="/juul.png" />
+                <BrandCard url="/hqd.png" />
+                <BrandCard url="/hqd.png" />
+                <BrandCard url="/hqd.png" />
               </div>
             </div>
           </div>
@@ -466,9 +377,9 @@ export default function Partners() {
               onSubmit={(e) => {
                 e.preventDefault();
               }}
-              className="flex flex-row mt-24"
+              className="flex flex-col md:flex-row mt-24"
             >
-              <div className="flex flex-col w-1/2 pr-4">
+              <div className="flex flex-col md:w-1/2 md:pr-4">
                 <div className="flex flex-col">
                   <label className="text-sm font-bold font-raleway">
                     VENUE NAME<span className="text-red-600">*</span>
@@ -514,27 +425,26 @@ export default function Partners() {
                     type="text"
                   />
                 </div>
-                <div
-                  className="grid gap-4 mt-4"
-                  style={{ gridTemplateColumns: "max-content auto" }}
-                >
-                  <div className="font-raleway font-bold pr-4">
-                    What is your estimated monthly alcohol revenue?
-                  </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    Est. monthly alcohol revenue
+                  </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2 flex-grow"
+                    className="p-1 border-black rounded-lg border-2 md:w-48 md:ml-auto"
                     type="text"
-                  ></input>
-                  <div className="font-raleway font-bold pr-4">
-                    What is your average daily foot traffic?
-                  </div>
+                  />
+                </div>
+                <div className="flex flex-col mt-4">
+                  <label className="text-sm font-bold font-raleway">
+                    Avg. daily foot traffic
+                  </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2 flex-grow"
+                    className="p-1 border-black rounded-lg border-2 md:w-48 md:ml-auto"
                     type="text"
-                  ></input>
+                  />
                 </div>
               </div>
-              <div className="w-1/2 pl-4">
+              <div className="md:w-1/2 md:pl-4 mt-4 md:mt-0">
                 <div className="flex flex-col">
                   <label className="text-sm font-bold font-raleway">
                     ADDRESS<span className="text-red-600">*</span>
@@ -582,9 +492,9 @@ export default function Partners() {
                     type="text"
                   />
                 </div>
-                <div className="flex flex-row mt-8 items-center">
+                <div className="flex flex-row mt-8 md:mt-20 items-center">
                   <button
-                    className="w-5 h-5 border-2 border-black rounded-md relative mr-4"
+                    className="border-2 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
                     onClick={() => setAgreeEmail((orig) => !orig)}
                   >
                     {agreeEmail && (
@@ -606,7 +516,7 @@ export default function Partners() {
                 </div>
                 <div className="flex flex-row mt-4 items-center">
                   <button
-                    className="w-5 h-5 border-2 border-black rounded-md relative mr-4"
+                    className="border-2 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
                     onClick={() => setAgreeSendInfo((orig) => !orig)}
                   >
                     {agreeSendInfo && (
@@ -639,7 +549,7 @@ export default function Partners() {
             </form>
           </div>
         </div>
-        <div className="relative h-32 lg:h-64">
+        <div className="relative h-16 md:h-32 lg:h-64">
           <div
             className="absolute bottom-0 -top-12 left-0 right-0 opacity-20"
             style={{

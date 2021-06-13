@@ -45,9 +45,13 @@ module.exports = {
         "4xl": "2.25rem",
       },
       minWidth: {
+        5: "1.25rem",
         48: "12rem",
         56: "14rem",
       },
+      minHeight: {
+        5: "1.25rem"
+      }
     },
   },
   variants: {
