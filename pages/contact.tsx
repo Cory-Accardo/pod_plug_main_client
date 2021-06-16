@@ -58,7 +58,7 @@ export default function Contact() {
       <main className="flex flex-col items-center pt-16 outer-container md:pt-36 bg-background-gray">
         <div className="container flex flex-col items-center md:flex-row">
           <div className="flex flex-col w-full md:pr-16 md:w-1/2">
-            <div className="text-5xl font-bold font-raleway">Let's Talk</div>
+            <div className="text-5xl font-bold font-raleway">Let&apos;s Talk</div>
             <div className="text-lg font-raleway">
               <div className="mt-6">
                 Curious to learn more about our product?

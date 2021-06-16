@@ -266,7 +266,7 @@ export default function Partners() {
               We Facilitate <span className="font-extrabold">EVERYTHING</span>
             </div>
             <div className="font-raleway text-xl text-center my-6">
-              No need to break a sweat - we've got you sorted!
+              No need to break a sweat - we&apos;ve got you sorted!
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
               <Procedure svg="/trans.svg" caption="DELIVERY" />
