@@ -62,9 +62,9 @@ export default function About() {
         </div>
         <div className="outer-container flex flex-col items-center pt-8 md:pt-24 pb-12 relative z-content">
           <div className="container flex flex-col-reverse md:flex-row items-center">
-            <div className="flex flex-col items-center md:w-1/2">
+            <div className="flex flex-col items-center md:items-start md:w-1/2">
               <div className="inline-block my-auto">
-                <div className="font-raleway font-bold text-6xl md:text-4.9xl lg:text-6xl xl:text-7xl text-center leading-tight">
+                <div className="font-raleway font-bold text-6xl md:text-4.9xl lg:text-6xl xl:text-7xl text-center md:text-left leading-tight">
                   Get to <br className="block sm:hidden"/> know us
                 </div>
                 <div className="px-4 md:px-0 font-raleway text-lg w-full lg:w-3/4 mt-6">
@@ -101,7 +101,7 @@ export default function About() {
             }}
           />
           <div className="flex flex-col md:flex-row container justify-around relative z-content items-center">
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-lg justify-around mb-8 max-w-full">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around mb-8 max-w-full">
               <div className="self-center font-raleway font-semibold text-xl">
                 Our Mission
               </div>
@@ -111,7 +111,7 @@ export default function About() {
                 enim ad minim veniam.
               </div>
             </div>
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-lg justify-around mb-8 max-w-full">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around mb-8 max-w-full">
               <div className="self-center font-raleway font-semibold text-xl">
                 Our Vision
               </div>
@@ -121,7 +121,7 @@ export default function About() {
                 enim ad minim veniam.
               </div>
             </div>
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-lg justify-around max-w-full">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around max-w-full">
               <div className="self-center font-raleway font-semibold text-xl">
                 Our Purpose
               </div>
