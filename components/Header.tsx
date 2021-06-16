@@ -19,7 +19,7 @@ export default function Header(props: HeaderProps) {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
-      <div className="flex flex-row items-center px-16 py-4 md:px-32 bg-theme-dark">
+      <div className="flex flex-row items-center px-16 py-4 md:px-32 bg-theme-dark relative z-content">
         <div className="relative w-20 mr-auto">
           <Image
             src="/logo_small"
