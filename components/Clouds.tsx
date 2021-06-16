@@ -7,7 +7,7 @@ interface CloudsProps {
 export default function Clouds(props: CloudsProps) {
   return (
     <div
-      className={`relative ${props.id === 1 ? styles.cloud0 : styles.cloud0}`}
+      className={`relative ${props.id === 1 ? styles.cloud1 : styles.cloud2} z-clouds`}
     >
       <img
         src="/clouds_blue.png"
