@@ -17,7 +17,7 @@ export default function BrandCard(props: BrandCardProps) {
             backgroundSize: "contain",
             backgroundPosition: "center center",
           }}
-        ></div>
+        />
       </div>
     </div>
   );

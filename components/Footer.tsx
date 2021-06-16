@@ -37,19 +37,19 @@ export default function Footer() {
               <FontAwesomeIcon
                 icon={faInstagramSquare}
                 className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              ></FontAwesomeIcon>
+              />
               <FontAwesomeIcon
                 icon={faFacebookSquare}
                 className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              ></FontAwesomeIcon>
+              />
               <FontAwesomeIcon
                 icon={faBuilding}
                 className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              ></FontAwesomeIcon>
+              />
               <FontAwesomeIcon
                 icon={faPhone}
                 className="w-4 h-4 md:w-6 md:h-6"
-              ></FontAwesomeIcon>
+              />
             </div>
           </div>
           <div className="flex-row self-center hidden z-content md:flex">

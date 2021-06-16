@@ -1,3 +1,8 @@
+/**
+ * Created by Haowen Liu in 2021
+ * Pod Plug venues page
+ */
+
 import Header from "../components/Header";
 import { Location } from "../types/types";
 import Image from "../components/Image";
@@ -32,10 +37,10 @@ export default function Partners() {
     googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
   });
 
-  const [map, setMap] = useState(null);
+  const [, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
-    var bounds = new google.maps.LatLngBounds(
+    const bounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(27.82, -124.39),
       new google.maps.LatLng(49.38, -66.94)
     );
@@ -505,7 +510,7 @@ export default function Partners() {
                             inset: "0.05rem",
                           }}
                           icon={faCheck}
-                        ></FontAwesomeIcon>
+                        />
                       </div>
                     )}
                   </button>
@@ -527,7 +532,7 @@ export default function Partners() {
                             inset: "0.05rem",
                           }}
                           icon={faCheck}
-                        ></FontAwesomeIcon>
+                        />
                       </div>
                     )}
                   </button>
@@ -558,7 +563,7 @@ export default function Partners() {
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",
             }}
-          ></div>
+          />
         </div>
       </main>
       <Footer />

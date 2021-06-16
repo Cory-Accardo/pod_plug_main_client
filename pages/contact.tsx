@@ -34,7 +34,7 @@ export default function Contact() {
     googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
   });
 
-  const [map, setMap] = useState(null);
+  const [, setMap] = useState(null);
 
   const onLoad = useCallback(function callback(map) {
     setMap(map);
@@ -122,7 +122,7 @@ export default function Contact() {
                   mapContainerStyle={containerStyle}
                   clickableIcons={false}
                   options={mapOptions}
-                ></GoogleMap>
+                />
               )}
             </div>
             <div className="flex-row justify-around hidden w-full mt-6 text-theme-dark md:flex">

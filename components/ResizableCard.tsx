@@ -14,7 +14,7 @@ export default function Card(props: ResizableCardProps) {
       <div
         className="text-7xl md:text-5xl lg:text-6xl xl:text-8xl text-theme-light font-raleway font-thin mb-8"
         dangerouslySetInnerHTML={{ __html: props.title }}
-      ></div>
+      />
       <div className="font-raleway text-theme-light text-center">
         {props.content}
       </div>

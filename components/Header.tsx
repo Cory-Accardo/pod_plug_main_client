@@ -89,7 +89,7 @@ export default function Header(props: HeaderProps) {
                 setShowMenu(false);
               }}
             >
-              <FontAwesomeIcon icon={faTimes}></FontAwesomeIcon>
+              <FontAwesomeIcon icon={faTimes} />
             </div>
             <div
               className={`text-white font-raleway font-semibold mb-8 ${

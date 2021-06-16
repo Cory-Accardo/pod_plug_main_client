@@ -54,7 +54,7 @@ export default function About() {
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",
             }}
-          ></div>
+          />
           <div className="flex flex-row container justify-around relative z-content">
             <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-lg justify-around">
               <div className="self-center font-raleway font-semibold text-xl">
@@ -88,7 +88,7 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="pt-24"></div>
+        <div className="pt-24" />
       </main>
 
       <Footer />

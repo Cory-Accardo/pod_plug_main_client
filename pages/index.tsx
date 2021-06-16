@@ -175,7 +175,7 @@ export default function Home() {
               <input
                 type="text"
                 className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
-              ></input>
+              />
               <button className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway">
                 Sign Up
               </button>
@@ -185,7 +185,7 @@ export default function Home() {
                 className={`${styles.image_width} ${
                   kioskState === 0 ? "hidden" : "block"
                 }`}
-              ></div>
+              />
               <div
                 className={`${kioskState === 0 ? styles.image_start : ""} ${
                   kioskState === 1 ? styles.image_moving : ""
@@ -212,7 +212,7 @@ export default function Home() {
               backgroundPosition: "bottom",
               height: "24rem",
             }}
-          ></div>
+          />
           <div
             className="absolute bottom-0 block w-full z-bg md:hidden"
             style={{
@@ -222,7 +222,7 @@ export default function Home() {
               backgroundPosition: "bottom",
               height: "24rem",
             }}
-          ></div>
+          />
         </div>
 
         {/* Second page */}
@@ -362,7 +362,7 @@ export default function Home() {
         */}
 
         {/* Google Maps */}
-        <div className="pt-32 md:pt-64"></div>
+        <div className="pt-32 md:pt-64" />
         {isLoaded && (
           <div className="relative w-full page z-bg">
             <div className="relative w-full h-full z-content">
@@ -417,7 +417,7 @@ export default function Home() {
                             setSearchFocused(false);
                           }}
                           className="w-full px-2 py-1 border-2 rounded-lg border-subtitle-gray md:border-theme-light md:w-auto"
-                        ></input>
+                        />
                       </form>
                       <button
                         className="hidden px-6 py-1 ml-4 text-white rounded-lg bg-theme-light md:block"
@@ -434,7 +434,7 @@ export default function Home() {
                       <div className="mt-4 text-xs font-medium font-raleway">
                         {coords.length} SEARCH RESULTS
                       </div>
-                      <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray"></hr>
+                      <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray" />
                       <div className="flex-shrink my-3 overflow-y-scroll">
                         <AnimateSharedLayout>
                           <motion.div layout>
