@@ -95,9 +95,9 @@ export default function About() {
             className="absolute w-full h-1/2 md:h-full left-0 top-1/2 md:top-0 z-bg opacity-30"
             style={{
               backgroundImage: 'url("skyline_full.png")',
-              backgroundSize: "cover",
+              backgroundSize: "auto auto",
               backgroundRepeat: "repeat-x",
-              backgroundPosition: "bottom",
+              backgroundPosition: "bottom left",
             }}
           />
           <div className="flex flex-col md:flex-row container justify-around relative z-content items-center">
