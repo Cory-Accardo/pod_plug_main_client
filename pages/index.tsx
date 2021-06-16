@@ -252,7 +252,7 @@ export default function Home() {
         {/* Third page */}
         <div className="relative flex flex-col mt-gap page">
           <div className="w-full mt-16 text-5xl text-center text-white">
-            Our Brand Partners
+            Convenient products we provide
           </div>
           <div className="flex flex-col items-center mt-24">
             <div className="w-auto pr-2 overflow-x-hidden md:overflow-y-scroll md:h-140 z-content py-2">
