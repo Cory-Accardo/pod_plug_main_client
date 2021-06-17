@@ -16,6 +16,7 @@ import BrandCard from "../components/BrandCard";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
+import BezierEasing from "bezier-easing";
 
 import styles from "../styles/Index.module.css";
 
@@ -30,6 +31,8 @@ const mapOptions = {
   streetViewControl: false,
   scrollwheel: false,
 };
+
+const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 
 export default function Home() {
   // begin: Google Maps
@@ -48,26 +51,44 @@ export default function Home() {
   }, []);
   // end: Google Maps
 
+  // begin: window resize
+  const [lg, setLg] = useState(false);
+
+  useEffect(() => {
+    const listener = () => {
+      setLg(window.matchMedia("(min-width: 1024px)").matches);
+    };
+    window.addEventListener("resize", listener);
+  });
+  // end: window resize
+
   // begin: Kiosk scrolling effect
   const kioskContainer = useRef<HTMLDivElement>();
   const textContainer = useRef<HTMLDivElement>();
 
-  // 0: original position
-  // 1: fixed to top of page
-  // 2: final position
-  const [kioskState, setKioskState] = useState(0);
+  const [kioskTransform, setKioskTransform] = useState("0rem");
 
   useEffect(() => {
     const listener = () => {
-      if (window.scrollY >= textContainer.current.offsetTop) {
-        setKioskState(2);
-        return;
+      let end: number;
+      if (lg) {
+        end = 68;
+      } else {
+        end = 58;
       }
-      if (kioskContainer.current.offsetTop - window.scrollY <= 40) {
-        setKioskState(1);
-        return;
-      }
-      setKioskState(0);
+      const fontSize = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      );
+      const x = Math.max(
+        Math.min(
+          (window.scrollY - kioskContainer.current.offsetTop + 40) /
+            fontSize /
+            end,
+          1
+        ),
+        0
+      );
+      setKioskTransform(`${easing(x) * end}rem`);
     };
 
     window.addEventListener("scroll", listener);
@@ -75,7 +96,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", listener);
     };
-  }, [kioskContainer]);
+  }, [kioskContainer, lg]);
   // end: Kiosk scrolling effect
 
   // begin: Venues
@@ -183,16 +204,8 @@ export default function Home() {
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
               <div
-                className={`${styles.image_width} ${
-                  kioskState === 0 ? "hidden" : "block"
-                }`}
-              />
-              <div
-                className={`${kioskState === 0 ? styles.image_start : ""} ${
-                  kioskState === 1 ? styles.image_moving : ""
-                } ${kioskState === 2 ? styles.image_end : ""} ${
-                  styles.image_width
-                } transform scale-75 md:scale-100`}
+                className={` ${styles.image_width} transform scale-75 md:scale-100`}
+                style={{ ["--tw-translate-y" as any]: kioskTransform }}
               >
                 <Image
                   src="/kiosk_full"

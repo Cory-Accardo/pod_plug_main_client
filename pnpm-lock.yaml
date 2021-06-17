@@ -9,6 +9,7 @@ specifiers:
   '@types/google.maps': ^3.45.2
   '@types/react': ^17.0.11
   autoprefixer: ^10.2.6
+  bezier-easing: ^2.1.0
   eslint: ^7.28.0
   eslint-config-next: ^11.0.0
   framer-motion: ^4.1.17
@@ -33,6 +34,7 @@ devDependencies:
   '@types/google.maps': 3.45.2
   '@types/react': 17.0.11
   autoprefixer: 10.2.6_postcss@8.3.4
+  bezier-easing: 2.1.0
   eslint: 7.28.0
   eslint-config-next: 11.0.0_f2751d9c7d058c6a710be2755ae79ce8
   framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
@@ -580,6 +582,10 @@ packages:
   /base64-js/1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
     dev: false
+
+  /bezier-easing/2.1.0:
+    resolution: {integrity: sha1-wE3+i5JtbsrKGBPWn/F5t8ICXYY=}
+    dev: true
 
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
