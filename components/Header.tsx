@@ -78,7 +78,7 @@ export default function Header(props: HeaderProps) {
       <AnimatePresence>
         {showMenu && (
           <motion.div
-            className="absolute top-0 bottom-0 right-0 flex flex-col w-64 p-6 bg-theme-dark z-overlay"
+            className="fixed top-0 bottom-0 right-0 flex flex-col w-64 p-6 bg-theme-dark z-overlay"
             initial={{ transform: "translateX(16rem)" }}
             animate={{ transform: "translateX(2rem)" }}
             exit={{ transform: "translateX(16rem)" }}

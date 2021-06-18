@@ -53,13 +53,21 @@ export default function Home() {
 
   // begin: window resize
   const [lg, setLg] = useState(false);
+  const [md, setMd] = useState(false);
 
   useEffect(() => {
+    setLg(window.matchMedia("(min-width: 1024px)").matches);
+    setMd(window.matchMedia("(min-width: 768px)").matches);
     const listener = () => {
       setLg(window.matchMedia("(min-width: 1024px)").matches);
+      setMd(window.matchMedia("(min-width: 768px)").matches);
+      console.log(window.matchMedia("(min-width: 768px)").matches);
     };
     window.addEventListener("resize", listener);
-  });
+    return () => {
+      window.removeEventListener("resize", listener);
+    };
+  }, []);
   // end: window resize
 
   // begin: Kiosk scrolling effect
@@ -70,6 +78,10 @@ export default function Home() {
 
   useEffect(() => {
     const listener = () => {
+      if (!md) {
+        setKioskTransform("0rem");
+        return;
+      }
       let end: number;
       if (lg) {
         end = 68;
@@ -96,7 +108,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", listener);
     };
-  }, [kioskContainer, lg]);
+  }, [kioskContainer, lg, md]);
   // end: Kiosk scrolling effect
 
   // begin: Venues
@@ -263,8 +275,8 @@ export default function Home() {
         </div>
 
         {/* Third page */}
-        <div className="relative flex flex-col mt-gap page">
-          <div className="w-full mt-16 text-5xl text-center text-white">
+        <div className="flex flex-col justify-center mt-20 md:mt-gap md:h-page_md lg:h-page outer-container">
+          <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
             Convenient products we provide
           </div>
           <div className="flex flex-col items-center mt-24">
