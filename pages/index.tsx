@@ -275,8 +275,8 @@ export default function Home() {
         </div>
 
         {/* Third page */}
-        <div className="flex flex-col justify-center mt-20 md:mt-gap md:h-page_md lg:h-page outer-container">
-          <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
+        <div className="flex flex-col justify-center mt-20 md:mt-gap md:h-page_md lg:h-page outer-container relative z-content">
+          <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl">
             Convenient products we provide
           </div>
           <div className="flex flex-col items-center mt-24">
