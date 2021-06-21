@@ -42,7 +42,8 @@ module.exports = {
         overlay: "4",
       },
       fontSize: {
-        "4.9xl": "2.8rem"
+        "4.5xl": ["2.5rem", "2.75rem"],
+        "4.9xl": "2.8rem",
       },
       minWidth: {
         5: "1.25rem",
@@ -50,11 +51,11 @@ module.exports = {
         56: "14rem",
       },
       minHeight: {
-        5: "1.25rem"
+        5: "1.25rem",
       },
       maxWidth: {
         32: "8rem",
-      }
+      },
     },
   },
   variants: {
