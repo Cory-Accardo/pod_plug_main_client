@@ -88,7 +88,7 @@ export default function Partners() {
       {/* First page */}
       <main className="bg-background-gray">
         {/* Clouds */}
-        <div className="absolute z-clouds w-full page">
+        <div className="absolute z-clouds w-full">
           <img
             src="/clouds_blue.png"
             alt="Clouds"

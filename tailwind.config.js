@@ -24,6 +24,9 @@ module.exports = {
       borderWidth: {
         3: "3px",
       },
+      width: {
+        184: "46rem",
+      },
       height: {
         page: "52rem",
         page_md: "42rem",
@@ -42,6 +45,8 @@ module.exports = {
         overlay: "4",
       },
       fontSize: {
+        "2.9xl": ["1.8rem", "2.1rem"],
+        "3.9xl": ["2.1rem", "2.6rem"],
         "4.5xl": ["2.5rem", "2.75rem"],
         "4.9xl": "2.8rem",
       },
