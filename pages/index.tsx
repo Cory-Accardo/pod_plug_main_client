@@ -310,7 +310,7 @@ export default function Home() {
                 options={mapOptions}
               >
                 {coords.map((latlng, index) => (
-                  <Marker position={latlng} key={index} icon="/marker.svg" />
+                  <Marker position={latlng} key={index} />
                 ))}
               </GoogleMap>
             </div>

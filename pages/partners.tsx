@@ -231,7 +231,6 @@ export default function Partners() {
                     lng: location.coords.longitude,
                   }}
                   key={index}
-                  icon="/marker.svg"
                 />
               ))}
             </GoogleMap>
