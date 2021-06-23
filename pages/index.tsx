@@ -122,7 +122,9 @@ export default function Home() {
   }, [searchBox]);
 
   useEffect(() => {
-    fetch("http://" + USER_MS + "/venues/listall")
+    fetch("https://" + USER_MS + "/venues/listall", {
+      mode: "cors",
+    })
       .then((res) => {
         return res.json();
       })
@@ -363,13 +365,15 @@ export default function Home() {
                     <div
                       className={`transition-opacity ${
                         searchFocused ? "" : styles.results_unfocused
-                      }`}
+                      } flex flex-col overflow-hidden flex-shrink`}
                     >
                       <div className="mt-4 text-xs font-medium font-raleway">
                         {coords.length} SEARCH RESULTS
                       </div>
                       <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray" />
-                      <div className="flex-shrink my-3 overflow-y-scroll">
+                      <div
+                        className="my-3 overflow-y-scroll flex-shrink"
+                      >
                         <AnimateSharedLayout>
                           <motion.div layout>
                             {locations

@@ -57,7 +57,9 @@ export default function Partners() {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
-    fetch("http://" + USER_MS + "/venues/listall")
+    fetch("https://" + USER_MS + "/venues/listall", {
+      mode: "cors",
+    })
       .then((res) => {
         return res.json();
       })
