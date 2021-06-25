@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { USER_MS } from "../constants";
+import { GOOGLE_API_KEY, USER_MS } from "../constants";
 import BrandCard from "../components/BrandCard";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -37,7 +37,7 @@ const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 export default function Home() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
+    googleMapsApiKey: GOOGLE_API_KEY,
   });
 
   const [map, setMap] = useState(null);
@@ -315,7 +315,7 @@ export default function Home() {
               </GoogleMap>
             </div>
             <div
-              className={`absolute top-0 left-0 flex flex-col w-full h-full outer-container transition-colors ${
+              className={`absolute top-0 left-0 flex flex-col w-full h-full outer-container transition-colors z-content ${
                 searchFocused ? styles.bg_focused : ""
               }`}
             >

@@ -11,7 +11,7 @@ import Card from "../components/Card";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
 import Footer from "../components/Footer";
-import { USER_MS } from "../constants";
+import { GOOGLE_API_KEY, USER_MS } from "../constants";
 import BrandCard from "../components/BrandCard";
 
 import Head from "next/head";
@@ -34,7 +34,7 @@ const mapOptions = {
 export default function Partners() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
+    googleMapsApiKey: GOOGLE_API_KEY,
   });
 
   const [, setMap] = useState(null);

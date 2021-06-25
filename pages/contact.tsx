@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { GOOGLE_API_KEY } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
@@ -31,7 +32,7 @@ const mapOptions = {
 export default function Contact() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyCu5Vh4v5aQLJBSHVxzWeAOWHdy0_8pJaM",
+    googleMapsApiKey: GOOGLE_API_KEY,
   });
 
   const [, setMap] = useState(null);
