@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { GOOGLE_API_KEY, MAILCHIMP_API_KEY, USER_MS } from "../constants";
+import { GOOGLE_API_KEY, USER_MS } from "../constants";
 import BrandCard from "../components/BrandCard";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -34,8 +34,6 @@ const mapOptions = {
 
 const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 
-const mailchimp = require("@mailchimp/mailchimp_marketing");
-
 export default function Home() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
@@ -53,15 +51,11 @@ export default function Home() {
   }, []);
   // end: Google Maps
 
-  // begin: mailchimp
+  // begin: signup
+  const [formInvalid, setFormInvalid] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formError, setFormError] = useState(false);
   const emailForm = useRef<HTMLInputElement>();
-
-  useEffect(() => {
-    mailchimp.setConfig({
-      apiKey: MAILCHIMP_API_KEY,
-      server: "us4",
-    });
-  }, []);
 
   const signup = useCallback(
     async function () {
@@ -70,15 +64,26 @@ export default function Home() {
           /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
         )
       ) {
-        const response = await mailchimp.lists.addListMember("ff02efc50a", {
-          email_address: emailForm.current.value,
-          status: "pending",
-        });
+        fetch("https://" + USER_MS + "/signup", {
+          mode: "cors",
+          method: "POST",
+          body: JSON.stringify({ email: emailForm.current.value }),
+        })
+          .then(() => {
+            setFormError(false);
+            setFormSuccess(true);
+          })
+          .catch((_) => {
+            setFormError(true);
+            setFormSuccess(false);
+          });
+      } else {
+        setFormInvalid(true);
       }
     },
     [emailForm]
   );
-  // end: mailchimp
+  // end: signup
 
   // begin: window resize
   const [lg, setLg] = useState(false);
@@ -241,7 +246,27 @@ export default function Home() {
                 type="text"
                 className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
                 ref={emailForm}
+                onChange={() => {
+                  setFormInvalid(false);
+                  setFormSuccess(false);
+                  setFormError(false);
+                }}
               />
+              {formInvalid && (
+                <div className="text-red-800 font-raleway">
+                  Please enter a valid email address!
+                </div>
+              )}
+              {formError && (
+                <div className="text-red-800 font-raleway">
+                  Network error. Please try again later.
+                </div>
+              )}
+              {formSuccess && (
+                <div className="text-green-800 font-raleway">
+                  Thank you for signing up!
+                </div>
+              )}
               <button
                 className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
                 onClick={() => {

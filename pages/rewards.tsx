@@ -1,23 +1,17 @@
 import Head from "next/head";
-import { useEffect, useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RewardsCard from "../components/RewardsCard";
-import { MAILCHIMP_API_KEY } from "../constants";
-
-const mailchimp = require("@mailchimp/mailchimp_marketing");
+import { USER_MS } from "../constants";
 
 export default function Rewards() {
-  // begin: mailchimp
+  // begin: signup
+  const [formInvalid, setFormInvalid] = useState(false);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formError, setFormError] = useState(false);
   const emailForm = useRef<HTMLInputElement>();
-
-  useEffect(() => {
-    mailchimp.setConfig({
-      apiKey: MAILCHIMP_API_KEY,
-      server: "us4",
-    });
-  }, []);
 
   const signup = useCallback(
     async function () {
@@ -26,15 +20,26 @@ export default function Rewards() {
           /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
         )
       ) {
-        const response = await mailchimp.lists.addListMember("ff02efc50a", {
-          email_address: emailForm.current.value,
-          status: "pending",
-        });
+        fetch("https://" + USER_MS + "/signup", {
+          mode: "cors",
+          method: "POST",
+          body: JSON.stringify({ email: emailForm.current.value }),
+        })
+          .then(() => {
+            setFormError(false);
+            setFormSuccess(true);
+          })
+          .catch((_) => {
+            setFormError(true);
+            setFormSuccess(false);
+          });
+      } else {
+        setFormInvalid(true);
       }
     },
     [emailForm]
   );
-  // end: mailchimp
+  // end: signup
 
   return (
     <>
@@ -128,12 +133,32 @@ export default function Rewards() {
                 Treat yourself; you deserve it
               </div>
               <input
-                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5 mb-4"
+                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5"
                 ref={emailForm}
+                onChange={() => {
+                  setFormError(false);
+                  setFormInvalid(false);
+                  setFormSuccess(false);
+                }}
               ></input>
+              {formInvalid && (
+                <div className="text-red-800 font-raleway">
+                  Please enter a valid email address!
+                </div>
+              )}
+              {formError && (
+                <div className="text-red-800 font-raleway">
+                  Network error. Please try again later.
+                </div>
+              )}
+              {formSuccess && (
+                <div className="text-green-800 font-raleway">
+                  Thank you for signing up!
+                </div>
+              )}
             </div>
             <button
-              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-8 text-white font-raleway w-full md:w-auto"
+              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-8 text-white font-raleway w-full md:w-auto mt-4"
               onClick={() => {
                 signup();
               }}
