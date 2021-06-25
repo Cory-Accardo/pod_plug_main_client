@@ -1,10 +1,41 @@
 import Head from "next/head";
+import { useEffect, useCallback, useRef } from "react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RewardsCard from "../components/RewardsCard";
+import { MAILCHIMP_API_KEY } from "../constants";
+
+const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 export default function Rewards() {
+  // begin: mailchimp
+  const emailForm = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    mailchimp.setConfig({
+      apiKey: MAILCHIMP_API_KEY,
+      server: "us4",
+    });
+  }, []);
+
+  const signup = useCallback(
+    async function () {
+      if (
+        emailForm.current.value.match(
+          /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
+        )
+      ) {
+        const response = await mailchimp.lists.addListMember("ff02efc50a", {
+          email_address: emailForm.current.value,
+          status: "pending",
+        });
+      }
+    },
+    [emailForm]
+  );
+  // end: mailchimp
+
   return (
     <>
       <Head>
@@ -96,9 +127,17 @@ export default function Rewards() {
               <div className="font-raleway font-bold text-xl sm:text-2xl tracking-wider mb-4 text-center md:text-left text-theme-dark md:text-black">
                 Treat yourself; you deserve it
               </div>
-              <input className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5 mb-4"></input>
+              <input
+                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5 mb-4"
+                ref={emailForm}
+              ></input>
             </div>
-            <button className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-8 text-white font-raleway w-full md:w-auto">
+            <button
+              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-8 text-white font-raleway w-full md:w-auto"
+              onClick={() => {
+                signup();
+              }}
+            >
               Sign Up
             </button>
           </div>

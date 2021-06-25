@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { GOOGLE_API_KEY, USER_MS } from "../constants";
+import { GOOGLE_API_KEY, MAILCHIMP_API_KEY, USER_MS } from "../constants";
 import BrandCard from "../components/BrandCard";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -34,6 +34,8 @@ const mapOptions = {
 
 const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 
+const mailchimp = require("@mailchimp/mailchimp_marketing");
+
 export default function Home() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
@@ -50,6 +52,33 @@ export default function Home() {
     setMap(null);
   }, []);
   // end: Google Maps
+
+  // begin: mailchimp
+  const emailForm = useRef<HTMLInputElement>();
+
+  useEffect(() => {
+    mailchimp.setConfig({
+      apiKey: MAILCHIMP_API_KEY,
+      server: "us4",
+    });
+  }, []);
+
+  const signup = useCallback(
+    async function () {
+      if (
+        emailForm.current.value.match(
+          /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
+        )
+      ) {
+        const response = await mailchimp.lists.addListMember("ff02efc50a", {
+          email_address: emailForm.current.value,
+          status: "pending",
+        });
+      }
+    },
+    [emailForm]
+  );
+  // end: mailchimp
 
   // begin: window resize
   const [lg, setLg] = useState(false);
@@ -211,8 +240,14 @@ export default function Home() {
               <input
                 type="text"
                 className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
+                ref={emailForm}
               />
-              <button className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway">
+              <button
+                className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
+                onClick={() => {
+                  signup();
+                }}
+              >
                 Sign Up
               </button>
             </div>
@@ -371,9 +406,7 @@ export default function Home() {
                         {coords.length} SEARCH RESULTS
                       </div>
                       <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray" />
-                      <div
-                        className="my-3 overflow-y-scroll flex-shrink"
-                      >
+                      <div className="my-3 overflow-y-scroll flex-shrink">
                         <AnimateSharedLayout>
                           <motion.div layout>
                             {locations
