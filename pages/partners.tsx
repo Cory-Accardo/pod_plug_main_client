@@ -19,6 +19,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 
 const containerStyle = {
   height: "100%",
@@ -31,11 +32,13 @@ const mapOptions = {
   zoomControl: true,
 };
 
+const libraries: Libraries = ["places", "geometry"];
+
 export default function Partners() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
-    libraries: ["places", "geometry"]
+    libraries: libraries,
   });
 
   const [, setMap] = useState(null);

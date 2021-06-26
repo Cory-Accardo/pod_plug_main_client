@@ -339,7 +339,7 @@ export default function Home() {
           <div
             className="absolute bottom-0 hidden w-full z-bg md:block"
             style={{
-              backgroundImage: 'url("skyline_full.png")',
+              backgroundImage: 'url("/skyline_full.png")',
               backgroundSize: "contain",
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",
@@ -349,7 +349,7 @@ export default function Home() {
           <div
             className="absolute bottom-0 block w-full z-bg md:hidden"
             style={{
-              backgroundImage: 'url("skyline_half.png")',
+              backgroundImage: 'url("/skyline_half.png")',
               backgroundSize: "contain",
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",
