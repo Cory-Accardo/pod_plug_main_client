@@ -17,6 +17,7 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 import BezierEasing from "bezier-easing";
+import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 
 import styles from "../styles/Index.module.css";
 
@@ -34,10 +35,13 @@ const mapOptions = {
 
 const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 
+const libraries: Libraries = ["places", "geometry"];
+
 export default function Home() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
+    libraries: libraries,
   });
 
   const [map, setMap] = useState(null);
@@ -147,13 +151,43 @@ export default function Home() {
 
   // begin: Venues
   const [locations, setLocations] = useState<Location[]>([]);
-  const [currentSearch, setCurrentSearch] = useState("");
+  const [currentLocation, setCurrentLocation] = useState<google.maps.LatLng>();
   const searchBox = useRef<HTMLInputElement>();
   const [coords, setCoords] = useState<google.maps.LatLng[]>([]);
+  const [autocomplete, setAutocomplete] =
+    useState<google.maps.places.Autocomplete>();
 
   const submitSearch = useCallback(() => {
-    setCurrentSearch(searchBox.current.value.toLowerCase());
+    if (searchBox.current.value === "") {
+      setCurrentLocation(undefined);
+      return;
+    }
+    const address = searchBox.current.value.split(" ").join("+");
+    fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GOOGLE_API_KEY}`
+    )
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setCurrentLocation(
+          new google.maps.LatLng(
+            json.results[0].geometry.location.lat,
+            json.results[0].geometry.location.lng
+          )
+        );
+      });
   }, [searchBox]);
+
+  useEffect(() => {
+    if (!isLoaded) return;
+    setAutocomplete(
+      new google.maps.places.Autocomplete(searchBox.current, {
+        types: ["(cities)"],
+        componentRestrictions: { country: "us" },
+      })
+    );
+  }, [isLoaded, searchBox]);
 
   useEffect(() => {
     fetch("https://" + USER_MS + "/venues/listall", {
@@ -175,20 +209,31 @@ export default function Home() {
     if (!isLoaded) return;
     setCoords(
       locations
-        .filter(
-          (location) =>
-            currentSearch === "" ||
-            location.name.toLowerCase().includes(currentSearch) ||
-            location.address.street.toLowerCase().includes(currentSearch)
-        )
         .map((location) => {
           return new google.maps.LatLng(
             location.coords.latitude,
             location.coords.longitude
           );
         })
+        .filter((location) => {
+          if (currentLocation !== undefined) {
+            console.log(
+              google.maps.geometry.spherical.computeDistanceBetween(
+                location,
+                currentLocation
+              )
+            );
+          }
+          return (
+            currentLocation === undefined ||
+            google.maps.geometry.spherical.computeDistanceBetween(
+              location,
+              currentLocation
+            ) < 80000
+          );
+        })
     );
-  }, [currentSearch, locations, isLoaded]);
+  }, [locations, isLoaded, currentLocation]);
   // end: Venues
 
   // begin: Google Map auto zoom
@@ -360,8 +405,8 @@ export default function Home() {
         {/* Google Maps */}
         <div className="pt-32 md:pt-64" />
         {isLoaded && (
-          <div className="relative w-full page z-bg">
-            <div className="relative w-full h-full z-content">
+          <div className="relative w-full page z-content">
+            <div className="w-full h-full">
               <GoogleMap
                 onLoad={onLoad}
                 onUnmount={onUnmount}
@@ -389,7 +434,7 @@ export default function Home() {
                     Our Kiosk Locations
                   </div>
                   <div
-                    className={`flex flex-col md:px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform ${
+                    className={`flex flex-col md:px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform relative z-content w-76 lg:w-112 ${
                       searchFocused ? styles.search_focused : ""
                     }`}
                   >
@@ -433,23 +478,26 @@ export default function Home() {
                       <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray" />
                       <div className="my-3 overflow-y-scroll flex-shrink">
                         <AnimateSharedLayout>
-                          <motion.div layout>
+                          <motion.div layout className="relative z-content">
                             {locations
-                              .filter(
-                                (location) =>
-                                  currentSearch === "" ||
-                                  location.name
-                                    .toLowerCase()
-                                    .includes(currentSearch) ||
-                                  location.address.street
-                                    .toLowerCase()
-                                    .includes(currentSearch)
-                              )
+                              .filter((location) => {
+                                if (currentLocation === undefined) return true;
+                                const latlng = new google.maps.LatLng(
+                                  location.coords.latitude,
+                                  location.coords.longitude
+                                );
+                                return (
+                                  google.maps.geometry.spherical.computeDistanceBetween(
+                                    latlng,
+                                    currentLocation
+                                  ) < 80000
+                                );
+                              })
                               .map((location) => {
                                 return (
                                   <AnimatePresence key={location.index}>
                                     <motion.div
-                                      className="flex flex-row items-center py-3"
+                                      className="flex flex-row items-center py-3 relative z-content"
                                       initial={{ opacity: 0 }}
                                       animate={{ opacity: 1 }}
                                       exit={{ opacity: 0 }}
@@ -459,7 +507,7 @@ export default function Home() {
                                       <img
                                         src="/marker.svg"
                                         alt="Marker"
-                                        className="h-8"
+                                        className="h-8 relative z-content"
                                       />
                                       <div className="flex flex-col ml-16">
                                         <div className="text-base font-normal font-raleway">

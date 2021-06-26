@@ -15,6 +15,7 @@ import {
   faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
 
 const containerStyle = {
   height: "100%",
@@ -29,10 +30,13 @@ const mapOptions = {
   zoom: 10,
 };
 
+const libraries: Libraries = ["places"];
+
 export default function Contact() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
+    libraries: libraries,
   });
 
   const [, setMap] = useState(null);
@@ -59,7 +63,9 @@ export default function Contact() {
       <main className="flex flex-col items-center pt-16 outer-container md:pt-36 bg-background-gray">
         <div className="container flex flex-col items-center md:flex-row">
           <div className="flex flex-col w-full md:pr-16 md:w-1/2">
-            <div className="text-5xl font-bold font-raleway">Let&apos;s Talk</div>
+            <div className="text-5xl font-bold font-raleway">
+              Let&apos;s Talk
+            </div>
             <div className="text-lg font-raleway">
               <div className="mt-6">
                 Curious to learn more about our product?
