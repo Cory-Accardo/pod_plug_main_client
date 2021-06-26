@@ -30,7 +30,7 @@ const mapOptions = {
   zoom: 10,
 };
 
-const libraries: Libraries = ["places"];
+const libraries: Libraries = ["places", "geometry"];
 
 export default function Contact() {
   // begin: Google Maps

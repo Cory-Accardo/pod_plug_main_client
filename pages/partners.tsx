@@ -35,7 +35,7 @@ export default function Partners() {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
-    libraries: ["places"]
+    libraries: ["places", "geometry"]
   });
 
   const [, setMap] = useState(null);
