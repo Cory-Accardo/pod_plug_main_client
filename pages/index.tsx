@@ -117,7 +117,7 @@ export default function Home() {
   useEffect(() => {
     const listener = () => {
       if (!md) {
-        setKioskTransform("0rem");
+        setKioskTransform("-4rem");
         return;
       }
       let end: number;
@@ -282,13 +282,15 @@ export default function Home() {
                 className="mt-16 text-4xl font-bold sm:text-5xl md:mt-32 lg:text-6xl lg:mt-48 font-acumin xl:text-7xl text-title-black"
                 style={{ textShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}
               >
-                Join Pod Rewards
+                Plug into Pod Rewards
               </div>
               <div className="mt-4 text-lg font-semibold sm:text-xl lg:text-2xl xl:text-3xl font-raleway text-subtitle-gray">
-                Get exclusive offers, discounts, and rebates
+                Exclusive discounts on products &amp; exclusive offers from
+                venues
               </div>
               <input
-                type="text"
+                type="email"
+                placeholder="email@example.com"
                 className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
                 ref={emailForm}
                 onChange={() => {
@@ -313,12 +315,12 @@ export default function Home() {
                 </div>
               )}
               <button
-                className="self-start w-full px-8 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
+                className="self-start w-full px-6 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
                 onClick={() => {
                   signup();
                 }}
               >
-                Sign Up
+                Join Today
               </button>
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
@@ -363,7 +365,7 @@ export default function Home() {
           className="flex flex-col justify-center mt-40 md:mt-gap md:h-page_md lg:h-page outer-container"
           ref={textContainer}
         >
-          <div className="container relative">
+          <div className="container relative z-clouds">
             <div
               className="relative flex flex-col py-16 bg-transparent md:px-16 md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60 font-raleway"
               style={{ borderRadius: "60px 0px 0px 60px" }}
@@ -372,10 +374,21 @@ export default function Home() {
                 Convenience When Out
               </div>
               <div className="mt-6 text-base font-normal leading-loose text-center text-white md:leading-normal lg:leading-loose xl:text-lg md:text-black md:text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                We started Pod Plug in 2019 to solve the two problems that
+                inevitably happen when out with friends – dead phone batteries
+                and dead vape products. We have since grown to provide those
+                items and more to enhance your evening out through safe, limited
+                contact, cashless kiosks. Our priority and mission is your
+                convenience when out.
+              </div>
+              <div className="mt-12 text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
+                Today
+              </div>
+              <div className="mt-6 text-base font-normal leading-loose text-center text-white md:leading-normal lg:leading-loose xl:text-lg md:text-black md:text-left">
+                We are expanding our mission’s scope by enhancing your evening
+                out with exclusive discounts on products and exclusive offers
+                from your favorite venues. Plug into Pod Rewards to start
+                enhancing your evenings even further.
               </div>
             </div>
           </div>
