@@ -547,7 +547,7 @@ export default function Partners() {
           <div
             className="absolute bottom-0 -top-12 left-0 right-0 opacity-20"
             style={{
-              backgroundImage: 'url("skyline_full.png")',
+              backgroundImage: 'url("/skyline_full.png")',
               backgroundSize: "contain",
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom",
