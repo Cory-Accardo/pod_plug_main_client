@@ -11,7 +11,7 @@ import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
 import { GOOGLE_API_KEY, USER_MS } from "../constants";
-import BrandCard from "../components/BrandCard";
+import PartnersComponent from "../components/PartnersComponent";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
@@ -386,20 +386,7 @@ export default function Home() {
           <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl">
             Convenient products we provide
           </div>
-          <div className="flex flex-col items-center mt-24">
-            <div className="w-auto pr-2 overflow-x-hidden md:overflow-y-scroll md:h-140 z-content py-2">
-              <div className="grid grid-flow-row grid-cols-2 md:grid-cols-3 gap-8 pb-4">
-                <BrandCard url="/airbar.png" />
-                <BrandCard url="/fume.png" />
-                <BrandCard url="/fume.png" />
-                <BrandCard url="/juul.png" />
-                <BrandCard url="/juul.png" />
-                <BrandCard url="/hqd.png" />
-                <BrandCard url="/hqd.png" />
-                <BrandCard url="/hqd.png" />
-              </div>
-            </div>
-          </div>
+          <PartnersComponent />
         </div>
 
         {/* Google Maps */}
