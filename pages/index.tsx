@@ -493,6 +493,32 @@ export default function Home() {
                                   ) < 80000
                                 );
                               })
+                              .sort((a, b) => {
+                                if (currentLocation) {
+                                  return (
+                                    google.maps.geometry.spherical.computeDistanceBetween(
+                                      currentLocation,
+                                      new google.maps.LatLng(
+                                        a.coords.latitude,
+                                        b.coords.longitude
+                                      )
+                                    ) -
+                                    google.maps.geometry.spherical.computeDistanceBetween(
+                                      currentLocation,
+                                      new google.maps.LatLng(
+                                        a.coords.latitude,
+                                        b.coords.longitude
+                                      )
+                                    )
+                                  );
+                                } else if (a.name > b.name) {
+                                  return 1;
+                                } else if (b.name > a.name) {
+                                  return -1;
+                                } else {
+                                  return 0;
+                                }
+                              })
                               .map((location) => {
                                 return (
                                   <AnimatePresence key={location.index}>
@@ -514,7 +540,16 @@ export default function Home() {
                                           {location.address.street}
                                         </div>
                                         <div className="text-sm font-medium font-raleway">
-                                          0.1 mi
+                                          {currentLocation &&
+                                            `${(
+                                              google.maps.geometry.spherical.computeDistanceBetween(
+                                                new google.maps.LatLng(
+                                                  location.coords.latitude,
+                                                  location.coords.longitude
+                                                ),
+                                                currentLocation
+                                              ) / 1600
+                                            ).toFixed(1)} mi`}
                                         </div>
                                       </div>
                                     </motion.div>
