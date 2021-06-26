@@ -99,7 +99,6 @@ export default function Home() {
     const listener = () => {
       setLg(window.matchMedia("(min-width: 1024px)").matches);
       setMd(window.matchMedia("(min-width: 768px)").matches);
-      console.log(window.matchMedia("(min-width: 768px)").matches);
     };
     window.addEventListener("resize", listener);
     return () => {
@@ -216,21 +215,11 @@ export default function Home() {
           );
         })
         .filter((location) => {
-          if (currentLocation !== undefined) {
-            console.log(
-              google.maps.geometry.spherical.computeDistanceBetween(
-                location,
-                currentLocation
-              )
-            );
-          }
-          return (
-            currentLocation === undefined ||
+          currentLocation === undefined ||
             google.maps.geometry.spherical.computeDistanceBetween(
               location,
               currentLocation
-            ) < 80000
-          );
+            ) < 80000;
         })
     );
   }, [locations, isLoaded, currentLocation]);
@@ -431,7 +420,7 @@ export default function Home() {
                       searchFocused ? styles.title_focused : ""
                     }`}
                   >
-                    Our Kiosk Locations
+                    Our Venue Partners
                   </div>
                   <div
                     className={`flex flex-col md:px-8 pt-4 mt-0 bg-transparent md:mt-8 md:bg-white rounded-xl max-h-96 transform transition-transform relative z-content w-76 lg:w-112 ${
