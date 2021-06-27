@@ -215,11 +215,13 @@ export default function Home() {
           );
         })
         .filter((location) => {
-          currentLocation === undefined ||
+          return (
+            currentLocation === undefined ||
             google.maps.geometry.spherical.computeDistanceBetween(
               location,
               currentLocation
-            ) < 80000;
+            ) < 80000
+          );
         })
     );
   }, [locations, isLoaded, currentLocation]);
