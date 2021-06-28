@@ -1,10 +1,10 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY } from "../constants";
+import { GOOGLE_API_KEY, USER_MS } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInstagramSquare,
@@ -49,6 +49,28 @@ export default function Contact() {
     setMap(null);
   }, []);
   // end: Google Maps
+
+  // begin: form
+  const emailForm = useRef<HTMLInputElement>();
+  const nameForm = useRef<HTMLInputElement>();
+  const msgForm = useRef<HTMLTextAreaElement>();
+  const numberForm = useRef<HTMLInputElement>();
+  const [formSuccess, setFormSuccess] = useState(false);
+
+  const submitMessage = useCallback(() => {
+    fetch("https://" + USER_MS + "/contact", {
+      method: "POST",
+      body: JSON.stringify({
+        email: emailForm.current.value,
+        name: nameForm.current.value,
+        number: numberForm.current.value,
+        msg: msgForm.current.value,
+      }),
+    }).then(() => {
+      setFormSuccess(true);
+    });
+  }, [emailForm]);
+  // end: form
   return (
     <>
       <Head>
@@ -82,6 +104,7 @@ export default function Contact() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
+                submitMessage();
               }}
               className="flex flex-col mt-4"
             >
@@ -90,6 +113,7 @@ export default function Contact() {
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="text"
+                  ref={nameForm}
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -97,6 +121,7 @@ export default function Contact() {
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="email"
+                  ref={emailForm}
                 />
               </div>
               <div className="flex flex-col mt-4">
@@ -104,14 +129,23 @@ export default function Contact() {
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="tel"
+                  ref={numberForm}
                 />
               </div>
               <div className="flex flex-col mt-4">
                 <label className="text-sm font-bold font-raleway">
                   MESSAGE
                 </label>
-                <textarea className="p-1 border-black rounded-lg border-3" />
+                <textarea
+                  className="p-1 border-black rounded-lg border-3"
+                  ref={msgForm}
+                />
               </div>
+              {formSuccess && (
+                <div className="font-raleway text-green-800">
+                  Thanks for reaching out!
+                </div>
+              )}
               <input
                 type="submit"
                 value="Send"
