@@ -281,7 +281,7 @@ export default function Home() {
               </div>
               <input
                 type="email"
-                placeholder="email@example.com"
+                placeholder="youremail@example.com"
                 className="self-start w-full p-1 mt-2 mr-0 text-base bg-white rounded-lg lg:text-lg border-3 border-subtitle-gray text-subtitle-gray md:w-3/4 lg:w-3/5"
                 ref={emailForm}
                 onChange={() => {
@@ -306,12 +306,12 @@ export default function Home() {
                 </div>
               )}
               <button
-                className="self-start w-full px-6 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
+                className="self-start w-full px-4 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
                 onClick={() => {
                   signup();
                 }}
               >
-                Join Today
+                Get Offers Today
               </button>
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
@@ -378,8 +378,8 @@ export default function Home() {
               <div className="mt-6 text-base font-normal leading-loose text-center text-white md:leading-normal lg:leading-loose xl:text-lg md:text-black md:text-left">
                 We are expanding our mission’s scope by enhancing your evening
                 out with exclusive discounts on products and exclusive offers
-                from your favorite venues. Plug into Pod Rewards to start
-                enhancing your evenings even further.
+                from your favorite venues. Plug into Pod Rewards to get
+                exclusive offers for your evenings out with friends.
               </div>
             </div>
           </div>

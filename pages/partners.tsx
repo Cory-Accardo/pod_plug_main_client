@@ -200,8 +200,7 @@ export default function Partners() {
                   Partner with us
                 </div>
                 <div className="text-xl md:text-2xl xl:text-3xl font-semibold text-title-blue-light mt-6">
-                  <div>Convenience when out</div>
-                  <div>Providing a WOW experience</div>
+                  <div>Our Promise: Convenience, When Out &amp; providing a WOW experience for our Customers and Consumers</div>
                 </div>
               </div>
               <div
@@ -253,11 +252,11 @@ export default function Partners() {
                 content="of the US population uses nicotine products"
               />
               <Card
-                title="40%"
+                title="~40%"
                 content="of nightlife participants use nicotine products"
               />
               <Card
-                title="5%"
+                title="~5%"
                 content="of foot traffic at current venues buy from our kiosks"
               />
             </div>
@@ -269,9 +268,6 @@ export default function Partners() {
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
               We Facilitate <span className="font-extrabold">EVERYTHING</span>
-            </div>
-            <div className="font-raleway text-xl text-center my-6">
-              No need to break a sweat - we&apos;ve got you sorted!
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
               <Procedure svg="/trans.svg" caption="DELIVERY" />
@@ -368,7 +364,7 @@ export default function Partners() {
         <div className="relative z-content flex flex-col items-center outer-container py-32">
           <div className="container">
             <div className="font-raleway font-bold text-4xl text-center">
-              Will you partner with us?
+              Interested in partnering with us?
             </div>
             <form
               onSubmit={(e) => {

@@ -125,15 +125,15 @@ export default function Rewards() {
           </div>
           <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-max md:w-full">
             <div className="font-raleway font-bold text-4xl md:text-4.5xl xl:text-5xl mb-4 mt-auto text-center md:text-left">
-              Rewards that
-              <br className="sm:hidden" /> don&apos;t stop giving
+              Enhance you evening out
             </div>
             <div className="flex flex-col w-full md:w-max">
               <div className="font-raleway font-bold text-xl sm:text-2xl tracking-wider mb-4 text-center md:text-left text-theme-dark md:text-black">
-                Treat yourself; you deserve it
+                Pod Rewards gives you exclusive product and venue offers
               </div>
               <input
                 className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5"
+                placeholder="youremail@example.com"
                 ref={emailForm}
                 onChange={() => {
                   setFormError(false);
@@ -158,12 +158,12 @@ export default function Rewards() {
               )}
             </div>
             <button
-              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-8 text-white font-raleway w-full md:w-auto mt-4"
+              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-4 text-white font-raleway w-full md:w-auto mt-4"
               onClick={() => {
                 signup();
               }}
             >
-              Sign Up
+              Get Offers Today
             </button>
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function Rewards() {
         <div className="outer-container flex flex-col items-center pb-24 md:py-24 relative z-content">
           <div className="container">
             <div className="text-3xl font-semibold text-center lg:text-4xl xl:text-5xl">
-              Offers you could receive
+              You could receive
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-12 md:mt-16 items-center">
               <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl font-raleway relative mb-6">
@@ -182,7 +182,8 @@ export default function Rewards() {
                   Welcome to Pod Rewards!
                 </div>
                 <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 px-2">
-                  $X off your first purchase just for signing up
+                  $10 off your first purchase of any nicotine product just for
+                  signing up
                 </div>
               </div>
               <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl font-raleway relative mb-6">

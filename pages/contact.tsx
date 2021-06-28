@@ -25,7 +25,7 @@ const containerStyle = {
 const mapOptions = {
   gestureHandling: "none",
   scrollwheel: false,
-  center: { lat: 29.7278882819393, lng: -95.41295100138362 },
+  center: { lat: 32.779167, lng: -96.808891 },
   disableDefaultUI: true,
   zoom: 10,
 };
@@ -86,7 +86,7 @@ export default function Contact() {
         <div className="container flex flex-col items-center md:flex-row">
           <div className="flex flex-col w-full md:pr-16 md:w-1/2">
             <div className="text-5xl font-bold font-raleway">
-              Let&apos;s Talk
+              Drop us a note
             </div>
             <div className="text-lg font-raleway">
               <div className="mt-6">
