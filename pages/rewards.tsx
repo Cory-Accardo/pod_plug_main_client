@@ -129,7 +129,7 @@ export default function Rewards() {
             </div>
             <div className="flex flex-col w-full md:w-max">
               <div className="font-raleway font-bold text-xl sm:text-2xl tracking-wider mb-4 text-center md:text-left text-theme-dark md:text-black">
-                Pod Rewards gives you exclusive product and venue offers
+                Get exclusive product and venue offers
               </div>
               <input
                 className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5"
