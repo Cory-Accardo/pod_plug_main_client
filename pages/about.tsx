@@ -65,12 +65,7 @@ export default function About() {
             <div className="flex flex-col items-center md:items-start md:w-1/2">
               <div className="inline-block my-auto">
                 <div className="font-raleway font-bold text-6xl md:text-4.9xl lg:text-6xl xl:text-7xl text-center md:text-left leading-tight">
-                  Get to <br className="block sm:hidden"/> know us
-                </div>
-                <div className="px-4 md:px-0 font-raleway text-lg w-full lg:w-3/4 mt-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam.
+                  Get to <br className="block sm:hidden" /> know us
                 </div>
               </div>
             </div>
@@ -101,34 +96,29 @@ export default function About() {
             }}
           />
           <div className="flex flex-col md:flex-row container justify-around relative z-content items-center">
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around mb-8 max-w-full">
-              <div className="self-center font-raleway font-semibold text-xl">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl mb-8 max-w-full">
+              <div className="self-center font-raleway font-semibold text-2xl mt-6">
                 Our Mission
               </div>
-              <div className="font-raleway text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam.
+              <div className="font-raleway text-base leading-relaxed text-center mt-6">
+                Convenience, When Out &amp; providing a WOW <br /> experience
               </div>
             </div>
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around mb-8 max-w-full">
-              <div className="self-center font-raleway font-semibold text-xl">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl mb-8 max-w-full">
+              <div className="self-center font-raleway font-semibold text-2xl mt-6">
                 Our Vision
               </div>
-              <div className="font-raleway text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam.
+              <div className="font-raleway text-base leading-relaxed text-center mt-6">
+                To become the trusted age-gated solution for convenience items
               </div>
             </div>
-            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl justify-around max-w-full">
-              <div className="self-center font-raleway font-semibold text-xl">
+            <div className="bg-white rounded-3xl w-72 h-64 p-8 flex flex-col shadow-xl max-w-full mb-8">
+              <div className="self-center font-raleway font-semibold text-2xl mt-6">
                 Our Purpose
               </div>
-              <div className="font-raleway text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam.
+              <div className="font-raleway text-base leading-relaxed text-center mt-6">
+                Give a safe and reliable solutions to people enjoying an evening
+                out
               </div>
             </div>
           </div>
