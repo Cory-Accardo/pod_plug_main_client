@@ -263,7 +263,7 @@ export default function Home() {
           className="relative flex flex-col items-center px-8 sm:px-16 md:px-0 page"
           style={{
             backgroundImage:
-              "linear-gradient(to bottom, #FFF, #FFF 45%, #2D6EB7 100%)",
+              "linear-gradient(to bottom, #FFF, #FFF 25%, #08457D 100%)",
           }}
           ref={kioskContainer}
         >
@@ -448,11 +448,11 @@ export default function Home() {
                           onBlur={() => {
                             setSearchFocused(false);
                           }}
-                          className="w-full px-2 py-1 border-2 rounded-lg border-subtitle-gray md:border-theme-light md:w-auto"
+                          className="w-full px-2 py-1 border-2 rounded-lg border-subtitle-gray md:border-theme-dark md:w-auto"
                         />
                       </form>
                       <button
-                        className="hidden px-6 py-1 ml-4 text-white rounded-lg bg-theme-light md:block"
+                        className="hidden px-6 py-1 ml-4 text-white rounded-lg bg-theme-dark md:block"
                         onClick={submitSearch}
                       >
                         Search

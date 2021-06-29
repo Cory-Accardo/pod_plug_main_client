@@ -11,7 +11,7 @@ module.exports = {
         "title-black": "#12172B",
         "subtitle-gray": "#61636E",
         "hr-gray": "#F1F1F1",
-        "background-blue": "#2D6EB7",
+        "background-blue": "#08457D",
         "background-gray": "#F5F4F4",
         "title-blue-dark": "#12172B",
         "title-blue-light": "#08457D",

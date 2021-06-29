@@ -132,7 +132,7 @@ export default function Rewards() {
                 Get exclusive product and venue offers
               </div>
               <input
-                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-light w-full md:w-4/5"
+                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-dark w-full md:w-4/5"
                 placeholder="youremail@example.com"
                 ref={emailForm}
                 onChange={() => {
@@ -158,7 +158,7 @@ export default function Rewards() {
               )}
             </div>
             <button
-              className="bg-theme-dark md:bg-theme-light rounded-lg py-1 px-4 text-white font-raleway w-full md:w-auto mt-4"
+              className="bg-theme-dark md:bg-theme-dark rounded-lg py-1 px-4 text-white font-raleway w-full md:w-auto mt-4"
               onClick={() => {
                 signup();
               }}
@@ -181,7 +181,7 @@ export default function Rewards() {
                 >
                   Welcome to Pod Rewards!
                 </div>
-                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 px-2">
+                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 md:bottom-4 lg:bottom-6 px-2">
                   $10 off your first purchase of any nicotine product just for
                   signing up
                 </div>
@@ -192,7 +192,7 @@ export default function Rewards() {
                   alt="iPhone rewards"
                   className="relative transform left-1/2 -translate-x-1/2 h-28 md:h-24 lg:h-28 mt-8 md:mt-6 lg:mt-8"
                 ></img>
-                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 px-2">
+                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 md:bottom-4 lg:bottom-6 px-2">
                   $1 off any product when you use Pod Rewards
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Rewards() {
                   alt="Reward tags"
                   className="relative transform left-1/2 -translate-x-1/2 h-44 md:h-36 lg:h-44"
                 ></img>
-                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 px-2">
+                <div className="text-theme-light text-center font-semibold text-lg md:text-base lg:text-lg absolute bottom-6 md:bottom-4 lg:bottom-6 px-2">
                   Get exclusive discounts on brands and products
                 </div>
               </div>
