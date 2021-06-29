@@ -123,7 +123,7 @@ export default function Rewards() {
               className="h-full"
             ></img>
           </div>
-          <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-max md:w-full">
+          <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-full">
             <div className="font-raleway font-bold text-4xl md:text-4.5xl xl:text-5xl mb-4 mt-auto text-center md:text-left">
               Enhance you evening out
             </div>
