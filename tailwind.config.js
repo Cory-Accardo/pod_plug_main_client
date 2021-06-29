@@ -15,6 +15,8 @@ module.exports = {
         "background-gray": "#F5F4F4",
         "title-blue-dark": "#12172B",
         "title-blue-light": "#08457D",
+        "button-emphasis": "#DDE8FC",
+        "button-hover": "#80A6E0",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
