@@ -20,6 +20,10 @@ a {
   box-sizing: border-box;
 }
 
+input:focus-visible {
+  outline: none;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
