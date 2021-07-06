@@ -90,7 +90,7 @@ export default function About() {
             className="absolute w-full h-1/2 md:h-full left-0 top-1/2 md:top-0 z-bg opacity-30"
             style={{
               backgroundImage: 'url("/skyline_full.png")',
-              backgroundSize: "auto auto",
+              backgroundSize: "auto 100%",
               backgroundRepeat: "repeat-x",
               backgroundPosition: "bottom left",
             }}
