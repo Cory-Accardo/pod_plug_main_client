@@ -81,7 +81,7 @@ function MyApp({ Component, pageProps }) {
             </div>
             <div className="flex flex-row mt-20 relative">
               <button
-                className="font-raleway text-xl border-2 border-theme-dark rounded py-2 w-28 bg-button-emphasis hover:bg-button-hover relative"
+                className="font-raleway text-xl border-3 border-theme-dark rounded py-2 w-28 bg-button-emphasis hover:bg-button-hover relative"
                 onClick={() => {
                   verifyAge(true);
                 }}
@@ -89,7 +89,7 @@ function MyApp({ Component, pageProps }) {
                 Yes!
               </button>
               <button
-                className="font-raleway text-xl border-2 border-theme-dark rounded py-2 w-28 ml-10 bg-white hover:bg-button-hover relative"
+                className="font-raleway text-xl border-3 border-theme-dark rounded py-2 w-28 ml-10 bg-white hover:bg-button-hover relative"
                 onClick={() => {
                   verifyAge(false);
                 }}

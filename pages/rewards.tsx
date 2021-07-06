@@ -132,7 +132,7 @@ export default function Rewards() {
                 Get exclusive product and venue offers
               </div>
               <input
-                className="p-1 rounded-lg border-2 text-base border-subtitle-gray md:border-theme-dark w-full md:w-4/5"
+                className="p-1 rounded-lg border-3 text-base border-subtitle-gray md:border-theme-dark w-full md:w-4/5"
                 placeholder="youremail@example.com"
                 ref={emailForm}
                 onChange={() => {

@@ -448,7 +448,7 @@ export default function Home() {
                           onBlur={() => {
                             setSearchFocused(false);
                           }}
-                          className="w-full px-2 py-1 border-2 rounded-lg border-subtitle-gray md:border-theme-dark md:w-auto"
+                          className="w-full px-2 py-1 border-3 rounded-lg border-subtitle-gray md:border-theme-dark md:w-auto"
                         />
                       </form>
                       <button
@@ -466,7 +466,7 @@ export default function Home() {
                       <div className="mt-4 text-xs font-medium font-raleway">
                         {coords.length} SEARCH RESULTS
                       </div>
-                      <hr className="h-0 mx-3 mt-2 border-2 border-hr-gray" />
+                      <hr className="h-0 mx-3 mt-2 border-3 border-hr-gray" />
                       <div className="my-3 overflow-y-scroll flex-shrink">
                         <AnimateSharedLayout>
                           <motion.div layout className="relative z-content">

@@ -378,7 +378,7 @@ export default function Partners() {
                     VENUE NAME<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
@@ -387,7 +387,7 @@ export default function Partners() {
                     GENERAL MANAGER NAME<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
@@ -396,7 +396,7 @@ export default function Partners() {
                     EMAIL<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="email"
                   />
                 </div>
@@ -405,7 +405,7 @@ export default function Partners() {
                     NUMBER<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="tel"
                   />
                 </div>
@@ -414,7 +414,7 @@ export default function Partners() {
                     SOCIAL MEDIA HANDLES<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
@@ -423,7 +423,7 @@ export default function Partners() {
                     Est. monthly alcohol revenue
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2 md:w-48 md:ml-auto"
+                    className="p-1 border-black rounded-lg border-3 md:w-48 md:ml-auto"
                     type="text"
                   />
                 </div>
@@ -432,7 +432,7 @@ export default function Partners() {
                     Avg. daily foot traffic
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2 md:w-48 md:ml-auto"
+                    className="p-1 border-black rounded-lg border-3 md:w-48 md:ml-auto"
                     type="text"
                   />
                 </div>
@@ -443,7 +443,7 @@ export default function Partners() {
                     ADDRESS<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
@@ -452,7 +452,7 @@ export default function Partners() {
                     CITY<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
@@ -462,7 +462,7 @@ export default function Partners() {
                       STATE<span className="text-red-600">*</span>
                     </label>
                     <input
-                      className="p-1 border-black rounded-lg border-2"
+                      className="p-1 border-black rounded-lg border-3"
                       type="text"
                     />
                   </div>
@@ -471,7 +471,7 @@ export default function Partners() {
                       ZIP<span className="text-red-600">*</span>
                     </label>
                     <input
-                      className="p-1 border-black rounded-lg border-2"
+                      className="p-1 border-black rounded-lg border-3"
                       type="text"
                     />
                   </div>
@@ -481,13 +481,13 @@ export default function Partners() {
                     COUNTRY<span className="text-red-600">*</span>
                   </label>
                   <input
-                    className="p-1 border-black rounded-lg border-2"
+                    className="p-1 border-black rounded-lg border-3"
                     type="text"
                   />
                 </div>
                 <div className="flex flex-row mt-8 md:mt-20 items-center">
                   <button
-                    className="border-2 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
+                    className="border-3 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
                     onClick={() => setAgreeEmail((orig) => !orig)}
                   >
                     {agreeEmail && (
@@ -509,7 +509,7 @@ export default function Partners() {
                 </div>
                 <div className="flex flex-row mt-4 items-center">
                   <button
-                    className="border-2 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
+                    className="border-3 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
                     onClick={() => setAgreeSendInfo((orig) => !orig)}
                   >
                     {agreeSendInfo && (
