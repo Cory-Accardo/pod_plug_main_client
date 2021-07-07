@@ -22,56 +22,60 @@ export default function Signup() {
       {/* Header */}
       <SignupHeader />
 
-      <main>
+      <main className="relative overflow-hidden">
         {/* Clouds */}
         <div className="absolute z-clouds w-full">
           <img
             src="/clouds_blue.png"
             alt="Clouds"
-            className="absolute opacity-80 z-clouds hidden md:block"
-            style={{ top: "-4rem", left: "-10vw" }}
-          />
-          <img
-            src="/clouds_blue.png"
-            alt="Clouds"
-            className="absolute opacity-80 z-clouds hidden md:block"
+            className="absolute opacity-80 z-clouds"
             style={{ top: "-2rem", left: "55vw" }}
           />
           <img
             src="/clouds_blue.png"
             alt="Clouds"
-            className="absolute opacity-80 z-clouds md:hidden"
+            className="absolute opacity-80 z-clouds"
             style={{ top: "0rem", left: "-10vw" }}
           />
           <img
             src="/clouds_big.png"
             alt="Clouds"
-            className="absolute opacity-80 z-clouds transform scale-75 hidden md:block"
-            style={{ top: "6rem", left: "-5vw" }}
+            className="absolute opacity-80 z-clouds transform scale-75"
+            style={{ top: "10rem", left: "-5vw" }}
           />
           <img
             src="/clouds_big.png"
             alt="Clouds"
-            className="absolute opacity-80 z-clouds transform scale-50 hidden xl:block"
-            style={{ top: "10rem", left: "55vw" }}
+            className="absolute opacity-80 z-clouds transform scale-50"
+            style={{ top: "16rem", left: "55vw" }}
           />
-          <img
-            src="/clouds_blue.png"
-            alt="Clouds"
-            className="absolute opacity-80 z-clouds transform md:hidden"
-            style={{ top: "15rem", left: "60vw" }}
-          />
+          {!firstForm && (
+            <>
+              <img
+                src="/clouds_blue.png"
+                alt="Clouds"
+                className="absolute opacity-80 z-clouds block lg:hidden"
+                style={{ top: "38rem", left: "-10vw" }}
+              />
+              <img
+                src="/clouds_big.png"
+                alt="Clouds"
+                className="absolute opacity-80 z-clouds transform scale-75 block lg:hidden"
+                style={{ top: "47rem", left: "45vw" }}
+              />
+            </>
+          )}
         </div>
         {/* First form */}
-        <div className="outer-container flex flex-col items-center">
-          <motion.div
-            className="container relative z-content"
-            initial={{ transform: "translateX(0vw)" }}
-            animate={{
-              transform: firstForm ? "translateX(0vw)" : "translateX(-100vw)",
-            }}
-          >
-            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 py-24">
+        <motion.div
+          className="outer-container flex flex-col items-center relative z-content"
+          initial={{ transform: "translateX(0vw)" }}
+          animate={{
+            transform: firstForm ? "translateX(0vw)" : "translateX(-100vw)",
+          }}
+        >
+          <div className="container">
+            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 max-w-full py-24">
               <div className="font-raleway font-bold text-4xl text-center">
                 Create an Account
               </div>
@@ -117,23 +121,26 @@ export default function Signup() {
                 </button>
               </form>
             </div>
-          </motion.div>
-          <motion.div
-            className="container absolute z-content"
-            initial={{ transform: "translateX(100vw)" }}
-            animate={{
-              transform: firstForm ? "translateX(100vw)" : "translateX(0vw)",
-            }}
-          >
-            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col py-24">
+          </div>
+        </motion.div>
+        {!firstForm && <div className="h-136 lg:h-32"></div>}
+        <motion.div
+          className="outer-container flex flex-col items-center absolute w-full top-0 z-content"
+          initial={{ transform: "translateX(100vw)" }}
+          animate={{
+            transform: firstForm ? "translateX(100vw)" : "translateX(0vw)",
+          }}
+        >
+          <div className="container max-w-full">
+            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col py-24 w-112 max-w-full lg:w-auto">
               <div className="font-raleway font-bold text-4xl text-center">
                 Billing Information
               </div>
               <div className="font-raleway font-bold text-subtitle-gray text-xl text-center mt-2">
                 Enter your details below
               </div>
-              <form className="flex flex-row font-raleway justify-center">
-                <div className="flex flex-col w-112 mr-16 mt-4">
+              <form className="flex flex-col lg:flex-row font-raleway justify-center items-center">
+                <div className="flex flex-col w-112 max-w-full mr-0 lg:mr-16 mt-4">
                   <div className="font-bold mt-4 text-lg">
                     Billing Information
                   </div>
@@ -189,7 +196,7 @@ export default function Signup() {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col w-112 mt-4">
+                <div className="flex flex-col w-112 mt-4 max-w-full lg:w-auto">
                   <div className="font-bold mt-4 text-lg">
                     Payment Information
                   </div>
@@ -271,7 +278,7 @@ export default function Signup() {
                     </div>
                   </div>
                   <button
-                    className="bg-white p-1 px-12 mt-16 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
+                    className="bg-white p-1 px-12 mt-8 lg:mt-16 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
                     onClick={(e) => {
                       e.preventDefault();
                       setFirstForm(false);
@@ -282,8 +289,8 @@ export default function Signup() {
                 </div>
               </form>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
         {/* Skyline */}
         <div className="relative h-80">
           <div
