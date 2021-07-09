@@ -204,14 +204,14 @@ export default function Partners() {
                 </div>
               </div>
               <div
-                className={`${styles.image_width} transform scale-75 -translate-y-8 md:translate-y-0 md:scale-90`}
+                className={`${styles.image_width} transform scale-75 -translate-y-8 md:translate-y-0 md:scale-100`}
               >
                 <Image
-                  src="/kiosk_2_full"
+                  src="/kiosk_full"
                   alt="Kiosk"
                   layout="responsive"
-                  height={1945}
-                  width={1185}
+                  height={2028}
+                  width={1209}
                 />
               </div>
             </div>
