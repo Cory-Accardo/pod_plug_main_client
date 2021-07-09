@@ -23,15 +23,17 @@ export default function Header(props: HeaderProps) {
         className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content"
         style={{ backgroundColor: "#12172B" }}
       >
-        <div className="relative w-20 mr-auto">
-          <Image
-            src="/logo_small"
-            alt="Pod Plug logo"
-            layout="responsive"
-            width={2098}
-            height={1294}
-          />
-        </div>
+        <Link href="/" passHref>
+          <a className="relative w-20 mr-auto cursor-pointer">
+            <Image
+              src="/logo_small"
+              alt="Pod Plug logo"
+              layout="responsive"
+              width={2098}
+              height={1294}
+            />
+          </a>
+        </Link>
         <div className="flex-row hidden lg:flex">
           <div
             className={`text-white mx-5 font-raleway font-semibold ${
