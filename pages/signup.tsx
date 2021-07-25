@@ -123,7 +123,7 @@ export default function Signup() {
             </div>
           </div>
         </motion.div>
-        {!firstForm && <div className="h-136 lg:h-32"></div>}
+        {!firstForm && <div className="h-36"></div>}
         <motion.div
           className="outer-container flex flex-col items-center absolute w-full top-0 z-content"
           initial={{ transform: "translateX(100vw)" }}
@@ -140,22 +140,12 @@ export default function Signup() {
                 Enter your details below
               </div>
               <form className="flex flex-col lg:flex-row font-raleway justify-center items-center">
-                <div className="flex flex-col w-112 max-w-full mr-0 lg:mr-16 mt-4">
-                  <div className="font-bold mt-4 text-lg">
-                    Billing Information
-                  </div>
+                <div className="flex flex-col w-112 max-w-full mt-4">
                   <div className="flex flex-col">
                     <label className="text-sm font-bold">FULL NAME</label>
                     <input
                       className="p-1 border-black rounded-lg border-3"
                       type="text"
-                    />
-                  </div>
-                  <div className="flex flex-col mt-4">
-                    <label className="text-sm font-bold">EMAIL</label>
-                    <input
-                      className="p-1 border-black rounded-lg border-3"
-                      type="email"
                     />
                   </div>
                   <div className="flex flex-col mt-4">
@@ -195,37 +185,7 @@ export default function Signup() {
                       type="text"
                     />
                   </div>
-                </div>
-                <div className="flex flex-col w-112 mt-4 max-w-full lg:w-auto">
-                  <div className="font-bold mt-4 text-lg">
-                    Payment Information
-                  </div>
-                  <div className="flex flex-col">
-                    <label className="text-sm font-bold">CARD NUMBER</label>
-                    <input
-                      className="p-1 border-black rounded-lg border-3"
-                      type="text"
-                    />
-                  </div>
-                  <div className="flex flex-row mt-4">
-                    <div className="flex flex-col w-1/2 pr-1">
-                      <label className="text-sm font-bold">EXPIRY</label>
-                      <input
-                        className="p-1 border-black rounded-lg border-3"
-                        type="text"
-                      />
-                    </div>
-                    <div className="flex flex-col w-1/2 pl-1">
-                      <label className="text-sm font-bold">
-                        CVV/CVC NUMBER
-                      </label>
-                      <input
-                        className="p-1 border-black rounded-lg border-3"
-                        type="text"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-row mt-8 md:mt-20 items-center">
+                  <div className="flex flex-row mt-8 items-center">
                     <button
                       className="border-3 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
                       onClick={(e) => {
@@ -278,7 +238,7 @@ export default function Signup() {
                     </div>
                   </div>
                   <button
-                    className="bg-white p-1 px-12 mt-8 lg:mt-16 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
+                    className="bg-white p-1 px-12 mt-8 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
                     onClick={(e) => {
                       e.preventDefault();
                       setFirstForm(false);

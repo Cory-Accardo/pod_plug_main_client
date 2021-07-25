@@ -1,5 +1,6 @@
 import Image from "../components/Image";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function SignupHeader() {
   const router = useRouter();
@@ -15,16 +16,22 @@ export default function SignupHeader() {
         }}
       >
         <img src="/arrow_left.svg" alt="Arrow" className="w-4" />
-        <div className="font-raleway text-white ml-6 hidden md:block">Exit to home</div>
+        <div className="font-raleway text-white ml-6 hidden md:block">
+          Exit to home
+        </div>
       </div>
       <div className="relative w-20 mx-auto">
-        <Image
-          src="/logo_small"
-          alt="Pod Plug logo"
-          layout="responsive"
-          width={2098}
-          height={1294}
-        />
+        <Link href="/" passHref>
+          <a>
+            <Image
+              src="/logo_small"
+              alt="Pod Plug logo"
+              layout="responsive"
+              width={2098}
+              height={1294}
+            />
+          </a>
+        </Link>
       </div>
     </div>
   );
