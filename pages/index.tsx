@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { GOOGLE_API_KEY, USER_MS } from "../constants";
+import { ALL, GOOGLE_API_KEY, JSON_HEADER, USER_MS, VENUES_LISTALL } from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -189,8 +189,11 @@ export default function Home() {
   }, [isLoaded, searchBox]);
 
   useEffect(() => {
-    fetch("https://" + USER_MS + "/venues/listall", {
+    fetch(ALL, {
       mode: "cors",
+      method: "POST",
+      headers: JSON_HEADER,
+      body: VENUES_LISTALL
     })
       .then((res) => {
         return res.json();
@@ -210,8 +213,8 @@ export default function Home() {
       locations
         .map((location) => {
           return new google.maps.LatLng(
-            location.coords.latitude,
-            location.coords.longitude
+            location.coords.lat,
+            location.coords.lon
           );
         })
         .filter((location) => {
@@ -474,8 +477,8 @@ export default function Home() {
                               .filter((location) => {
                                 if (currentLocation === undefined) return true;
                                 const latlng = new google.maps.LatLng(
-                                  location.coords.latitude,
-                                  location.coords.longitude
+                                  location.coords.lat,
+                                  location.coords.lon
                                 );
                                 return (
                                   google.maps.geometry.spherical.computeDistanceBetween(
@@ -490,15 +493,15 @@ export default function Home() {
                                     google.maps.geometry.spherical.computeDistanceBetween(
                                       currentLocation,
                                       new google.maps.LatLng(
-                                        a.coords.latitude,
-                                        b.coords.longitude
+                                        a.coords.lat,
+                                        b.coords.lon
                                       )
                                     ) -
                                     google.maps.geometry.spherical.computeDistanceBetween(
                                       currentLocation,
                                       new google.maps.LatLng(
-                                        a.coords.latitude,
-                                        b.coords.longitude
+                                        a.coords.lat,
+                                        b.coords.lon
                                       )
                                     )
                                   );
@@ -535,8 +538,8 @@ export default function Home() {
                                             `${(
                                               google.maps.geometry.spherical.computeDistanceBetween(
                                                 new google.maps.LatLng(
-                                                  location.coords.latitude,
-                                                  location.coords.longitude
+                                                  location.coords.lat,
+                                                  location.coords.lon
                                                 ),
                                                 currentLocation
                                               ) / 1600

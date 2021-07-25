@@ -11,7 +11,7 @@ import Card from "../components/Card";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, USER_MS } from "../constants";
+import { GOOGLE_API_KEY, ALL, JSON_HEADER, VENUES_LISTALL } from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import Head from "next/head";
@@ -61,8 +61,11 @@ export default function Partners() {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
-    fetch("https://" + USER_MS + "/venues/listall", {
+    fetch(ALL, {
       mode: "cors",
+      method: "POST",
+      headers: JSON_HEADER,
+      body: VENUES_LISTALL,
     })
       .then((res) => {
         return res.json();
@@ -200,7 +203,10 @@ export default function Partners() {
                   Partner with us
                 </div>
                 <div className="text-xl md:text-2xl xl:text-3xl font-semibold text-title-blue-light mt-6">
-                  <div>Our Promise: Convenience, When Out &amp; providing a WOW experience for our Customers and Consumers</div>
+                  <div>
+                    Our Promise: Convenience, When Out &amp; providing a WOW
+                    experience for our Customers and Consumers
+                  </div>
                 </div>
               </div>
               <div
@@ -230,8 +236,8 @@ export default function Partners() {
               {locations.map((location, index) => (
                 <Marker
                   position={{
-                    lat: location.coords.latitude,
-                    lng: location.coords.longitude,
+                    lat: location.coords.lat,
+                    lng: location.coords.lon,
                   }}
                   key={index}
                 />

@@ -2,8 +2,8 @@ export interface Location {
   index: number;
   name: string;
   coords: {
-    latitude: number;
-    longitude: number;
+    lat: number;
+    lon: number;
   };
   address: {
     street: string;

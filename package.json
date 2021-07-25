@@ -22,7 +22,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@react-google-maps/api": "^2.2.0",
     "@types/google.maps": "^3.45.6",
-    "@types/react": "^17.0.14",
+    "@types/react": "^17.0.15",
     "autoprefixer": "^10.3.1",
     "bezier-easing": "^2.1.0",
     "eslint": "^7.31.0",
