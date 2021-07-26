@@ -61,7 +61,7 @@ export default function Signup() {
         headers: JSON_HEADER,
       }).then((res) => {
         if (res.status === 200) {
-          router.push("/");
+          router.push("/setupCard");
         } else {
           setGeneralError("Something is wrong. Please try again.");
         }

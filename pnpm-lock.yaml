@@ -6,6 +6,8 @@ specifiers:
   '@fortawesome/free-solid-svg-icons': ^5.15.3
   '@fortawesome/react-fontawesome': ^0.1.14
   '@react-google-maps/api': ^2.2.0
+  '@stripe/react-stripe-js': ^1.4.1
+  '@stripe/stripe-js': ^1.16.0
   '@types/google.maps': ^3.45.6
   '@types/react': ^17.0.15
   autoprefixer: ^10.3.1
@@ -33,6 +35,8 @@ devDependencies:
   '@fortawesome/free-solid-svg-icons': 5.15.3
   '@fortawesome/react-fontawesome': 0.1.14_ec0af2bc0907a851e3e0afc4708fd0f0
   '@react-google-maps/api': 2.2.0_react-dom@17.0.2+react@17.0.2
+  '@stripe/react-stripe-js': 1.4.1_e74653d606886fe1e864691fd666375c
+  '@stripe/stripe-js': 1.16.0
   '@types/google.maps': 3.45.6
   '@types/react': 17.0.15
   autoprefixer: 10.3.1_postcss@8.3.6
@@ -297,6 +301,23 @@ packages:
 
   /@rushstack/eslint-patch/1.0.6:
     resolution: {integrity: sha512-Myxw//kzromB9yWgS8qYGuGVf91oBUUJpNvy5eM50sqvmKLbKjwLxohJnkWGTeeI9v9IBMtPLxz5Gc60FIfvCA==}
+    dev: true
+
+  /@stripe/react-stripe-js/1.4.1_e74653d606886fe1e864691fd666375c:
+    resolution: {integrity: sha512-FjcVrhf72+9fUL3Lz3xi02ni9tzH1A1x6elXlr6tvBDgSD55oPJuodoP8eC7xTnBIKq0olF5uJvgtkJyDCdzjA==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.13.0
+      react: ^16.8.0 || ^17.0.0
+      react-dom: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@stripe/stripe-js': 1.16.0
+      prop-types: 15.7.2
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+    dev: true
+
+  /@stripe/stripe-js/1.16.0:
+    resolution: {integrity: sha512-ZSHbiwTrISoaTbpercmYGuY7QTg7HxfFyNgbJBaYbwHWbzMhpEdGTsmMpaBXIU6iiqwEEDaIyD8O6yJ+H5DWCg==}
     dev: true
 
   /@types/google.maps/3.45.6:
