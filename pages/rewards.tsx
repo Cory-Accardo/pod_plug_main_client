@@ -1,10 +1,10 @@
 import Head from "next/head";
 import { useCallback, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RewardsCard from "../components/RewardsCard";
-import { USER_MS } from "../constants";
 
 export default function Rewards() {
   // begin: signup
@@ -12,6 +12,7 @@ export default function Rewards() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
   const emailForm = useRef<HTMLInputElement>();
+  const router = useRouter();
 
   const signup = useCallback(
     async function () {
@@ -20,24 +21,15 @@ export default function Rewards() {
           /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
         )
       ) {
-        fetch("https://" + USER_MS + "/signup", {
-          mode: "cors",
-          method: "POST",
-          body: JSON.stringify({ email: emailForm.current.value }),
-        })
-          .then(() => {
-            setFormError(false);
-            setFormSuccess(true);
-          })
-          .catch((_) => {
-            setFormError(true);
-            setFormSuccess(false);
-          });
+        router.push({
+          pathname: "/signup",
+          query: { email: emailForm.current.value },
+        });
       } else {
         setFormInvalid(true);
       }
     },
-    [emailForm]
+    [emailForm, router]
   );
   // end: signup
 

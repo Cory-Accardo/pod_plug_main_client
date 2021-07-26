@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { ALL, GOOGLE_API_KEY, JSON_HEADER, USER_MS, VENUES_LISTALL } from "../constants";
+import { ALL, GOOGLE_API_KEY, JSON_HEADER, VENUES_LISTALL } from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -18,6 +18,7 @@ import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 import BezierEasing from "bezier-easing";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+import { useRouter } from "next/router";
 
 import styles from "../styles/Index.module.css";
 
@@ -60,6 +61,7 @@ export default function Home() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [formError, setFormError] = useState(false);
   const emailForm = useRef<HTMLInputElement>();
+  const router = useRouter();
 
   const signup = useCallback(
     async function () {
@@ -68,24 +70,15 @@ export default function Home() {
           /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
         )
       ) {
-        fetch("https://" + USER_MS + "/signup", {
-          mode: "cors",
-          method: "POST",
-          body: JSON.stringify({ email: emailForm.current.value }),
-        })
-          .then(() => {
-            setFormError(false);
-            setFormSuccess(true);
-          })
-          .catch((_) => {
-            setFormError(true);
-            setFormSuccess(false);
-          });
+        router.push({
+          pathname: "/signup",
+          query: { email: emailForm.current.value },
+        });
       } else {
         setFormInvalid(true);
       }
     },
-    [emailForm]
+    [emailForm, router]
   );
   // end: signup
 
@@ -193,7 +186,7 @@ export default function Home() {
       mode: "cors",
       method: "POST",
       headers: JSON_HEADER,
-      body: VENUES_LISTALL
+      body: VENUES_LISTALL,
     })
       .then((res) => {
         return res.json();

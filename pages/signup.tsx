@@ -171,6 +171,7 @@ export default function Signup() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="email"
+                    value={router.query.email ? router.query.email : ""}
                     {...register1("email", {
                       required: { value: true, message: "Email is required" },
                       pattern: {
