@@ -9,12 +9,16 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import useSignedInOnly from "../hooks/useSignedInOnly";
 
 const stripePromise = loadStripe(
   "pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs"
 );
 
 function CardForm() {
+  // Ensure signed in
+  useSignedInOnly();
+
   const stripe = useStripe();
   const elements = useElements();
   const handleSubmit = async (event) => {
