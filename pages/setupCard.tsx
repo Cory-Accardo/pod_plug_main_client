@@ -1,5 +1,7 @@
 import SignupHeader from "../components/SignupHeader";
 import styles from "../styles/SetupCard.module.css";
+import useSignedInOnly from "../hooks/useSignedInOnly";
+import { JSON_HEADER, MAIN } from "../constants";
 
 import Head from "next/head";
 import {
@@ -9,7 +11,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import useSignedInOnly from "../hooks/useSignedInOnly";
+import { useCookies } from "react-cookie";
 
 const stripePromise = loadStripe(
   "pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs"
@@ -21,6 +23,7 @@ function CardForm() {
 
   const stripe = useStripe();
   const elements = useElements();
+  const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -30,12 +33,33 @@ function CardForm() {
       return;
     }
 
-    const payload = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
-    });
-
-    console.log("[PaymentMethod]", payload);
+    // Retrieve clientSecret
+    fetch(MAIN + "/setupCard", {
+      method: "POST",
+      headers: {
+        ...JSON_HEADER,
+        "x-token": cookies["x-token"],
+        "x-refresh-token": cookies["x-refresh-token"],
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((clientSecret) => {
+        stripe
+          .confirmCardSetup(clientSecret, {
+            payment_method: {
+              card: elements.getElement(CardElement),
+            },
+          })
+          .then((result) => {
+            if (result.error) {
+              console.log(result.error.message);
+            } else {
+              console.log("cardSetup success");
+            }
+          });
+      });
   };
   return (
     <form
