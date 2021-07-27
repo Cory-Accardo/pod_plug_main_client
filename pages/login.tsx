@@ -102,12 +102,9 @@ export default function Login() {
         {/* First form */}
         <div className="outer-container flex flex-col items-center relative z-content">
           <div className="container">
-            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 max-w-full py-24">
-              <div className="font-raleway font-bold text-4xl text-center">
-                Create an Account
-              </div>
-              <div className="font-raleway font-bold text-subtitle-gray text-xl text-center mt-2">
-                Join our rewards program today
+            <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 max-w-full py-24 mt-12">
+              <div className="font-raleway font-bold text-4xl text-center mb-8">
+                Log into your account
               </div>
               <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col mt-4">
