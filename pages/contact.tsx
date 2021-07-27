@@ -69,7 +69,7 @@ export default function Contact() {
     }).then(() => {
       setFormSuccess(true);
     });
-  }, [emailForm]);
+  }, [emailForm, nameForm, numberForm, msgForm]);
   // end: form
   return (
     <>
