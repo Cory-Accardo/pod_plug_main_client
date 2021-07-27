@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function useSignedInOnly() {
-  const [cookies] = useCookies(["x_token", "x_refresh_token"]);
+  const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const router = useRouter();
   useEffect(() => {
-    if (!cookies.x_token || !cookies.x_refresh_token) {
+    if (!cookies["x-token"] || !cookies["x-refresh-token"]) {
       router.push("/login");
     }
   }, [cookies, router]);
