@@ -29,12 +29,14 @@ export default function Login() {
       headers: JSON_HEADER,
     })
       .then((res) => {
-        if (res.status == 401) {
-          setGeneralError(
-            "Your account and password do not match. Please try again."
-          );
-        } else {
-          setGeneralError("Something is wrong. Please try again.");
+        if (res.status !== 200) {
+          if (res.status === 401) {
+            setGeneralError(
+              "Your account and password do not match. Please try again."
+            );
+          } else {
+            setGeneralError("Something is wrong. Please try again.");
+          }
         }
         return res.json();
       })
