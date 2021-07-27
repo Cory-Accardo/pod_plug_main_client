@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
@@ -15,6 +15,7 @@ export default function Signup() {
     register: register1,
     handleSubmit: handleSubmit1,
     getValues: getValues1,
+    setValue: setValue1,
     formState: { errors: errors1 },
   } = useForm({ mode: "all" });
   const {
@@ -62,6 +63,10 @@ export default function Signup() {
       }).then((res) => {
         if (res.status === 200) {
           router.push("/setupCard");
+        } else if (res.status == 409) {
+          setGeneralError(
+            "Email is already registered. Try another email or login instead."
+          );
         } else {
           setGeneralError("Something is wrong. Please try again.");
         }
@@ -75,6 +80,11 @@ export default function Signup() {
       }
     }
   };
+  useEffect(() => {
+    if (router.query.email) {
+      setValue1("email", router.query.email);
+    }
+  }, [router, setValue1]);
 
   return (
     <>
@@ -171,7 +181,6 @@ export default function Signup() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="email"
-                    value={router.query.email ? router.query.email : ""}
                     {...register1("email", {
                       required: { value: true, message: "Email is required" },
                       pattern: {
