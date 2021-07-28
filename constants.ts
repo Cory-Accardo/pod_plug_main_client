@@ -16,6 +16,13 @@ export const VENUES_LISTALL = JSON.stringify({
   details: {},
 });
 
+export const JOBS_LISTALL = JSON.stringify({
+  ms: "users",
+  path: "/jobs/listall",
+  method: "GET",
+  details: {},
+});
+
 export const JSON_HEADER = {
   "Content-Type": "application/json",
 };

@@ -1,11 +1,36 @@
 import Head from "next/head";
+import { useEffect, useState } from "react";
 
 import Header from "../components/Header";
 import Image from "../components/Image";
 import Footer from "../components/Footer";
 import OpeningEntry from "../components/OpeningEntry";
+import { ALL, JOBS_LISTALL, JSON_HEADER } from "../constants";
+
+interface Job {
+  title: string;
+  url: string;
+}
 
 export default function Careers() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  useEffect(() => {
+    fetch(ALL, {
+      method: "POST",
+      body: JOBS_LISTALL,
+      headers: JSON_HEADER,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setJobs(
+          json.map((value) => {
+            return { title: value.title, url: value.linkedin_url };
+          })
+        );
+      });
+  }, []);
   return (
     <>
       <Head>
@@ -68,7 +93,9 @@ export default function Careers() {
             }}
           ></div>
           <div className="max-w-128 font-raleway relative z-content pb-32">
-            <div className="font-bold text-4xl md:text-5xl text-center">Why Pod Plug?</div>
+            <div className="font-bold text-4xl md:text-5xl text-center">
+              Why Pod Plug?
+            </div>
             <div className="text-center mt-10">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui non
               assumenda nam excepturi voluptatum ea incidunt in velit magni
@@ -94,25 +121,21 @@ export default function Careers() {
       <div className="outer-container flex flex-col items-center">
         <div className="container font-raleway">
           <div className="font-semibold text-3xl md:text-4xl lg:text-5xl mt-24 mb-12">
-            Openings<span className="text-base md:text-lg ml-4">(4 openings)</span>
+            Openings
+            <span className="text-base md:text-lg ml-4">
+              ({jobs.length} openings)
+            </span>
           </div>
           <div className="border-b-2 border-black">
-            <OpeningEntry
-              title="Sale Representative"
-              link="https://www.linkedin.com/in/podplug"
-            ></OpeningEntry>
-            <OpeningEntry
-              title="Sale Representative"
-              link="https://www.linkedin.com/in/podplug"
-            ></OpeningEntry>
-            <OpeningEntry
-              title="Sale Representative"
-              link="https://www.linkedin.com/in/podplug"
-            ></OpeningEntry>
-            <OpeningEntry
-              title="Sale Representative"
-              link="https://www.linkedin.com/in/podplug"
-            ></OpeningEntry>
+            {jobs.map((job, index) => {
+              return (
+                <OpeningEntry
+                  title={job.title}
+                  link={job.url}
+                  key={index}
+                ></OpeningEntry>
+              );
+            })}
           </div>
         </div>
       </div>
