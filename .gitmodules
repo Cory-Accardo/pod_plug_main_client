@@ -1,0 +1,3 @@
+[submodule "admin-portal"]
+	path = admin-portal
+	url = git@github.com:Cory-Accardo/admin-portal.git
