@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, MAIN } from "../constants";
+import { GOOGLE_API_KEY, JSON_HEADER, MAIN } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
@@ -56,9 +56,12 @@ export default function Contact() {
   const msgForm = useRef<HTMLTextAreaElement>();
   const numberForm = useRef<HTMLInputElement>();
   const [formSuccess, setFormSuccess] = useState(false);
+  const [formError, setFormError] = useState(false);
 
   const submitMessage = useCallback(() => {
-    fetch(MAIN + "/contact", {
+    setFormSuccess(false);
+    setFormError(false);
+    fetch(MAIN + "/send_form", {
       method: "POST",
       body: JSON.stringify({
         formType: "contactUs",
@@ -67,8 +70,15 @@ export default function Contact() {
         number: numberForm.current.value,
         message: msgForm.current.value,
       }),
-    }).then(() => {
-      setFormSuccess(true);
+      headers: JSON_HEADER,
+    }).then((res) => {
+      if (res.status === 200) {
+        setFormSuccess(true);
+        setFormError(false);
+      } else {
+        setFormError(true);
+        setFormSuccess(false);
+      }
     });
   }, [emailForm, nameForm, numberForm, msgForm]);
   // end: form
@@ -145,6 +155,11 @@ export default function Contact() {
               {formSuccess && (
                 <div className="font-raleway text-green-800">
                   Thanks for reaching out!
+                </div>
+              )}
+              {formError && (
+                <div className="font-raleway text-red-800">
+                  Something is wrong. Please try again later.
                 </div>
               )}
               <input
