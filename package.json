@@ -8,7 +8,9 @@
     "start": "next start",
     "test": "rtest tests.json",
     "lint": "next lint",
-    "deploy": "next build && next export && aws s3 sync out s3://podplug-client --region us-east-2"
+    "build-admin": "cd admin-portal && yarn && yarn build",
+    "export": "next build && next export",
+    "deploy": "./deploy.sh && aws s3 sync out s3://podplug-client --region us-east-2"
   },
   "dependencies": {
     "next": "11.0.1",
