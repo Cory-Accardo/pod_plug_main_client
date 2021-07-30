@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, USER_MS } from "../constants";
+import { GOOGLE_API_KEY, MAIN, USER_MS } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
@@ -58,13 +58,14 @@ export default function Contact() {
   const [formSuccess, setFormSuccess] = useState(false);
 
   const submitMessage = useCallback(() => {
-    fetch("https://" + USER_MS + "/contact", {
+    fetch(MAIN + "/contact", {
       method: "POST",
       body: JSON.stringify({
+        formType: "contactUs",
         email: emailForm.current.value,
         name: nameForm.current.value,
         number: numberForm.current.value,
-        msg: msgForm.current.value,
+        message: msgForm.current.value,
       }),
     }).then(() => {
       setFormSuccess(true);
