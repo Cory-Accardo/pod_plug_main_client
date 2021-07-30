@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, MAIN, USER_MS } from "../constants";
+import { GOOGLE_API_KEY, MAIN } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
