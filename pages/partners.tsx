@@ -11,7 +11,13 @@ import Card from "../components/Card";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, ALL, JSON_HEADER, VENUES_LISTALL } from "../constants";
+import {
+  GOOGLE_API_KEY,
+  ALL,
+  JSON_HEADER,
+  VENUES_LISTALL,
+  MAIN,
+} from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import Head from "next/head";
@@ -20,6 +26,7 @@ import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+import { useForm } from "react-hook-form";
 
 const containerStyle = {
   height: "100%",
@@ -35,6 +42,40 @@ const mapOptions = {
 const libraries: Libraries = ["places", "geometry"];
 
 export default function Partners() {
+  // begin: form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: "all" });
+
+  const onSubmit = (form) => {
+    setAgreeInfoError(false);
+    setAgreeEmailError(false);
+    if (agreeEmail && agreeSendInfo) {
+      fetch(MAIN + "/send_form", {
+        method: "POST",
+        body: JSON.stringify({
+          formType: "venuePartner",
+          ...form,
+        }),
+        headers: JSON_HEADER,
+      });
+    } else {
+      if (!agreeEmail) {
+        setAgreeEmailError(true);
+      }
+      if (!agreeSendInfo) {
+        setAgreeInfoError(true);
+      }
+    }
+  };
+  const [agreeEmail, setAgreeEmail] = useState(false);
+  const [agreeSendInfo, setAgreeSendInfo] = useState(false);
+  const [agreeEmailError, setAgreeEmailError] = useState(false);
+  const [agreeInfoError, setAgreeInfoError] = useState(false);
+  // end: form
+
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
@@ -79,11 +120,6 @@ export default function Partners() {
       });
   }, []);
   // end: Venues
-
-  // begin: form
-  const [agreeEmail, setAgreeEmail] = useState(false);
-  const [agreeSendInfo, setAgreeSendInfo] = useState(false);
-  // end: form
 
   return (
     <>
@@ -373,9 +409,7 @@ export default function Partners() {
               Interested in partnering with us?
             </div>
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col md:flex-row mt-24"
             >
               <div className="flex flex-col md:w-1/2 md:pr-4">
@@ -386,7 +420,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("venueName", {
+                      required: {
+                        value: true,
+                        message: "Venue name is required",
+                      },
+                    })}
                   />
+                  {errors.venueName && (
+                    <div className="font-raleway text-red-700">
+                      {errors.venueName.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -395,7 +440,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("manager", {
+                      required: {
+                        value: true,
+                        message: "Manager name is required",
+                      },
+                    })}
                   />
+                  {errors.manager && (
+                    <div className="font-raleway text-red-700">
+                      {errors.manager.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -404,7 +460,23 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="email"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "Email is required",
+                      },
+                      pattern: {
+                        value:
+                          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                        message: "Invalid email format",
+                      },
+                    })}
                   />
+                  {errors.email && (
+                    <div className="font-raleway text-red-700">
+                      {errors.email.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -413,7 +485,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="tel"
+                    {...register("number", {
+                      required: {
+                        value: true,
+                        message: "Phone number is required",
+                      },
+                    })}
                   />
+                  {errors.number && (
+                    <div className="font-raleway text-red-700">
+                      {errors.number.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -422,7 +505,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("socialMedia", {
+                      required: {
+                        value: true,
+                        message: "Social media handle is required",
+                      },
+                    })}
                   />
+                  {errors.socialMedia && (
+                    <div className="font-raleway text-red-700">
+                      {errors.socialMedia.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -431,6 +525,7 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3 md:w-48 md:ml-auto"
                     type="text"
+                    {...register("alchRevenue")}
                   />
                 </div>
                 <div className="flex flex-col mt-4">
@@ -440,6 +535,7 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3 md:w-48 md:ml-auto"
                     type="text"
+                    {...register("footTraffic")}
                   />
                 </div>
               </div>
@@ -451,7 +547,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("address", {
+                      required: {
+                        value: true,
+                        message: "Street address is required",
+                      },
+                    })}
                   />
+                  {errors.address && (
+                    <div className="font-raleway text-red-700">
+                      {errors.address.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col mt-4">
                   <label className="text-sm font-bold font-raleway">
@@ -460,7 +567,18 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("city", {
+                      required: {
+                        value: true,
+                        message: "City is required",
+                      },
+                    })}
                   />
+                  {errors.city && (
+                    <div className="font-raleway text-red-700">
+                      {errors.city.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-row">
                   <div className="flex flex-col mt-4 w-1/2 pr-2">
@@ -470,7 +588,18 @@ export default function Partners() {
                     <input
                       className="p-1 border-black rounded-lg border-3"
                       type="text"
+                      {...register("state", {
+                        required: {
+                          value: true,
+                          message: "State is required",
+                        },
+                      })}
                     />
+                    {errors.state && (
+                      <div className="font-raleway text-red-700">
+                        {errors.state.message}
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col mt-4 w-1/2 pl-2">
                     <label className="text-sm font-bold font-raleway">
@@ -479,7 +608,18 @@ export default function Partners() {
                     <input
                       className="p-1 border-black rounded-lg border-3"
                       type="text"
+                      {...register("zip", {
+                        required: {
+                          value: true,
+                          message: "ZIP is required",
+                        },
+                      })}
                     />
+                    {errors.zip && (
+                      <div className="font-raleway text-red-700">
+                        {errors.zip.message}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="flex flex-col mt-4">
@@ -489,12 +629,27 @@ export default function Partners() {
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="text"
+                    {...register("country", {
+                      required: {
+                        value: true,
+                        message: "Country is required",
+                      },
+                    })}
                   />
+                  {errors.country && (
+                    <div className="font-raleway text-red-700">
+                      {errors.country.message}
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-row mt-8 md:mt-20 items-center">
                   <button
                     className="border-3 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
-                    onClick={() => setAgreeEmail((orig) => !orig)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setAgreeEmailError(false);
+                      setAgreeEmail((orig) => !orig);
+                    }}
                   >
                     {agreeEmail && (
                       <div className="absolute h-full w-full left-0 top-0 bg-black">
@@ -513,10 +668,19 @@ export default function Partners() {
                     <span className="text-red-600">*</span>
                   </div>
                 </div>
+                {agreeEmailError && (
+                  <div className="text-red-700 font-raleway">
+                    You need to agree before proceeding
+                  </div>
+                )}
                 <div className="flex flex-row mt-4 items-center">
                   <button
                     className="border-3 border-black rounded-md relative mr-4 min-w-5 max-w-5 min-h-5 max-h-5"
-                    onClick={() => setAgreeSendInfo((orig) => !orig)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setAgreeInfoError(false);
+                      setAgreeSendInfo((orig) => !orig);
+                    }}
                   >
                     {agreeSendInfo && (
                       <div className="absolute h-full w-full left-0 top-0 bg-black">
@@ -536,13 +700,20 @@ export default function Partners() {
                     <span className="text-red-600">*</span>
                   </div>
                 </div>
+                {agreeInfoError && (
+                  <div className="text-red-700 font-raleway">
+                    You need to agree before proceeding
+                  </div>
+                )}
                 <div className="flex flex-row mt-4 items-center">
                   <div className="mr-auto">
                     <span className="text-red-600">*</span>Required
                   </div>
-                  <button className="bg-black text-white rounded-lg px-12 py-1">
-                    Yes!
-                  </button>
+                  <input
+                    type="submit"
+                    className="bg-black text-white rounded-lg px-12 py-1 cursor-pointer"
+                    value="Yes!"
+                  ></input>
                 </div>
               </div>
             </form>
