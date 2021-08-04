@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Clouds from "../components/Clouds";
 import { Location } from "../types/types";
-import { ALL, GOOGLE_API_KEY, JSON_HEADER, VENUES_LISTALL } from "../constants";
+import { API, GOOGLE_API_KEY, JSON_HEADER } from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
@@ -182,11 +182,9 @@ export default function Home() {
   }, [isLoaded, searchBox]);
 
   useEffect(() => {
-    fetch(ALL, {
-      mode: "cors",
-      method: "POST",
+    fetch(API + "/venues/listall", {
+      method: "GET",
       headers: JSON_HEADER,
-      body: VENUES_LISTALL,
     })
       .then((res) => {
         return res.json();

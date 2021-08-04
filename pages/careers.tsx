@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Image from "../components/Image";
 import Footer from "../components/Footer";
 import OpeningEntry from "../components/OpeningEntry";
-import { ALL, JOBS_LISTALL, JSON_HEADER } from "../constants";
+import { API, JSON_HEADER } from "../constants";
 
 interface Job {
   title: string;
@@ -15,9 +15,8 @@ interface Job {
 export default function Careers() {
   const [jobs, setJobs] = useState<Job[]>([]);
   useEffect(() => {
-    fetch(ALL, {
-      method: "POST",
-      body: JOBS_LISTALL,
+    fetch(API + "/jobs/listall", {
+      method: "GET",
       headers: JSON_HEADER,
     })
       .then((res) => {

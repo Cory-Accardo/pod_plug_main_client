@@ -11,13 +11,7 @@ import Card from "../components/Card";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
 import Footer from "../components/Footer";
-import {
-  GOOGLE_API_KEY,
-  ALL,
-  JSON_HEADER,
-  VENUES_LISTALL,
-  MAIN,
-} from "../constants";
+import { GOOGLE_API_KEY, JSON_HEADER, API } from "../constants";
 import PartnersComponent from "../components/PartnersComponent";
 
 import Head from "next/head";
@@ -53,7 +47,7 @@ export default function Partners() {
     setAgreeInfoError(false);
     setAgreeEmailError(false);
     if (agreeEmail && agreeSendInfo) {
-      fetch(MAIN + "/send_form", {
+      fetch(API + "/auth/send_form", {
         method: "POST",
         body: JSON.stringify({
           formType: "venuePartner",
@@ -102,11 +96,9 @@ export default function Partners() {
   const [locations, setLocations] = useState<Location[]>([]);
 
   useEffect(() => {
-    fetch(ALL, {
-      mode: "cors",
-      method: "POST",
+    fetch(API + "/venues/listall", {
+      method: "GET",
       headers: JSON_HEADER,
-      body: VENUES_LISTALL,
     })
       .then((res) => {
         return res.json();

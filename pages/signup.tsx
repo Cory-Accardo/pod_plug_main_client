@@ -7,7 +7,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 
 import SignupHeader from "../components/SignupHeader";
-import { JSON_HEADER, MAIN } from "../constants";
+import { JSON_HEADER, API } from "../constants";
 
 export default function Signup() {
   const router = useRouter();
@@ -38,7 +38,7 @@ export default function Signup() {
   const onSubmit2 = (values) => {
     setGeneralError(undefined);
     if (agreeEmail && agreeSendInfo) {
-      fetch(MAIN + "/signup", {
+      fetch(API + "/auth/signup", {
         method: "POST",
         body: JSON.stringify({
           ...form,

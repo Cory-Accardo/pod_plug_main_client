@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useCookies } from "react-cookie";
 
 import SignupHeader from "../components/SignupHeader";
-import { JSON_HEADER, MAIN } from "../constants";
+import { JSON_HEADER, API } from "../constants";
 import useNotSignedInOnly from "../hooks/useNotSignedInOnly";
 
 export default function Login() {
@@ -20,7 +20,7 @@ export default function Login() {
   const [generalError, setGeneralError] = useState(undefined);
   const onSubmit = (values) => {
     setGeneralError(undefined);
-    fetch(MAIN + "/login", {
+    fetch(API + "/auth/login", {
       method: "POST",
       body: JSON.stringify({
         email: values.email,

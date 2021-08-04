@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { GOOGLE_API_KEY, JSON_HEADER, MAIN } from "../constants";
+import { API, GOOGLE_API_KEY, JSON_HEADER } from "../constants";
 
 import Head from "next/head";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
@@ -61,7 +61,7 @@ export default function Contact() {
   const submitMessage = useCallback(() => {
     setFormSuccess(false);
     setFormError(false);
-    fetch(MAIN + "/send_form", {
+    fetch(API + "/auth/send_form", {
       method: "POST",
       body: JSON.stringify({
         formType: "contactUs",

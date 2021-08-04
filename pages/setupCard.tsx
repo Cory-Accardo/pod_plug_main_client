@@ -1,7 +1,7 @@
 import SignupHeader from "../components/SignupHeader";
 import styles from "../styles/SetupCard.module.css";
 import useSignedInOnly from "../hooks/useSignedInOnly";
-import { JSON_HEADER, MAIN } from "../constants";
+import { JSON_HEADER, API } from "../constants";
 
 import Head from "next/head";
 import {
@@ -34,7 +34,7 @@ function CardForm() {
     }
 
     // Retrieve clientSecret
-    fetch(MAIN + "/setupCard", {
+    fetch(API + "/auth/setupCard", {
       method: "POST",
       headers: {
         ...JSON_HEADER,
