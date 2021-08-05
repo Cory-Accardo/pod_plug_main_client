@@ -42,9 +42,13 @@ export default function Login() {
       })
       .then((json) => {
         if (json["x-token"] && json["x-refresh-token"]) {
-          setCookie("x-token", json["x-token"], { path: "/" });
+          setCookie("x-token", json["x-token"], {
+            path: "/",
+            sameSite: "strict",
+          });
           setCookie("x-refresh-token", json["x-refresh-token"], {
             path: "/",
+            sameSite: "strict",
           });
         }
       });

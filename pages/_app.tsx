@@ -1,19 +1,17 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 const COOKIE_NAME = "age-confirmed";
 
 function MyApp({ Component, pageProps }) {
   const [verified, setVerified] = useState(true);
+  const [cookies, setCookie] = useCookies([COOKIE_NAME]);
 
   useEffect(() => {
-    const cookiePair = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(COOKIE_NAME));
-    if (cookiePair) {
-      const verifiedCookie = cookiePair.split("=")[1];
-      if (verifiedCookie === "true") {
+    if (cookies[COOKIE_NAME]) {
+      if (cookies[COOKIE_NAME] === "true") {
         setVerified(true);
       } else {
         setVerified(false);
@@ -21,18 +19,22 @@ function MyApp({ Component, pageProps }) {
     } else {
       setVerified(false);
     }
-  }, []);
+  }, [cookies]);
 
-  const verifyAge = useCallback((old_enough) => {
-    if (old_enough) {
-      setVerified(true);
-      document.cookie = `${COOKIE_NAME}=true`;
-    } else {
-      setVerified(false);
-      document.cookie = `${COOKIE_NAME}=false`;
-      location.href = "https://www.google.com";
-    }
-  }, []);
+  const verifyAge = useCallback(
+    (old_enough) => {
+      if (old_enough) {
+        setVerified(true);
+        setCookie(COOKIE_NAME, "true", { path: "/", sameSite: "strict" });
+        document.cookie = `${COOKIE_NAME}=true`;
+      } else {
+        setVerified(false);
+        setCookie(COOKIE_NAME, "false", { path: "/", sameSite: "strict" });
+        location.href = "https://www.google.com";
+      }
+    },
+    [setCookie]
+  );
 
   return (
     <>
