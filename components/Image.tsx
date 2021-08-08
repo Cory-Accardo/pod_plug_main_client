@@ -30,7 +30,7 @@ export default function Image(props: ImageProps) {
             srcSet={`${props.src}_2k.webp 2560w, ${props.src}_1080p.webp 1920w, ${props.src}_720p.webp 1280w`}
           />
           <img
-            srcSet={`${props.src}_2k.jpg 2560w, ${props.src}_1080p.jpg 1920w, ${props.src}_720p.jpg 1280w`}
+            srcSet={`${props.src}_2k.png 2560w, ${props.src}_1080p.png 1920w, ${props.src}_720p.png 1280w`}
             alt={props.alt}
             className={`${
               props.className !== undefined ? props.className : ""
@@ -47,7 +47,7 @@ export default function Image(props: ImageProps) {
             srcSet={`${props.src}_2k.webp 2560w, ${props.src}_1080p.webp 1920w, ${props.src}_720p.webp 1280w`}
           />
           <img
-            srcSet={`${props.src}_2k.jpg 2560w, ${props.src}_1080p.jpg 1920w, ${props.src}_720p.jpg 1280w`}
+            srcSet={`${props.src}_2k.png 2560w, ${props.src}_1080p.png 1920w, ${props.src}_720p.png 1280w`}
             alt={props.alt}
             className={`object-cover object-center h-auto w-full ${props.className}`}
             decoding="async"
