@@ -1,7 +1,7 @@
 import SignupHeader from "../components/SignupHeader";
 import styles from "../styles/SetupCard.module.css";
 import useSignedInOnly from "../hooks/useSignedInOnly";
-import { API } from "../constants";
+import { API, JSON_HEADER } from "../constants";
 import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -81,7 +81,32 @@ function CardForm() {
                     },
                   }).then((res) => {
                     if (res.status === 200) {
-                      router.push("/cards");
+                      fetch(API + "/auth/list_cards", {
+                        method: "POST",
+                        headers: {
+                          "x-token": cookies["x-token"],
+                          "x-refresh-token": cookies["x-refresh-token"],
+                        },
+                      })
+                        .then((res) => {
+                          return res.json();
+                        })
+                        .then((json) => {
+                          if (json.data.length === 1) {
+                            fetch(API + "/auth/update_default_payment", {
+                              method: "PUT",
+                              headers: {
+                                ...JSON_HEADER,
+                                "x-token": cookies["x-token"],
+                                "x-refresh-token": cookies["x-refresh-token"],
+                              },
+                              body: JSON.stringify({
+                                card: json.data[0].id,
+                              }),
+                            });
+                            router.push("/cards");
+                          }
+                        });
                     } else if (res.status === 202) {
                       setGeneralError(
                         "This card is already added to your account."
