@@ -1,7 +1,11 @@
 import SignupHeader from "../components/SignupHeader";
 import styles from "../styles/SetupCard.module.css";
 import useSignedInOnly from "../hooks/useSignedInOnly";
-import { JSON_HEADER, API } from "../constants";
+import { API } from "../constants";
+import { useRouter } from "next/router";
+import { useState, useCallback } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import Head from "next/head";
 import {
@@ -21,46 +25,84 @@ function CardForm() {
   // Ensure signed in
   useSignedInOnly();
 
+  const router = useRouter();
   const stripe = useStripe();
   const elements = useElements();
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const [loading, setLoading] = useState(false);
 
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return;
-    }
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      setLoading(true);
 
-    // Retrieve clientSecret
-    fetch(API + "/auth/setupCard", {
-      method: "POST",
-      headers: {
-        ...JSON_HEADER,
-        "x-token": cookies["x-token"],
-        "x-refresh-token": cookies["x-refresh-token"],
-      },
-    })
-      .then((res) => {
-        return res.json();
+      if (!stripe || !elements) {
+        // Stripe.js has not loaded yet. Make sure to disable
+        // form submission until Stripe.js has loaded.
+        return;
+      }
+
+      // Retrieve clientSecret
+      fetch(API + "/auth/setup_card", {
+        method: "POST",
+        headers: {
+          "x-token": cookies["x-token"],
+          "x-refresh-token": cookies["x-refresh-token"],
+        },
       })
-      .then((clientSecret) => {
-        stripe
-          .confirmCardSetup(clientSecret, {
-            payment_method: {
-              card: elements.getElement(CardElement),
-            },
-          })
-          .then((result) => {
-            if (result.error) {
-              console.log(result.error.message);
-            } else {
-              console.log("cardSetup success");
-            }
-          });
-      });
-  };
+        .then((res) => {
+          if (res.status === 200) {
+            return res.json();
+          } else if (res.status === 406) {
+            setGeneralError(
+              "You can at most have 3 cards associated with your account."
+            );
+            setLoading(false);
+            return null;
+          }
+        })
+        .then((clientSecret) => {
+          if (clientSecret) {
+            stripe
+              .confirmCardSetup(clientSecret, {
+                payment_method: {
+                  card: elements.getElement(CardElement),
+                },
+              })
+              .then((result) => {
+                if (result.error) {
+                  setGeneralError(result.error.message);
+                } else {
+                  fetch(API + "/auth/check_duplicate_cards", {
+                    method: "POST",
+                    headers: {
+                      "x-token": cookies["x-token"],
+                      "x-refresh-token": cookies["x-refresh-token"],
+                    },
+                  }).then((res) => {
+                    if (res.status === 200) {
+                      router.push("/cards");
+                    } else if (res.status === 202) {
+                      setGeneralError(
+                        "This card is already added to your account."
+                      );
+                    } else {
+                      setGeneralError(
+                        "An unknown error has occured. Please try again later."
+                      );
+                    }
+                  });
+                }
+                setLoading(false);
+              });
+          }
+        });
+    },
+    [cookies, elements, router, stripe]
+  );
+
+  const [generalError, setGeneralError] = useState("");
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -84,26 +126,26 @@ function CardForm() {
               },
             },
           }}
-          onReady={() => {
-            console.log("CardElement [ready]");
-          }}
-          onChange={(event) => {
-            console.log("CardElement [change]", event);
-          }}
-          onBlur={() => {
-            console.log("CardElement [blur]");
-          }}
-          onFocus={() => {
-            console.log("CardElement [focus]");
-          }}
         />
       </label>
+      {generalError !== "" && (
+        <div className="font-raleway text-lg text-red-800">{generalError}</div>
+      )}
       <button
         type="submit"
         disabled={!stripe}
         className={`${styles.payButton} w-96`}
       >
-        USE CARD
+        {!loading ? (
+          "USE CARD"
+        ) : (
+          <div className="flex flex-col items-center">
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className="w-5 h-5 animate-spin"
+            ></FontAwesomeIcon>
+          </div>
+        )}
       </button>
     </form>
   );
@@ -114,7 +156,7 @@ export default function SetupCard() {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <title>About Us - Pod Plug</title>
+        <title>Edit Payment Method - Pod Plug</title>
       </Head>
       <SignupHeader />
       <main className="relative overflow-hidden">
