@@ -54,6 +54,27 @@ function formatCardName(name: string, funding: string) {
   }
 }
 
+function getImageLink(name: string) {
+  switch (name.toLowerCase()) {
+    case "visa":
+      return "/visa_electron.png";
+    case "mastercard":
+      return "/mastercard.png";
+    case "amex":
+      return "/american_express.png";
+    case "diners":
+      return "/diners_club.png";
+    case "discover":
+      return "/discover.png";
+    case "jcb":
+      return "/jcb.png";
+    case "unionpay":
+      return "/china_union.png";
+    default:
+      return "/credit_card.png";
+  }
+}
+
 export default function PaymenCard(props: PaymentCardProps) {
   const router = useRouter();
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
@@ -96,12 +117,22 @@ export default function PaymenCard(props: PaymentCardProps) {
 
   return (
     <div className="font-raleway m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full flex flex-col">
-      <div className="font-bold">
-        {formatCardName(props.brand, props.funding)} ****{props.last4}
-      </div>
-      {props.name && <div className="font-semibold">{props.name}</div>}
-      <div>
-        Expires {String(props.month).padStart(2, "0")}/{props.year}
+      <div className="flex flex-row">
+        <div>
+          <div className="font-bold">
+            {formatCardName(props.brand, props.funding)} ****{props.last4}
+          </div>
+          {props.name && <div className="font-semibold">{props.name}</div>}
+          <div>
+            Expires {String(props.month).padStart(2, "0")}/{props.year}
+          </div>
+        </div>
+        <img
+          src={getImageLink(props.brand)}
+          alt="Credit card image"
+          className="ml-auto self-center"
+          style={{ height: "48px", width: "48px" }}
+        />
       </div>
       <div className="flex flex-row mt-3">
         <button

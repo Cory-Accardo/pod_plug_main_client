@@ -103,7 +103,10 @@ function CardForm() {
                               body: JSON.stringify({
                                 card: json.data[0].id,
                               }),
+                            }).then(() => {
+                              router.push("/cards");
                             });
+                          } else {
                             router.push("/cards");
                           }
                         });
