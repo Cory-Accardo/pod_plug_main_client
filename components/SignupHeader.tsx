@@ -5,10 +5,7 @@ import Link from "next/link";
 export default function SignupHeader() {
   const router = useRouter();
   return (
-    <div
-      className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content"
-      style={{ backgroundColor: "#12172B" }}
-    >
+    <div className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black">
       <div
         className="absolute h-full flex flex-row items-center cursor-pointer"
         onClick={() => {

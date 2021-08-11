@@ -13,8 +13,7 @@ export default function CheckoutHeader() {
   return (
     <>
       <div
-        className="flex flex-row items-center px-8 py-4 md:px-32 relative z-content"
-        style={{ backgroundColor: "#12172B" }}
+        className="flex flex-row items-center px-8 py-4 md:px-32 relative z-content bg-header-black"
       >
         <Link href="/" passHref>
           <a className="relative w-20 mr-auto cursor-pointer">

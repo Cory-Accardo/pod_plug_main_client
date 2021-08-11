@@ -13,6 +13,9 @@ export default function Veridas() {
   const stateRef = useRef<HTMLSelectElement>(undefined);
   const yearRef = useRef<HTMLSelectElement>(undefined);
   const [type, setType] = useState(undefined);
+  const [completed, setCompleted] = useState(false);
+  const [ocr, setOcr] = useState("");
+
   const start = useCallback(() => {
     if (stateRef && stateRef.current) {
       if (yearRef && yearRef.current) {
@@ -45,6 +48,9 @@ export default function Veridas() {
             },
             "*"
           );
+        } else if (event.data.code === "ProcessCompleted") {
+          setOcr(JSON.stringify(event.data));
+          setCompleted(true);
         }
       };
 
@@ -142,7 +148,7 @@ export default function Veridas() {
                   </select>
                 </label>
                 <button
-                  className="bg-theme-light rounded-lg w-96 max-w-full mt-8 p-1"
+                  className="text-white bg-header-black rounded-lg w-96 max-w-full mt-8 p-1"
                   onClick={() => start()}
                 >
                   Next
@@ -153,7 +159,7 @@ export default function Veridas() {
           <Footer />
         </>
       )}
-      {token && (
+      {token && !completed && (
         <iframe
           ref={veridasRef}
           className="w-screen h-screen"
@@ -164,6 +170,7 @@ export default function Veridas() {
           }}
         ></iframe>
       )}
+      {completed && <div>{ocr}</div>}
     </>
   );
 }
