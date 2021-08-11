@@ -65,6 +65,9 @@ module.exports = {
         32: "8rem",
         128: "32rem",
       },
+      animation: {
+        "spin-slow": "spin 2s linear infinite",
+      },
     },
   },
   variants: {
