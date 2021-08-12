@@ -35,35 +35,35 @@ export default function Header(props: HeaderProps) {
         </Link>
         <div className="flex-row hidden lg:flex">
           <div
-            className={`text-white mx-5 font-raleway font-semibold ${
+            className={`text-white mx-5 font-semibold ${
               props.current === "/" && "font-black"
             }`}
           >
             <Link href="/">Home</Link>
           </div>
           <div
-            className={`text-white mx-5 font-raleway font-semibold ${
+            className={`text-white mx-5 font-semibold ${
               props.current === "/rewards" && "font-black"
             }`}
           >
             <Link href="/rewards">Rewards</Link>
           </div>
           <div
-            className={`text-white mx-5 font-raleway font-semibold ${
+            className={`text-white mx-5 font-semibold ${
               props.current === "/partners" && "font-black"
             }`}
           >
             <Link href="/partners">Venue Partners</Link>
           </div>
           <div
-            className={`text-white mx-5 font-raleway font-semibold ${
+            className={`text-white mx-5 font-semibold ${
               props.current === "/about" && "font-black"
             }`}
           >
             <Link href="/about">About Us</Link>
           </div>
           <div
-            className={`text-white mx-5 font-raleway font-semibold ${
+            className={`text-white mx-5 font-semibold ${
               props.current === "/contact" && "font-black"
             }`}
           >
@@ -97,35 +97,35 @@ export default function Header(props: HeaderProps) {
               <FontAwesomeIcon icon={faTimes} />
             </div>
             <div
-              className={`text-white font-raleway font-semibold mb-8 ${
+              className={`text-white font-semibold mb-8 ${
                 props.current === "/" && "font-black"
               }`}
             >
               <Link href="/">Home</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold mb-8 ${
+              className={`text-white font-semibold mb-8 ${
                 props.current === "/rewards" && "font-black"
               }`}
             >
               <Link href="/rewards">Rewards</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold mb-8 ${
+              className={`text-white font-semibold mb-8 ${
                 props.current === "/partners" && "font-black"
               }`}
             >
               <Link href="/partners">Venue Partners</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold mb-8 ${
+              className={`text-white font-semibold mb-8 ${
                 props.current === "/about" && "font-black"
               }`}
             >
               <Link href="/about">About Us</Link>
             </div>
             <div
-              className={`text-white font-raleway font-semibold mb-8 ${
+              className={`text-white font-semibold mb-8 ${
                 props.current === "/contact" && "font-black"
               }`}
             >

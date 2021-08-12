@@ -73,12 +73,12 @@ function MyApp({ Component, pageProps }) {
               alt="Age 21 warning"
               className="w-48 mt-16 pt-2 relative"
             />
-            <div className="font-black font-raleway text-2xl mt-4 relative">
+            <div className="font-black text-2xl mt-4 relative">
               Are you over 21?
             </div>
             <div className="flex flex-row mt-20 relative">
               <button
-                className="font-raleway text-xl border-3 border-theme-dark rounded py-2 w-28 bg-button-emphasis hover:bg-button-hover relative"
+                className="text-xl border-3 border-theme-dark rounded py-2 w-28 bg-button-emphasis hover:bg-button-hover relative"
                 onClick={() => {
                   verifyAge(true);
                 }}
@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }) {
                 Yes!
               </button>
               <button
-                className="font-raleway text-xl border-3 border-theme-dark rounded py-2 w-28 ml-10 bg-white hover:bg-button-hover relative"
+                className="text-xl border-3 border-theme-dark rounded py-2 w-28 ml-10 bg-white hover:bg-button-hover relative"
                 onClick={() => {
                   verifyAge(false);
                 }}

@@ -134,7 +134,7 @@ function CardForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative z-content font-raleway flex flex-col items-center"
+      className="relative z-content flex flex-col items-center"
     >
       <label className="w-96">
         <CardElement
@@ -157,7 +157,7 @@ function CardForm() {
         />
       </label>
       {generalError !== "" && (
-        <div className="font-raleway text-lg text-red-800">{generalError}</div>
+        <div className="text-lg text-red-800">{generalError}</div>
       )}
       <button
         type="submit"
@@ -228,7 +228,7 @@ export default function SetupCard() {
           />
         </div>
         <div className="outer-container flex flex-col items-center mt-36">
-          <div className="font-raleway font-bold text-4xl text-center mb-8">
+          <div className="font-bold text-4xl text-center mb-8">
             Payment Method
           </div>
           <div className="container">

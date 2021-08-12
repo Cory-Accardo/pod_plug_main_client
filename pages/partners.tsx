@@ -226,7 +226,7 @@ export default function Partners() {
         <div className="outer-container flex flex-col items-center">
           <div className="page container relative z-content">
             <div className="w-full h-full flex flex-col md:flex-row items-center relative">
-              <div className="flex flex-col font-raleway text-center flex-grow mt-24 sm:mt-32 md:mt-0">
+              <div className="flex flex-col text-center flex-grow mt-24 sm:mt-32 md:mt-0">
                 <div className="text-4xl sm:text-5xl md:text-5xl xl:text-7xl font-bold text-title-blue-dark">
                   Partner with us
                 </div>
@@ -277,7 +277,7 @@ export default function Partners() {
         {/* Third page: Did you know */}
         <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content mt-12 sm:mt-24 md:mt-0">
           <div className="container">
-            <div className="font-raleway font-bold text-4xl text-center">
+            <div className="font-bold text-4xl text-center">
               Did you know?
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
@@ -300,7 +300,7 @@ export default function Partners() {
         {/* Fourth page: We facilitate everything */}
         <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content">
           <div className="container">
-            <div className="font-raleway font-bold text-4xl text-center">
+            <div className="font-bold text-4xl text-center">
               We Facilitate <span className="font-extrabold">EVERYTHING</span>
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
@@ -342,7 +342,7 @@ export default function Partners() {
         {/* Fifth page: What we propose */}
         <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content">
           <div className="container">
-            <div className="font-raleway font-bold text-4xl text-center">
+            <div className="font-bold text-4xl text-center">
               Here is what we propose
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-16">
@@ -365,10 +365,10 @@ export default function Partners() {
                 footer=""
               />
               <div className="h-72 lg:min-w-48 xl:min-w-56 rounded-3xl bg-transparent md:bg-white flex-col items-center justify-center p-4 flex md:hidden lg:flex">
-                <div className="font-raleway text-theme-light font-black text-xl mb-4">
+                <div className="text-theme-light font-black text-xl mb-4">
                   WE ACCEPT
                 </div>
-                <div className="font-raleway text-theme-light text-center text-lg md:text-base xl:text-lg h-29 xl:h-38 flex flex-row items-center mt-4 md:mt-0">
+                <div className="text-theme-light text-center text-lg md:text-base xl:text-lg h-29 xl:h-38 flex flex-row items-center mt-4 md:mt-0">
                   <div>
                     Credit, Debit,
                     <br />
@@ -388,7 +388,7 @@ export default function Partners() {
 
         {/* Sixth page: Convenient products */}
         <div className="flex flex-col pt-32 md:py-32 outer-container items-center">
-          <div className="font-raleway font-bold text-4xl text-center">
+          <div className="font-bold text-4xl text-center">
             Convenient products we provide
           </div>
           <PartnersComponent />
@@ -397,7 +397,7 @@ export default function Partners() {
         {/* Will you partner with us */}
         <div className="relative z-content flex flex-col items-center outer-container py-32">
           <div className="container">
-            <div className="font-raleway font-bold text-4xl text-center">
+            <div className="font-bold text-4xl text-center">
               Interested in partnering with us?
             </div>
             <form
@@ -406,7 +406,7 @@ export default function Partners() {
             >
               <div className="flex flex-col md:w-1/2 md:pr-4">
                 <div className="flex flex-col">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     VENUE NAME<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -420,13 +420,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.venueName && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.venueName.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     GENERAL MANAGER NAME<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -440,13 +440,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.manager && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.manager.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     EMAIL<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -465,13 +465,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.email && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.email.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     NUMBER<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -485,13 +485,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.number && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.number.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     SOCIAL MEDIA HANDLES<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -505,13 +505,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.socialMedia && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.socialMedia.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     Est. monthly alcohol revenue
                   </label>
                   <input
@@ -521,7 +521,7 @@ export default function Partners() {
                   />
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     Avg. daily foot traffic
                   </label>
                   <input
@@ -533,7 +533,7 @@ export default function Partners() {
               </div>
               <div className="md:w-1/2 md:pl-4 mt-4 md:mt-0">
                 <div className="flex flex-col">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     ADDRESS<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -547,13 +547,13 @@ export default function Partners() {
                     })}
                   />
                   {errors.address && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.address.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     CITY<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -567,14 +567,14 @@ export default function Partners() {
                     })}
                   />
                   {errors.city && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.city.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-row">
                   <div className="flex flex-col mt-4 w-1/2 pr-2">
-                    <label className="text-sm font-bold font-raleway">
+                    <label className="text-sm font-bold">
                       STATE<span className="text-red-600">*</span>
                     </label>
                     <input
@@ -588,13 +588,13 @@ export default function Partners() {
                       })}
                     />
                     {errors.state && (
-                      <div className="font-raleway text-red-700">
+                      <div className="text-red-700">
                         {errors.state.message}
                       </div>
                     )}
                   </div>
                   <div className="flex flex-col mt-4 w-1/2 pl-2">
-                    <label className="text-sm font-bold font-raleway">
+                    <label className="text-sm font-bold">
                       ZIP<span className="text-red-600">*</span>
                     </label>
                     <input
@@ -608,14 +608,14 @@ export default function Partners() {
                       })}
                     />
                     {errors.zip && (
-                      <div className="font-raleway text-red-700">
+                      <div className="text-red-700">
                         {errors.zip.message}
                       </div>
                     )}
                   </div>
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     COUNTRY<span className="text-red-600">*</span>
                   </label>
                   <input
@@ -629,7 +629,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.country && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.country.message}
                     </div>
                   )}
@@ -655,13 +655,13 @@ export default function Partners() {
                       </div>
                     )}
                   </button>
-                  <div className="font-raleway">
+                  <div>
                     I agree to receiving future offers in my email or via post.
                     <span className="text-red-600">*</span>
                   </div>
                 </div>
                 {agreeEmailError && (
-                  <div className="text-red-700 font-raleway">
+                  <div className="text-red-700">
                     You need to agree before proceeding
                   </div>
                 )}
@@ -686,14 +686,14 @@ export default function Partners() {
                       </div>
                     )}
                   </button>
-                  <div className="font-raleway">
+                  <div>
                     I agree to allow my information to be sent to future vendor
                     and venue partners.
                     <span className="text-red-600">*</span>
                   </div>
                 </div>
                 {agreeInfoError && (
-                  <div className="text-red-700 font-raleway">
+                  <div className="text-red-700">
                     You need to agree before proceeding
                   </div>
                 )}

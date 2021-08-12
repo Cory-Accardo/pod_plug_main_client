@@ -244,7 +244,7 @@ export default function Home() {
       </Head>
       {/* Header */}
       <Header current="/" />
-      <div className="py-2 mb-4 text-sm text-center text-black shadow-md md:py-0 sm:text-base md:text-lg text-thin font-raleway">
+      <div className="py-2 mb-4 text-sm text-center text-black shadow-md md:py-0 sm:text-base md:text-lg text-thin">
         Cashless Convenience in Age-gated Venues
       </div>
 
@@ -269,7 +269,7 @@ export default function Home() {
               >
                 Plug into Pod Rewards
               </div>
-              <div className="mt-4 text-lg font-semibold sm:text-xl lg:text-2xl xl:text-3xl font-raleway text-subtitle-gray">
+              <div className="mt-4 text-lg font-semibold sm:text-xl lg:text-2xl xl:text-3xl text-subtitle-gray">
                 Exclusive discounts on products &amp; exclusive offers from
                 venues
               </div>
@@ -285,17 +285,17 @@ export default function Home() {
                 }}
               />
               {formInvalid && (
-                <div className="text-red-800 font-raleway">
+                <div className="text-red-800">
                   Please enter a valid email address!
                 </div>
               )}
               {formError && (
-                <div className="text-red-800 font-raleway">
+                <div className="text-red-800">
                   Network error. Please try again later.
                 </div>
               )}
               {formSuccess && (
-                <div className="text-green-800 font-raleway">
+                <div className="text-green-800">
                   Thank you for signing up!
                 </div>
               )}
@@ -352,7 +352,7 @@ export default function Home() {
         >
           <div className="container relative z-clouds">
             <div
-              className="relative flex flex-col py-16 bg-transparent md:px-16 md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60 font-raleway"
+              className="relative flex flex-col py-16 bg-transparent md:px-16 md:mr-32 md:bg-white lg:mr-64 md:pr-44 lg:pr-60"
               style={{ borderRadius: "60px 0px 0px 60px" }}
             >
               <div className="text-3xl font-semibold text-center text-white lg:text-4xl xl:text-5xl md:text-black md:text-left">
@@ -412,7 +412,7 @@ export default function Home() {
               <div className="container relative h-full">
                 <div className="absolute left-0 right-0 top-8 md:top-36 z-content md:right-auto">
                   <div
-                    className={`text-4xl font-semibold text-center font-raleway md:text-left transition-opacity ${
+                    className={`text-4xl font-semibold text-center md:text-left transition-opacity ${
                       searchFocused ? styles.title_focused : ""
                     }`}
                   >
@@ -423,7 +423,7 @@ export default function Home() {
                       searchFocused ? styles.search_focused : ""
                     }`}
                   >
-                    <div className="hidden text-lg font-medium font-raleway md:block">
+                    <div className="hidden text-lg font-medium md:block">
                       Your Location
                     </div>
                     <div className="flex flex-row mt-2">
@@ -457,7 +457,7 @@ export default function Home() {
                         searchFocused ? "" : styles.results_unfocused
                       } flex flex-col overflow-hidden flex-shrink`}
                     >
-                      <div className="mt-4 text-xs font-medium font-raleway">
+                      <div className="mt-4 text-xs font-medium">
                         {coords.length} SEARCH RESULTS
                       </div>
                       <hr className="h-0 mx-3 mt-2 border-3 border-hr-gray" />
@@ -521,10 +521,10 @@ export default function Home() {
                                         className="h-8 relative z-content"
                                       />
                                       <div className="flex flex-col ml-16">
-                                        <div className="text-base font-normal font-raleway">
+                                        <div className="text-base font-normal">
                                           {location.address.street}
                                         </div>
-                                        <div className="text-sm font-medium font-raleway">
+                                        <div className="text-sm font-medium">
                                           {currentLocation &&
                                             `${(
                                               google.maps.geometry.spherical.computeDistanceBetween(

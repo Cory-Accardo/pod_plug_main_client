@@ -53,16 +53,16 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex-row self-center hidden z-content md:flex">
-            <div className="self-center mx-2 lg:mx-5 font-raleway">
+            <div className="self-center mx-2 lg:mx-5">
               <Link href="/">Home</Link>
             </div>
-            <div className="self-center mx-2 lg:mx-5 font-raleway">
+            <div className="self-center mx-2 lg:mx-5">
               <Link href="/rewards">Rewards Venues</Link>
             </div>
-            <div className="self-center mx-2 lg:mx-5 font-raleway">
+            <div className="self-center mx-2 lg:mx-5">
               <Link href="/about">About Us</Link>
             </div>
-            <div className="self-center mx-2 lg:mx-5 font-raleway">
+            <div className="self-center mx-2 lg:mx-5">
               <Link href="/careers">Careers</Link>
             </div>
           </div>

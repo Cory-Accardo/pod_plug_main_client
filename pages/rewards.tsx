@@ -116,11 +116,11 @@ export default function Rewards() {
             ></img>
           </div>
           <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-full">
-            <div className="font-raleway font-bold text-4xl md:text-4.5xl xl:text-5xl mb-4 mt-auto text-center md:text-left">
+            <div className="font-bold text-4xl md:text-4.5xl xl:text-5xl mb-4 mt-auto text-center md:text-left">
               Enhance you evening out
             </div>
             <div className="flex flex-col w-full md:w-max">
-              <div className="font-raleway font-bold text-xl sm:text-2xl tracking-wider mb-4 text-center md:text-left text-theme-dark md:text-black">
+              <div className="font-bold text-xl sm:text-2xl tracking-wider mb-4 text-center md:text-left text-theme-dark md:text-black">
                 Get exclusive product and venue offers
               </div>
               <input
@@ -134,17 +134,17 @@ export default function Rewards() {
                 }}
               ></input>
               {formInvalid && (
-                <div className="text-red-800 font-raleway">
+                <div className="text-red-800">
                   Please enter a valid email address!
                 </div>
               )}
               {formError && (
-                <div className="text-red-800 font-raleway">
+                <div className="text-red-800">
                   Network error. Please try again later.
                 </div>
               )}
               {formSuccess && (
-                <div className="text-green-800 font-raleway">
+                <div className="text-green-800">
                   Thank you for signing up!
                 </div>
               )}
@@ -166,7 +166,7 @@ export default function Rewards() {
               You could receive
             </div>
             <div className="flex flex-col md:flex-row justify-around mt-12 md:mt-16 items-center">
-              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl font-raleway relative mb-6">
+              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl relative mb-6">
                 <div
                   className="font-black text-theme-light text-3.9xl md:text-2.9xl lg:text-3.9xl text-center mt-11 lg:mt-16"
                   style={{ textShadow: "0px 2px 2px rgba(0, 0, 0, 0.25)" }}
@@ -178,7 +178,7 @@ export default function Rewards() {
                   signing up
                 </div>
               </div>
-              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl font-raleway relative mb-6">
+              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl relative mb-6">
                 <img
                   src="/iphone_rewards.png"
                   alt="iPhone rewards"
@@ -188,7 +188,7 @@ export default function Rewards() {
                   $1 off any product when you use Pod Rewards
                 </div>
               </div>
-              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl font-raleway relative mb-6">
+              <div className="rounded-3xl bg-white w-64 h-64 max-w-full md:w-52 lg:w-64 md:h-52 lg:h-64 shadow-xl relative mb-6">
                 <img
                   src="/rewards_tag.png"
                   alt="Reward tags"

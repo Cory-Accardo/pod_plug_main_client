@@ -57,7 +57,7 @@ export default function Careers() {
         </div>
         {/* Main content */}
         <div className="outer-container flex flex-col items-center pt-36 pb-12 relative z-content">
-          <div className="container flex flex-col font-raleway">
+          <div className="container flex flex-col">
             <div className="text-subtitle-gray font-bold text-5xl text-center leading-tight">
               Let&apos;s work together
             </div>
@@ -91,7 +91,7 @@ export default function Careers() {
               backgroundImage: 'url("/skyline_full.png")',
             }}
           ></div>
-          <div className="max-w-128 font-raleway relative z-content pb-32">
+          <div className="max-w-128 relative z-content pb-32">
             <div className="font-bold text-4xl md:text-5xl text-center">
               Why Pod Plug?
             </div>
@@ -118,7 +118,7 @@ export default function Careers() {
       </main>
       {/* Opennings */}
       <div className="outer-container flex flex-col items-center">
-        <div className="container font-raleway">
+        <div className="container">
           <div className="font-semibold text-3xl md:text-4xl lg:text-5xl mt-24 mb-12">
             Openings
             <span className="text-base md:text-lg ml-4">

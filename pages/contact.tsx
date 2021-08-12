@@ -96,10 +96,10 @@ export default function Contact() {
       <main className="flex flex-col items-center pt-16 outer-container md:pt-36 bg-background-gray">
         <div className="container flex flex-col items-center md:flex-row">
           <div className="flex flex-col w-full md:pr-16 md:w-1/2">
-            <div className="text-5xl font-bold font-raleway">
+            <div className="text-5xl font-bold">
               Drop us a note
             </div>
-            <div className="text-lg font-raleway">
+            <div className="text-lg">
               <div className="mt-6">
                 Curious to learn more about our product?
               </div>
@@ -120,7 +120,7 @@ export default function Contact() {
               className="flex flex-col mt-4"
             >
               <div className="flex flex-col mt-4">
-                <label className="text-sm font-bold font-raleway">NAME</label>
+                <label className="text-sm font-bold">NAME</label>
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="text"
@@ -128,7 +128,7 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className="text-sm font-bold font-raleway">EMAIL</label>
+                <label className="text-sm font-bold">EMAIL</label>
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="email"
@@ -136,7 +136,7 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className="text-sm font-bold font-raleway">NUMBER</label>
+                <label className="text-sm font-bold">NUMBER</label>
                 <input
                   className="p-1 border-black rounded-lg border-3"
                   type="tel"
@@ -144,7 +144,7 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className="text-sm font-bold font-raleway">
+                <label className="text-sm font-bold">
                   MESSAGE
                 </label>
                 <textarea
@@ -153,12 +153,12 @@ export default function Contact() {
                 />
               </div>
               {formSuccess && (
-                <div className="font-raleway text-green-800">
+                <div className="text-green-800">
                   Thanks for reaching out!
                 </div>
               )}
               {formError && (
-                <div className="font-raleway text-red-800">
+                <div className="text-red-800">
                   Something is wrong. Please try again later.
                 </div>
               )}

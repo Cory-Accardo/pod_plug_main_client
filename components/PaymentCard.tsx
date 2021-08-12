@@ -116,7 +116,7 @@ export default function PaymenCard(props: PaymentCardProps) {
   }, [cookies, props]);
 
   return (
-    <div className="font-raleway m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full flex flex-col">
+    <div className="m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full flex flex-col">
       <div className="flex flex-row">
         <div>
           <div className="font-bold">

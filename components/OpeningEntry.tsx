@@ -8,7 +8,7 @@ interface OpeningEntryProps {
 
 export default function OpeningEntry(props: OpeningEntryProps) {
   return (
-    <div className="border-t-2 border-black px-2 py-8 md:p-8 font-raleway relative">
+    <div className="border-t-2 border-black px-2 py-8 md:p-8 relative">
       <a href={props.link} target="_blank" rel="noreferrer">
         <div className="font-semibold text-lg md:text-xl mb-1">
           {props.title}

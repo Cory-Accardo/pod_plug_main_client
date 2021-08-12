@@ -82,13 +82,13 @@ export default function Cards() {
               );
             })}
           {cards && cards.length === 0 && (
-            <div className="mx-8 mt-16 font-raleway font-semibold text-2xl mb-8">
+            <div className="mx-8 mt-16 font-semibold text-2xl mb-8">
               No payment method added
             </div>
           )}
           {cards && cards.length < 3 && (
             <Link href="/setupCard" passHref>
-              <a className="font-raleway m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full font-bold text-center">
+              <a className="m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full font-bold text-center">
                 Add Card
               </a>
             </Link>

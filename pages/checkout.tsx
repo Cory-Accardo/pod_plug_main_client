@@ -152,7 +152,7 @@ export default function Checkout() {
         </div>
         <div className="pt-32 bg-background-gray"></div>
         <div className="h-140 relative bg-background-gray px-8">
-          <div className="flex flex-col items-center z-content relative font-raleway">
+          <div className="flex flex-col items-center z-content relative">
             <div className="text-4xl font-black text-center">
               {(state === PaymentStates.Waiting ||
                 state === PaymentStates.Connected) &&

@@ -13,7 +13,7 @@ export default function SignupHeader() {
         }}
       >
         <img src="/arrow_left.svg" alt="Arrow" className="w-4" />
-        <div className="font-raleway text-white ml-6 hidden md:block">
+        <div className="text-white ml-6 hidden md:block">
           Exit to home
         </div>
       </div>

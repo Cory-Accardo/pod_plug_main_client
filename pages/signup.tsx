@@ -164,10 +164,10 @@ export default function Signup() {
         >
           <div className="container">
             <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 max-w-full py-24">
-              <div className="font-raleway font-bold text-4xl text-center">
+              <div className="font-bold text-4xl text-center">
                 Create an Account
               </div>
-              <div className="font-raleway font-bold text-subtitle-gray text-xl text-center mt-2">
+              <div className="font-bold text-subtitle-gray text-xl text-center mt-2">
                 Join our rewards program today
               </div>
               <form
@@ -175,9 +175,7 @@ export default function Signup() {
                 onSubmit={handleSubmit1(onSubmit1)}
               >
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
-                    EMAIL
-                  </label>
+                  <label className="text-sm font-bold">EMAIL</label>
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="email"
@@ -191,15 +189,11 @@ export default function Signup() {
                     })}
                   />
                   {errors1.email && (
-                    <div className="font-raleway text-red-700">
-                      {errors1.email.message}
-                    </div>
+                    <div className="text-red-700">{errors1.email.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
-                    PASSWORD
-                  </label>
+                  <label className="text-sm font-bold">PASSWORD</label>
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="password"
@@ -215,15 +209,13 @@ export default function Signup() {
                     })}
                   />
                   {errors1.password && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors1.password.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
-                    RE-ENTER PASSWORD
-                  </label>
+                  <label className="text-sm font-bold">RE-ENTER PASSWORD</label>
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="password"
@@ -238,13 +230,13 @@ export default function Signup() {
                     })}
                   />
                   {errors1.password2 && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors1.password2.message}
                     </div>
                   )}
                 </div>
                 <input
-                  className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
+                  className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
                   type="submit"
                   value="Next"
                 ></input>
@@ -261,14 +253,14 @@ export default function Signup() {
         >
           <div className="container max-w-full">
             <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col py-24 w-112 max-w-full lg:w-auto">
-              <div className="font-raleway font-bold text-4xl text-center">
+              <div className="font-bold text-4xl text-center">
                 Additional Information
               </div>
-              <div className="font-raleway font-bold text-subtitle-gray text-xl text-center mt-2">
+              <div className="font-bold text-subtitle-gray text-xl text-center mt-2">
                 Enter the details below
               </div>
               <form
-                className="flex flex-col lg:flex-row font-raleway justify-center items-center"
+                className="flex flex-col lg:flex-row justify-center items-center"
                 onSubmit={handleSubmit2(onSubmit2)}
               >
                 <div className="flex flex-col w-112 max-w-full mt-4">
@@ -286,7 +278,7 @@ export default function Signup() {
                         })}
                       />
                       {errors2.fname && (
-                        <div className="font-raleway text-red-700">
+                        <div className="text-red-700">
                           {errors2.fname.message}
                         </div>
                       )}
@@ -299,7 +291,7 @@ export default function Signup() {
                         {...register2("lname")}
                       />
                       {errors2.lname && (
-                        <div className="font-raleway text-red-700">
+                        <div className="text-red-700">
                           {errors2.lname.message}
                         </div>
                       )}
@@ -318,7 +310,7 @@ export default function Signup() {
                       })}
                     />
                     {errors2.address && (
-                      <div className="font-raleway text-red-700">
+                      <div className="text-red-700">
                         {errors2.address.message}
                       </div>
                     )}
@@ -336,9 +328,7 @@ export default function Signup() {
                       })}
                     />
                     {errors2.city && (
-                      <div className="font-raleway text-red-700">
-                        {errors2.city.message}
-                      </div>
+                      <div className="text-red-700">{errors2.city.message}</div>
                     )}
                   </div>
                   <div className="flex flex-row mt-4">
@@ -355,7 +345,7 @@ export default function Signup() {
                         })}
                       />
                       {errors2.state && (
-                        <div className="font-raleway text-red-700">
+                        <div className="text-red-700">
                           {errors2.state.message}
                         </div>
                       )}
@@ -373,7 +363,7 @@ export default function Signup() {
                         })}
                       />
                       {errors2.zip && (
-                        <div className="font-raleway text-red-700">
+                        <div className="text-red-700">
                           {errors2.zip.message}
                         </div>
                       )}
@@ -392,7 +382,7 @@ export default function Signup() {
                       })}
                     />
                     {errors2.country && (
-                      <div className="font-raleway text-red-700">
+                      <div className="text-red-700">
                         {errors2.country.message}
                       </div>
                     )}
@@ -418,16 +408,14 @@ export default function Signup() {
                         </div>
                       )}
                     </button>
-                    <div className="font-raleway">
+                    <div>
                       I agree to receiving future offers in my email or via
                       post.
                       <span className="text-red-600">*</span>
                     </div>
                   </div>
                   {agreeEmailError && (
-                    <div className="text-red-700 font-raleway">
-                      {agreeEmailError}
-                    </div>
+                    <div className="text-red-700">{agreeEmailError}</div>
                   )}
                   <div className="flex flex-row mt-4 items-center">
                     <button
@@ -450,24 +438,20 @@ export default function Signup() {
                         </div>
                       )}
                     </button>
-                    <div className="font-raleway">
+                    <div>
                       I agree to allow my information to be sent to future
                       vendor and venue partners.
                       <span className="text-red-600">*</span>
                     </div>
                   </div>
                   {agreeInfoError && (
-                    <div className="text-red-700 font-raleway">
-                      {agreeInfoError}
-                    </div>
+                    <div className="text-red-700">{agreeInfoError}</div>
                   )}
                   {generalError && (
-                    <div className="text-red-700 font-raleway">
-                      {generalError}
-                    </div>
+                    <div className="text-red-700">{generalError}</div>
                   )}
                   <input
-                    className="bg-white p-1 px-12 mt-8 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
+                    className="bg-white p-1 px-12 mt-8 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
                     value="Confirm"
                     type="submit"
                   ></input>

@@ -114,14 +114,14 @@ export default function Veridas() {
             </div>
             <div className="pt-32 bg-background-gray"></div>
             <div className="h-140 relative bg-background-gray px-8">
-              <div className="flex flex-col items-center z-content relative font-raleway">
+              <div className="flex flex-col items-center z-content relative">
                 <div className="text-4xl font-black text-center">
                   Age Verification
                 </div>
                 <div className="text-xl text-subtitle-gray text-center mt-4">
                   Please enter the details of your driver license.
                 </div>
-                <label className="font-raleway mt-8 w-96 max-w-full font-semibold">
+                <label className="mt-8 w-96 max-w-full font-semibold">
                   Issuing State
                   <select
                     className="w-full mt-2 border-3 border-subtitle-gray rounded-lg p-1"
@@ -136,7 +136,7 @@ export default function Veridas() {
                     ))}
                   </select>
                 </label>
-                <label className="font-raleway mt-4 w-96 max-w-full font-semibold">
+                <label className="mt-4 w-96 max-w-full font-semibold">
                   License Version
                   <select
                     className="w-full mt-2 border-3 border-subtitle-gray rounded-lg p-1"

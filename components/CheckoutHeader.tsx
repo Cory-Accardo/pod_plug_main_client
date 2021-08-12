@@ -33,7 +33,7 @@ export default function CheckoutHeader() {
           }}
         >
           <img src="/arrow_left.svg" alt="Arrow" className="w-3 md:w-4" />
-          <div className="font-raleway text-white ml-3 md:ml-3 text-sm md:text-base">
+          <div className="text-white ml-3 md:ml-3 text-sm md:text-base">
             Exit checkout
           </div>
         </div>

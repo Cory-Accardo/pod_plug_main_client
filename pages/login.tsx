@@ -112,12 +112,12 @@ export default function Login() {
         <div className="outer-container flex flex-col items-center relative z-content">
           <div className="container">
             <div className="relative transform left-1/2 -translate-x-1/2 flex flex-col w-112 max-w-full py-24 mt-12">
-              <div className="font-raleway font-bold text-4xl text-center mb-8">
+              <div className="font-bold text-4xl text-center mb-8">
                 Log into your account
               </div>
               <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     EMAIL
                   </label>
                   <input
@@ -128,13 +128,13 @@ export default function Login() {
                     })}
                   />
                   {errors.email && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.email.message}
                     </div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold font-raleway">
+                  <label className="text-sm font-bold">
                     PASSWORD
                   </label>
                   <input
@@ -148,18 +148,18 @@ export default function Login() {
                     })}
                   />
                   {errors.password && (
-                    <div className="font-raleway text-red-700">
+                    <div className="text-red-700">
                       {errors.password.message}
                     </div>
                   )}
                 </div>
                 {generalError && (
-                  <div className="font-raleway text-red-700">
+                  <div className="text-red-700">
                     {generalError}
                   </div>
                 )}
                 <input
-                  className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer font-raleway border-3 text-black self-end"
+                  className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
                   type="submit"
                   value="Next"
                 ></input>
