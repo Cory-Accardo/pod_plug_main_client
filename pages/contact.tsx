@@ -165,7 +165,7 @@ export default function Contact() {
               <input
                 type="submit"
                 value="Send"
-                className="bg-white self-end p-1 px-12 mt-4 text-sm font-semibold border-black rounded-lg cursor-pointer font-raleway border-3"
+                className="button-light self-end p-1 px-12 mt-4 text-sm font-semibold cursor-pointer"
               />
             </form>
           </div>

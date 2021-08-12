@@ -37,7 +37,7 @@ export default function Rewards() {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <title>About Us - Pod Plug</title>
+        <title>Pod Rewards - Pod Plug</title>
       </Head>
       {/* Header */}
       <Header current="/rewards" />
@@ -150,7 +150,7 @@ export default function Rewards() {
               )}
             </div>
             <button
-              className="bg-theme-dark md:bg-theme-dark rounded-lg py-1 px-4 text-white font-raleway w-full md:w-auto mt-4"
+              className="button-dark py-1 px-4 w-full md:w-auto mt-4"
               onClick={() => {
                 signup();
               }}

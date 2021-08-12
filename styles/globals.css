@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Raleway, sans-serif;
   overflow-x: hidden;
 }
 
@@ -41,6 +40,14 @@ input:focus-visible {
 
 .page {
   @apply lg:h-page h-page_md;
+}
+
+.button-dark {
+  @apply border-2 border-header-black bg-header-black hover:bg-white text-white hover:text-header-black rounded-md shadow-sm;
+}
+
+.button-light {
+  @apply border-2 border-header-black bg-white hover:bg-header-black text-header-black hover:text-white rounded-md shadow-sm;
 }
 
 .StripeElement {

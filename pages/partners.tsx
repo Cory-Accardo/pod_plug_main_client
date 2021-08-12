@@ -117,7 +117,7 @@ export default function Partners() {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
-        <title>Contact Us - Pod Plug</title>
+        <title>Venue Partners - Pod Plug</title>
       </Head>
       {/* Header */}
       <Header current="/partners" />
@@ -703,7 +703,7 @@ export default function Partners() {
                   </div>
                   <input
                     type="submit"
-                    className="bg-black text-white rounded-lg px-12 py-1 cursor-pointer"
+                    className="button-dark px-12 py-1 cursor-pointer"
                     value="Yes!"
                   ></input>
                 </div>

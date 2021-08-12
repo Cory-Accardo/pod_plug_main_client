@@ -300,12 +300,12 @@ export default function Home() {
                 </div>
               )}
               <button
-                className="self-start w-full px-4 py-1 mt-3 text-base font-semibold text-white rounded-lg bg-background-blue md:bg-white md:w-auto lg:text-lg border-3 border-background-blue md:border-subtitle-gray md:text-subtitle-gray font-raleway"
+                className="self-start w-full mt-3 text-base font-semibold button-light px-6 py-1 md:bg-white md:w-auto lg:text-lg"
                 onClick={() => {
                   signup();
                 }}
               >
-                Get Offers Today
+                Next
               </button>
             </div>
             <div className={`relative h-full z-content ${styles.image_width}`}>
@@ -446,7 +446,7 @@ export default function Home() {
                         />
                       </form>
                       <button
-                        className="hidden px-6 py-1 ml-4 text-white rounded-lg bg-theme-dark md:block"
+                        className="hidden button-dark px-6 py-1 ml-4 md:block"
                         onClick={submitSearch}
                       >
                         Search

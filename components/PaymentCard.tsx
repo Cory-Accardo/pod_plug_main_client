@@ -136,7 +136,7 @@ export default function PaymenCard(props: PaymentCardProps) {
       </div>
       <div className="flex flex-row mt-3">
         <button
-          className="w-1/2 border-2 border-subtitle-gray rounded-md shadow-sm mr-1"
+          className="w-1/2 mr-1 button-light"
           onClick={() => {
             removeCard(false);
             router.push("/setupCard");
@@ -145,7 +145,7 @@ export default function PaymenCard(props: PaymentCardProps) {
           Edit
         </button>
         <button
-          className="w-1/2 border-2 border-subtitle-gray rounded-md shadow-sm ml-1"
+          className="w-1/2 ml-1 button-light"
           onClick={() => removeCard(true)}
         >
           Remove
@@ -158,7 +158,7 @@ export default function PaymenCard(props: PaymentCardProps) {
       )}
       {!props.default && (
         <button
-          className="flex-grow border-2 border-subtitle-gray rounded-md mt-2 shadow-sm"
+          className="flex-grow mt-2 button-light"
           onClick={() => setAsDefault()}
         >
           Set as Default
