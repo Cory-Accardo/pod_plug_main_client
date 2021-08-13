@@ -144,7 +144,7 @@ export default function Header(props: HeaderProps) {
             {cookies["x-token"] && cookies["x-refresh-token"] && (
               <>
                 <Link href="/cards" passHref>
-                  <a className="button-gray flex flex-row mr-6 px-2 py-1 items-center">
+                  <a className="button-gray flex flex-row mr-6 px-2 py-1 items-center hover:border-background-gray">
                     <img
                       src="/credit_cards.png"
                       alt="Credit cards image"
@@ -154,7 +154,7 @@ export default function Header(props: HeaderProps) {
                   </a>
                 </Link>
                 <button
-                  className="button-gray flex flex-row mr-6 p-2 mt-4 items-center"
+                  className="button-gray flex flex-row mr-6 p-2 mt-4 items-center hover:border-background-gray"
                   onClick={() => signOut()}
                 >
                   <FontAwesomeIcon
@@ -168,7 +168,7 @@ export default function Header(props: HeaderProps) {
             {(!cookies["x-token"] || !cookies["x-refresh-token"]) && (
               <>
                 <Link href="/signup" passHref>
-                  <a className="button-yellow flex flex-row mr-6 p-2 items-center">
+                  <a className="button-yellow flex flex-row mr-6 p-2 items-center hover:border-signup-yellow">
                     <FontAwesomeIcon
                       icon={faUser}
                       className="w-6 h-6"
@@ -177,7 +177,7 @@ export default function Header(props: HeaderProps) {
                   </a>
                 </Link>
                 <Link href="/login" passHref>
-                  <a className="button-gray flex flex-row mr-6 p-2 mt-4 items-center">
+                  <a className="button-gray flex flex-row mr-6 p-2 mt-4 items-center hover:border-background-gray">
                     <FontAwesomeIcon
                       icon={faUser}
                       className="w-6 h-6"
