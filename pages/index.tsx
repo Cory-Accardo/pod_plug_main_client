@@ -300,7 +300,7 @@ export default function Home() {
                 </div>
               )}
               <button
-                className="self-start w-full mt-3 text-base font-semibold button-light px-6 py-1 md:bg-white md:w-auto lg:text-lg"
+                className="self-start w-full mt-3 text-base font-semibold button-dark md:button-light px-6 py-1 md:bg-white md:w-auto lg:text-lg"
                 onClick={() => {
                   signup();
                 }}

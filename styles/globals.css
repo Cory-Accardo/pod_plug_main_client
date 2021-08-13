@@ -50,6 +50,10 @@ input:focus-visible {
   @apply border-2 border-header-black bg-white hover:bg-header-black text-header-black hover:text-white rounded-md shadow-sm;
 }
 
+.md\:button-light {
+  @apply md:border-header-black md:bg-white md:hover:bg-header-black md:text-header-black md:hover:text-white;
+}
+
 .button-yellow {
   @apply border-2 border-header-black bg-signup-yellow hover:bg-header-black text-header-black hover:text-signup-yellow rounded-md shadow-sm;
 }
