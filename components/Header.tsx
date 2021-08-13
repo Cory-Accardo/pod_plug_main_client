@@ -5,12 +5,20 @@
 
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faTimes,
+  faUser,
+  faSignInAlt,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 
 import Image from "../components/Image";
 import MyAccount from "./MyAccount";
+import useSignout from "../hooks/useSignout";
 
 interface HeaderProps {
   current: "/" | "/rewards" | "/partners" | "/about" | "/contact";
@@ -18,6 +26,8 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   const [showMenu, setShowMenu] = useState(false);
+  const [cookies] = useCookies(["x-token", "x-refresh-token"]);
+  const signOut = useSignout();
   return (
     <>
       <div className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black">
@@ -131,6 +141,52 @@ export default function Header(props: HeaderProps) {
             >
               <Link href="/contact">Contact Us</Link>
             </div>
+            {cookies["x-token"] && cookies["x-refresh-token"] && (
+              <>
+                <Link href="/cards" passHref>
+                  <a className="button-gray flex flex-row mr-6 px-2 py-1 items-center">
+                    <img
+                      src="/credit_cards.png"
+                      alt="Credit cards image"
+                      className="w-8 h-8"
+                    ></img>
+                    <div className="ml-2">Your Cards</div>
+                  </a>
+                </Link>
+                <button
+                  className="button-gray flex flex-row mr-6 p-2 mt-4 items-center"
+                  onClick={() => signOut()}
+                >
+                  <FontAwesomeIcon
+                    icon={faSignOutAlt}
+                    className="w-6 h-6 mx-1"
+                  ></FontAwesomeIcon>
+                  <div className="ml-2">Logout</div>
+                </button>
+              </>
+            )}
+            {(!cookies["x-token"] || !cookies["x-refresh-token"]) && (
+              <>
+                <Link href="/signup" passHref>
+                  <a className="button-yellow flex flex-row mr-6 p-2 items-center">
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="w-6 h-6"
+                    ></FontAwesomeIcon>
+                    <div className="ml-2">Signup</div>
+                  </a>
+                </Link>
+                <Link href="/login" passHref>
+                  <a className="button-gray flex flex-row mr-6 p-2 mt-4 items-center">
+                    <FontAwesomeIcon
+                      icon={faUser}
+                      className="w-6 h-6"
+                    ></FontAwesomeIcon>
+                    <div className="ml-2">Login</div>
+                  </a>
+                </Link>
+              </>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

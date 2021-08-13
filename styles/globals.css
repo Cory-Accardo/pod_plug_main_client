@@ -54,6 +54,10 @@ input:focus-visible {
   @apply border-2 border-header-black bg-signup-yellow hover:bg-header-black text-header-black hover:text-signup-yellow rounded-md shadow-sm;
 }
 
+.button-gray {
+  @apply border-2 border-header-black bg-background-gray hover:bg-header-black text-header-black hover:text-background-gray rounded-md shadow-sm;
+}
+
 .StripeElement {
   display: block;
   margin: 10px 0 20px 0;

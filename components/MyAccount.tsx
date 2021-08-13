@@ -1,17 +1,15 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
+import useSignout from "../hooks/useSignout";
 
 export default function MyAccount() {
   const [open, setOpen] = useState(false);
   const [cookies, , removeCookie] = useCookies(["x-token", "x-refresh-token"]);
-  const signOut = useCallback(() => {
-    removeCookie("x-refresh-token");
-    removeCookie("x-token");
-  }, [removeCookie]);
+  const signOut = useSignout();
   return (
     <div
       className="relative ml-4 cursor-pointer"
