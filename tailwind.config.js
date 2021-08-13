@@ -18,6 +18,8 @@ module.exports = {
         "button-emphasis": "#DDE8FC",
         "button-hover": "#80A6E0",
         "header-black": "#12172B",
+        "myaccount-gray": "#ECE6E2",
+        "signup-yellow": "#FFDE88",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],

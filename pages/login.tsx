@@ -50,7 +50,7 @@ export default function Login() {
             path: "/",
             sameSite: "strict",
           });
-          router.push("/cards");
+          router.push("/");
         } else {
           setGeneralError(
             "There is something wrong on our side. Please try again later."

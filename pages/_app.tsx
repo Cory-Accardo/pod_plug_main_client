@@ -25,7 +25,6 @@ function MyApp({ Component, pageProps }) {
       if (old_enough) {
         setVerified(true);
         setCookie(COOKIE_NAME, "true", { path: "/", sameSite: "strict" });
-        document.cookie = `${COOKIE_NAME}=true`;
       } else {
         setVerified(false);
         setCookie(COOKIE_NAME, "false", { path: "/", sameSite: "strict" });

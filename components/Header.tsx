@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
 import Image from "../components/Image";
+import MyAccount from "./MyAccount";
 
 interface HeaderProps {
   current: "/" | "/rewards" | "/partners" | "/about" | "/contact";
@@ -19,9 +20,7 @@ export default function Header(props: HeaderProps) {
   const [showMenu, setShowMenu] = useState(false);
   return (
     <>
-      <div
-        className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black"
-      >
+      <div className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black">
         <Link href="/" passHref>
           <a className="relative w-20 mr-auto cursor-pointer">
             <Image
@@ -33,7 +32,7 @@ export default function Header(props: HeaderProps) {
             />
           </a>
         </Link>
-        <div className="flex-row hidden lg:flex">
+        <div className="flex-row hidden xl:flex items-center">
           <div
             className={`text-white mx-5 font-semibold ${
               props.current === "/" && "font-black"
@@ -69,9 +68,10 @@ export default function Header(props: HeaderProps) {
           >
             <Link href="/contact">Contact Us</Link>
           </div>
+          <MyAccount />
         </div>
         <div
-          className="block cursor-pointer lg:hidden"
+          className="block cursor-pointer xl:hidden"
           onClick={() => {
             setShowMenu(true);
           }}
