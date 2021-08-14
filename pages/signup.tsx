@@ -60,11 +60,7 @@ export default function Signup() {
             zip: values.zip,
           },
           // TODO: use real birthday
-          birthday: {
-            year: 4000,
-            month: 24,
-            day: 60,
-          },
+          birthday: birthday,
         }),
         headers: JSON_HEADER,
       }).then((res) => {
