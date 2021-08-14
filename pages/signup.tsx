@@ -1,16 +1,22 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheckSquare } from "@fortawesome/free-regular-svg-icons";
 import { useForm } from "react-hook-form";
 
 import SignupHeader from "../components/SignupHeader";
-import { JSON_HEADER, API } from "../constants";
+import { JSON_HEADER, API, VERIDAS_URL } from "../constants";
+import { dlOptions } from "../veridasOptions";
 
 export default function Signup() {
-  const router = useRouter();
+  const [formNum, setFormNum] = useState(0);
+  const [form, setForm] = useState({});
+  const [csrfToken, setCsrfToken] = useState(undefined);
+
+  // begin: cred form
   const {
     register: register1,
     handleSubmit: handleSubmit1,
@@ -18,23 +24,24 @@ export default function Signup() {
     setValue: setValue1,
     formState: { errors: errors1 },
   } = useForm({ mode: "all" });
-  const {
-    register: register2,
-    handleSubmit: handleSubmit2,
-    formState: { errors: errors2 },
-  } = useForm({ mode: "all" });
-  const [firstForm, setFirstForm] = useState(true);
+  const onSubmit1 = (values) => {
+    setFormNum(1);
+    delete values.password2;
+    setForm(values);
+  };
+  // end: cred form
+
+  // begin: detials form
   const [agreeEmail, setAgreeEmail] = useState(false);
   const [agreeSendInfo, setAgreeSendInfo] = useState(false);
   const [agreeEmailError, setAgreeEmailError] = useState(undefined);
   const [agreeInfoError, setAgreeInfoError] = useState(undefined);
   const [generalError, setGeneralError] = useState(undefined);
-  const [form, setForm] = useState({});
-  const onSubmit1 = (values) => {
-    setFirstForm(false);
-    delete values.password2;
-    setForm(values);
-  };
+  const {
+    register: register2,
+    handleSubmit: handleSubmit2,
+    formState: { errors: errors2 },
+  } = useForm({ mode: "all" });
   const onSubmit2 = (values) => {
     setGeneralError(undefined);
     if (agreeEmail && agreeSendInfo) {
@@ -80,11 +87,144 @@ export default function Signup() {
       }
     }
   };
+  // end: details form
+
+  // begin: initial email
+  const router = useRouter();
   useEffect(() => {
     if (router.query.email) {
       setValue1("email", router.query.email);
     }
   }, [router, setValue1]);
+  // end: initial email
+
+  // begin: Veridas
+  const [licenseState, setLicenseState] = useState("Alaska");
+  const [type, setType] = useState(undefined);
+  const [token, setToken] = useState(undefined);
+  const stateRef = useRef<HTMLSelectElement>(undefined);
+  const yearRef = useRef<HTMLSelectElement>(undefined);
+  const veridasRef = useRef<HTMLIFrameElement>(null);
+  const [birthday, setBirthDay] = useState({ day: -1, month: -1, year: -1 });
+  const [veridasError, setVeridasError] = useState(undefined);
+  // 0 No error, 1 Try again, 2 Attempts used up
+  const [veridasCompleteError, setVeridasCompleteError] = useState(0);
+  const start = useCallback(() => {
+    if (stateRef && stateRef.current) {
+      if (yearRef && yearRef.current) {
+        setType(dlOptions[stateRef.current.value][yearRef.current.value]);
+        fetch(API + "/auth/veridasToken", {
+          method: "POST",
+          headers: JSON_HEADER,
+          body: JSON.stringify({
+            email: form["email"],
+          }),
+        })
+          .then((res) => {
+            if (res.status === 429) {
+              setVeridasError(
+                "You made too many requests. Try again 24 hours later."
+              );
+            } else {
+              return res.json();
+            }
+          })
+          .then((json) => {
+            if (json) {
+              setFormNum(2);
+              setToken(json.veridas.access_token);
+              setCsrfToken(json.signupSecret);
+            }
+          });
+      }
+    }
+  }, [stateRef, yearRef, form]);
+
+  useEffect(() => {
+    if (type) {
+      const listener = (event) => {
+        console.log(event.data);
+        if (event.data.code === "ProcessStarted") {
+          console.log(type);
+          veridasRef.current.contentWindow.postMessage(
+            {
+              documentType: type,
+              callbackData: {
+                ocr: true,
+              },
+            },
+            "*"
+          );
+        } else if (event.data.code === "ProcessCompleted") {
+          const dobNode = event.data.additionalData.ocr.nodes.find(
+            (node) => node.fieldName === "Date of Birth"
+          );
+          var thereIsError = false;
+          if (!dobNode || !dobNode.text) {
+            thereIsError = true;
+          } else {
+            const dobFields = dobNode.text
+              .split(" ")
+              .map((text) => parseInt(text));
+            if (dobFields.length != 3) {
+              thereIsError = true;
+            } else {
+              // Validate date
+              var date = new Date();
+              date.setFullYear(dobFields[2], dobFields[1] - 1, dobFields[0]);
+
+              if (
+                date.getFullYear() == dobFields[2] &&
+                date.getMonth() == dobFields[1] + 1 &&
+                date.getDate() == dobFields[0]
+              ) {
+                setBirthDay({
+                  day: dobFields[0],
+                  month: dobFields[1],
+                  year: dobFields[2],
+                });
+                setTimeout(() => {
+                  setFormNum(4);
+                }, 500);
+              } else {
+                thereIsError = true;
+              }
+            }
+          }
+
+          if (thereIsError) {
+            fetch(API + "/auth/veridasAttempts", {
+              method: "POST",
+              headers: JSON_HEADER,
+              body: JSON.stringify({
+                email: form["email"],
+              }),
+            })
+              .then((res) => {
+                return res.json();
+              })
+              .then((attempts) => {
+                if (parseInt(attempts) < 2) {
+                  setVeridasCompleteError(1);
+                } else {
+                  setVeridasCompleteError(2);
+                }
+                setFormNum(3);
+              });
+          } else {
+            setFormNum(3);
+          }
+        }
+      };
+
+      window.addEventListener("message", listener);
+
+      return () => {
+        window.removeEventListener("message", listener);
+      };
+    }
+  }, [form, type]);
+  // end: veridas
 
   return (
     <>
@@ -122,7 +262,7 @@ export default function Signup() {
             className="absolute opacity-80 z-clouds transform scale-50"
             style={{ top: "16rem", left: "55vw" }}
           />
-          {!firstForm && (
+          {formNum === 2 && (
             <>
               <img
                 src="/clouds_blue.png"
@@ -142,7 +282,7 @@ export default function Signup() {
         {/* Skyline */}
         <div
           className="absolute h-80 w-full"
-          style={{ top: firstForm ? "35rem" : "50rem" }}
+          style={{ top: formNum === 4 ? "50rem" : "35rem" }}
         >
           <div
             className="absolute h-96 z-bg opacity-30 bottom-0 left-0 right-0"
@@ -159,7 +299,7 @@ export default function Signup() {
           className="outer-container flex flex-col items-center relative z-content"
           initial={{ transform: "translateX(0vw)" }}
           animate={{
-            transform: firstForm ? "translateX(0vw)" : "translateX(-100vw)",
+            transform: formNum === 0 ? "translateX(0vw)" : "translateX(-100vw)",
           }}
         >
           <div className="container">
@@ -236,7 +376,7 @@ export default function Signup() {
                   )}
                 </div>
                 <input
-                  className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
+                  className="px-12 mt-4 text-sm font-bold cursor-pointer self-end button-light py-1"
                   type="submit"
                   value="Next"
                 ></input>
@@ -246,9 +386,65 @@ export default function Signup() {
         </motion.div>
         <motion.div
           className="outer-container flex flex-col items-center absolute w-full top-0 z-content"
+          initial={{ transform: "translateX(-100vw)" }}
+          animate={{
+            transform:
+              formNum === 0
+                ? "translateX(100vw)"
+                : formNum === 1
+                ? "translateX(0vw)"
+                : "translateX(-100vw)",
+          }}
+        >
+          <div className="flex flex-col items-center z-content relative py-24 container">
+            <div className="text-4xl font-black text-center">
+              Age Verification
+            </div>
+            <img
+              src="/age.svg"
+              alt="Age 21 warning"
+              className="w-36 pt-2 relative"
+            />
+            <label className="mt-4 w-96 max-w-full font-semibold">
+              Driver License Issuing State
+              <select
+                className="w-full mt-2 border-3 border-subtitle-gray rounded-lg p-1"
+                value={licenseState}
+                onChange={(e) => {
+                  setLicenseState(e.target.value);
+                }}
+                ref={stateRef}
+              >
+                {Object.keys(dlOptions).map((key) => (
+                  <option key={key}>{key}</option>
+                ))}
+              </select>
+            </label>
+            <label className="mt-4 w-96 max-w-full font-semibold">
+              License Version
+              <select
+                className="w-full mt-2 border-3 border-subtitle-gray rounded-lg p-1"
+                ref={yearRef}
+              >
+                {Object.keys(dlOptions[licenseState]).map((year) => (
+                  <option key={year}>{year}</option>
+                ))}
+              </select>
+            </label>
+            {veridasError && <div className="text-red-700">{veridasError}</div>}
+            <button
+              className="w-96 max-w-full mt-8 p-1 button-dark"
+              onClick={() => start()}
+            >
+              Next
+            </button>
+          </div>
+        </motion.div>
+        <motion.div
+          className="outer-container flex flex-col items-center absolute w-full top-0 z-content"
           initial={{ transform: "translateX(100vw)" }}
           animate={{
-            transform: firstForm ? "translateX(100vw)" : "translateX(0vw)",
+            transform: formNum < 4 ? "translateX(100vw)" : "translateX(0vw)",
           }}
         >
           <div className="container max-w-full">
@@ -460,7 +656,84 @@ export default function Signup() {
             </div>
           </div>
         </motion.div>
-        <div style={{ height: firstForm ? "20rem" : "30rem" }}></div>
+        <div style={{ height: formNum === 4 ? "30rem" : "20rem" }}></div>
+        {token && formNum === 2 && (
+          <iframe
+            ref={veridasRef}
+            className="w-screen h-screen fixed top-0 left-0 z-content"
+            allow="camera; microphone;"
+            src={`https://${VERIDAS_URL}?access_token=${token}`}
+            onLoad={(e) => {
+              (e.target as HTMLIFrameElement).contentWindow.postMessage(
+                {},
+                "*"
+              );
+            }}
+          ></iframe>
+        )}
+        {veridasCompleteError === 2 && formNum === 3 && (
+          <div className="px-8 absolute z-content top-32 w-screen flex flex-col items-center">
+            <div className="w-96 max-w-full text-center flex flex-col items-center">
+              <div className="text-4xl font-black">Final attempt failed</div>
+              <div className="text-xl text-subtitle-gray text-center mt-4">
+                If this is an error, email{" "}
+                <a href="mailto:contact@podplug.com" className="font-semibold">
+                  contact@podplug.com
+                </a>{" "}
+                for additional support!
+              </div>
+              <div className="text-xl text-subtitle-gray text-center mt-4">
+                Or try again when you’re 21 :)
+              </div>
+              <button
+                className="p-1 button-dark w-full mt-6"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                Exit
+              </button>
+            </div>
+          </div>
+        )}
+        {veridasCompleteError === 1 && formNum === 3 && (
+          <div className="px-8 absolute z-content top-32 w-screen flex flex-col items-center">
+            <div className="w-96 max-w-full text-center flex flex-col items-center">
+              <div className="text-4xl font-black">Verification Failed</div>
+              <div className="text-xl text-subtitle-gray text-center mt-4">
+                Our systems were unable to verify that you are over 21.
+              </div>
+              <div className="text-xl text-subtitle-gray text-center mt-4">
+                You may attempt ONE more time. Try taking a clearer photo or
+                using a better camera!
+              </div>
+              <button
+                className="p-1 button-dark w-full mt-6"
+                onClick={() => {
+                  setFormNum(1);
+                }}
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+        )}
+        {veridasCompleteError === 0 && formNum === 3 && (
+          <div className="px-8 absolute z-content top-32 w-screen">
+            <div className="w-96 max-w-full text-center flex flex-col items-center">
+              <div className="text-4xl font-black">
+                Verification Successful!
+              </div>
+              <div className="text-lg mt-8">
+                Let’s just double check we got the right information!
+              </div>
+              <FontAwesomeIcon
+                icon={faCheckSquare}
+                className="w-20 mt-16 text-green-600"
+              />
+            </div>
+          </div>
+        )}
       </main>
     </>
   );
