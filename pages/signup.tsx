@@ -681,18 +681,21 @@ export default function Signup() {
         </motion.div>
         <div style={{ height: formNum === 4 ? "30rem" : "20rem" }}></div>
         {token && formNum === 2 && (
-          <iframe
-            ref={veridasRef}
-            className="w-screen h-screen fixed top-0 left-0 z-content"
-            allow="camera; microphone;"
-            src={`https://${VERIDAS_URL}?access_token=${token}`}
-            onLoad={(e) => {
-              (e.target as HTMLIFrameElement).contentWindow.postMessage(
-                {},
-                "*"
-              );
-            }}
-          ></iframe>
+          <>
+            <iframe
+              ref={veridasRef}
+              className="w-screen h-[90vh] fixed top-0 left-0 z-content"
+              allow="camera; microphone;"
+              src={`https://${VERIDAS_URL}?access_token=${token}`}
+              onLoad={(e) => {
+                (e.target as HTMLIFrameElement).contentWindow.postMessage(
+                  {},
+                  "*"
+                );
+              }}
+            ></iframe>
+            <div className="bg-background-gray h-[10vh] fixed top-[90vh] w-screen left-0 z-content"></div>
+          </>
         )}
         {veridasCompleteError === 2 && formNum === 3 && (
           <div className="px-8 absolute z-content top-32 w-screen flex flex-col items-center">
