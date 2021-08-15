@@ -11,6 +11,29 @@ import SignupHeader from "../components/SignupHeader";
 import { JSON_HEADER, API, VERIDAS_URL } from "../constants";
 import { dlOptions } from "../veridasOptions";
 
+// Check is older than 21
+// TODO: now the limit is 18 for testing
+const isOldEnough = (birthday: Date) => {
+  let now = new Date();
+  let yearDiff = now.getFullYear() - birthday.getFullYear();
+  if (yearDiff > 18) {
+    return true;
+  } else if (yearDiff < 18) {
+    return false;
+  } else {
+    if (now.getMonth() > birthday.getMonth()) {
+      return true;
+    } else if (now.getMonth() < birthday.getMonth()) {
+      return false;
+    } else {
+      if (now.getDate() >= birthday.getDate()) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
 export default function Signup() {
   const [formNum, setFormNum] = useState(0);
   const [form, setForm] = useState({});
@@ -59,7 +82,6 @@ export default function Signup() {
             state: values.state,
             zip: values.zip,
           },
-          // TODO: use real birthday
           birthday: birthday,
         }),
         headers: JSON_HEADER,
@@ -170,18 +192,23 @@ export default function Signup() {
               date.setFullYear(dobFields[2], dobFields[1] - 1, dobFields[0]);
 
               if (
-                date.getFullYear() == dobFields[2] &&
-                date.getMonth() == dobFields[1] + 1 &&
-                date.getDate() == dobFields[0]
+                date.getFullYear() === dobFields[2] &&
+                date.getMonth() === dobFields[1] - 1 &&
+                date.getDate() === dobFields[0]
               ) {
-                setBirthDay({
-                  day: dobFields[0],
-                  month: dobFields[1],
-                  year: dobFields[2],
-                });
-                setTimeout(() => {
-                  setFormNum(4);
-                }, 500);
+                // Check is older than 21
+                if (isOldEnough(date)) {
+                  setBirthDay({
+                    day: dobFields[0],
+                    month: dobFields[1],
+                    year: dobFields[2],
+                  });
+                  setTimeout(() => {
+                    setFormNum(4);
+                  }, 10000);
+                } else {
+                  thereIsError = true;
+                }
               } else {
                 thereIsError = true;
               }
@@ -715,7 +742,7 @@ export default function Signup() {
           </div>
         )}
         {veridasCompleteError === 0 && formNum === 3 && (
-          <div className="px-8 absolute z-content top-32 w-screen">
+          <div className="px-8 absolute z-content top-32 w-screen flex flex-col items-center">
             <div className="w-96 max-w-full text-center flex flex-col items-center">
               <div className="text-4xl font-black">
                 Verification Successful!
@@ -725,7 +752,7 @@ export default function Signup() {
               </div>
               <FontAwesomeIcon
                 icon={faCheckSquare}
-                className="w-20 mt-16 text-green-600"
+                className="w-20 mt-8 text-green-600"
               />
             </div>
           </div>
