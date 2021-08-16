@@ -31,6 +31,27 @@ function CardForm() {
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const [loading, setLoading] = useState(false);
 
+  const removeCard = useCallback(
+    (cardId) => {
+      return new Promise<void>((resolve, reject) => {
+        fetch(API + "/auth/remove_card", {
+          method: "DELETE",
+          headers: {
+            ...JSON_HEADER,
+            "x-token": cookies["x-token"],
+            "x-refresh-token": cookies["x-refresh-token"],
+          },
+          body: JSON.stringify({
+            card: cardId,
+          }),
+        }).then(() => {
+          resolve();
+        });
+      });
+    },
+    [cookies]
+  );
+
   const handleSubmit = useCallback(
     async (event) => {
       event.preventDefault();
@@ -40,6 +61,11 @@ function CardForm() {
         // Stripe.js has not loaded yet. Make sure to disable
         // form submission until Stripe.js has loaded.
         return;
+      }
+
+      // If editing, delete first
+      if (router.query.edit) {
+        await removeCard(router.query.edit);
       }
 
       // Retrieve clientSecret
@@ -126,7 +152,7 @@ function CardForm() {
           }
         });
     },
-    [cookies, elements, router, stripe]
+    [cookies, elements, removeCard, router, stripe]
   );
 
   const [generalError, setGeneralError] = useState("");

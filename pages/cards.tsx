@@ -26,7 +26,6 @@ export default function Cards() {
         return res.json();
       })
       .then((json) => {
-        console.log(json.data);
         setCards(json.data);
       });
   };
@@ -43,7 +42,6 @@ export default function Cards() {
         return res.text();
       })
       .then((json) => {
-        console.log(json);
         setDefaultCard(json.slice(1, -1));
       });
   };
