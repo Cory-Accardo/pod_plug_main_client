@@ -34,6 +34,60 @@ const isOldEnough = (birthday: Date) => {
   return false;
 };
 
+// Check veridas return data
+const checkVeridas = (
+  data: any,
+  setBirthday: (birthday: any) => void,
+  setFormNum: (num: number) => void
+) => {
+  let lifeProof = data.additionalData.globalScores.biometryScores.find(
+    (node) => node.name === "ValidasScoreLifeProof"
+  ).value;
+  let documentScore = data.additionalData.globalScores.documentScores.find(
+    (node) => node.name === "Score-DocumentGlobal"
+  ).value;
+  console.log("Life proof", lifeProof);
+  console.log("Document score", documentScore);
+  if (lifeProof < 0.65 || documentScore < 0.65) {
+    return false;
+  }
+  const dobNode = data.additionalData.ocr.nodes.find(
+    (node) => node.fieldName === "Date of Birth"
+  );
+  if (!dobNode || !dobNode.text) {
+    return false;
+  }
+  const dobFields = dobNode.text.split(" ").map((text) => parseInt(text));
+  if (dobFields.length != 3) {
+    return false;
+  }
+  // Validate birthday
+  var date = new Date();
+  date.setFullYear(dobFields[2], dobFields[1] - 1, dobFields[0]);
+
+  if (
+    date.getFullYear() !== dobFields[2] ||
+    date.getMonth() !== dobFields[1] - 1 ||
+    date.getDate() !== dobFields[0]
+  ) {
+    return false;
+  }
+  // Check is older than 21
+  if (!isOldEnough(date)) {
+    return false;
+  }
+
+  setBirthday({
+    day: dobFields[0],
+    month: dobFields[1],
+    year: dobFields[2],
+  });
+  setTimeout(() => {
+    setFormNum(4);
+  }, 10000);
+  return true;
+};
+
 export default function Signup() {
   const [formNum, setFormNum] = useState(0);
   const [form, setForm] = useState({});
@@ -83,6 +137,7 @@ export default function Signup() {
             zip: values.zip,
           },
           birthday: birthday,
+          signupToken: csrfToken,
         }),
         headers: JSON_HEADER,
       }).then((res) => {
@@ -123,7 +178,7 @@ export default function Signup() {
   const stateRef = useRef<HTMLSelectElement>(undefined);
   const yearRef = useRef<HTMLSelectElement>(undefined);
   const veridasRef = useRef<HTMLIFrameElement>(null);
-  const [birthday, setBirthDay] = useState({ day: -1, month: -1, year: -1 });
+  const [birthday, setBirthday] = useState({ day: -1, month: -1, year: -1 });
   const [veridasError, setVeridasError] = useState(undefined);
   // 0 No error, 1 Try again, 2 Attempts used up
   const [veridasCompleteError, setVeridasCompleteError] = useState(0);
@@ -174,48 +229,27 @@ export default function Signup() {
             "*"
           );
         } else if (event.data.code === "ProcessCompleted") {
-          const dobNode = event.data.additionalData.ocr.nodes.find(
-            (node) => node.fieldName === "Date of Birth"
-          );
-          var thereIsError = false;
-          if (!dobNode || !dobNode.text) {
-            thereIsError = true;
-          } else {
-            const dobFields = dobNode.text
-              .split(" ")
-              .map((text) => parseInt(text));
-            if (dobFields.length != 3) {
-              thereIsError = true;
-            } else {
-              // Validate date
-              var date = new Date();
-              date.setFullYear(dobFields[2], dobFields[1] - 1, dobFields[0]);
-
-              if (
-                date.getFullYear() === dobFields[2] &&
-                date.getMonth() === dobFields[1] - 1 &&
-                date.getDate() === dobFields[0]
-              ) {
-                // Check is older than 21
-                if (isOldEnough(date)) {
-                  setBirthDay({
-                    day: dobFields[0],
-                    month: dobFields[1],
-                    year: dobFields[2],
-                  });
-                  setTimeout(() => {
-                    setFormNum(4);
-                  }, 10000);
-                } else {
-                  thereIsError = true;
-                }
-              } else {
-                thereIsError = true;
-              }
-            }
-          }
-
-          if (thereIsError) {
+          /**
+ * {
+  "biometryScores": [
+    {
+      "name": "ValidasScoreLifeProof",
+      "value": 0.5439535341591903
+    },
+    {
+      "name": "ValidasScoreSelfie",
+      "value": 0
+    }
+  ],
+  "documentScores": [
+    {
+      "name": "Score-DocumentGlobal",
+      "value": 0
+    }
+  ]
+}
+ */
+          if (!checkVeridas(event.data, setBirthday, setFormNum)) {
             fetch(API + "/auth/veridasAttempts", {
               method: "POST",
               headers: JSON_HEADER,
@@ -684,7 +718,7 @@ export default function Signup() {
           <>
             <iframe
               ref={veridasRef}
-              className="w-screen h-[90vh] fixed top-0 left-0 z-content"
+              className="w-screen h-[90vh] md:h-screen fixed top-0 left-0 z-content"
               allow="camera; microphone;"
               src={`https://${VERIDAS_URL}?access_token=${token}`}
               onLoad={(e) => {
@@ -694,7 +728,7 @@ export default function Signup() {
                 );
               }}
             ></iframe>
-            <div className="bg-background-gray h-[10vh] fixed top-[90vh] w-screen left-0 z-content"></div>
+            <div className="bg-background-gray h-[10vh] fixed block md:hidden top-[90vh] w-screen left-0 z-content"></div>
           </>
         )}
         {veridasCompleteError === 2 && formNum === 3 && (
