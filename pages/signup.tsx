@@ -217,18 +217,7 @@ export default function Signup() {
     if (type) {
       const listener = (event) => {
         console.log(event.data);
-        if (event.data.code === "ProcessStarted") {
-          console.log(type);
-          veridasRef.current.contentWindow.postMessage(
-            {
-              documentType: type,
-              callbackData: {
-                ocr: true,
-              },
-            },
-            "*"
-          );
-        } else if (event.data.code === "ProcessCompleted") {
+        if (event.data.code === "ProcessCompleted") {
           /**
  * {
   "biometryScores": [
@@ -723,7 +712,12 @@ export default function Signup() {
               src={`https://${VERIDAS_URL}?access_token=${token}`}
               onLoad={(e) => {
                 (e.target as HTMLIFrameElement).contentWindow.postMessage(
-                  {},
+                  {
+                    documentType: type,
+                    callbackData: {
+                      ocr: true,
+                    },
+                  },
                   "*"
                 );
               }}
