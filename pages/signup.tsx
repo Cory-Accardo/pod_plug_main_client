@@ -84,7 +84,7 @@ const checkVeridas = (
   });
   setTimeout(() => {
     setFormNum(4);
-  }, 10000);
+  }, 1000);
   return true;
 };
 
@@ -99,12 +99,42 @@ export default function Signup() {
     handleSubmit: handleSubmit1,
     getValues: getValues1,
     setValue: setValue1,
+    setError: setError1,
     formState: { errors: errors1 },
   } = useForm({ mode: "all" });
-  const onSubmit1 = (values) => {
-    setFormNum(1);
-    delete values.password2;
-    setForm(values);
+  const onSubmit1 = async (values) => {
+    fetch(API + "/auth/veridasToken", {
+      method: "POST",
+      headers: JSON_HEADER,
+      body: JSON.stringify({
+        email: values.email,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 429) {
+          setError1("email", {
+            type: "manual",
+            message: "You made too many requests. Try again 24 hours later.",
+          });
+        } else if (res.status === 400) {
+          setError1("email", {
+            type: "manual",
+            message:
+              "The provided email is not a valid and reachable address.",
+          });
+        } else {
+          return res.json();
+        }
+      })
+      .then((json) => {
+        if (json) {
+          setToken(json.veridas.access_token);
+          setCsrfToken(json.signupSecret);
+          setFormNum(1);
+          delete values.password2;
+          setForm(values);
+        }
+      });
   };
   // end: cred form
 
@@ -186,58 +216,17 @@ export default function Signup() {
     if (stateRef && stateRef.current) {
       if (yearRef && yearRef.current) {
         setType(dlOptions[stateRef.current.value][yearRef.current.value]);
-        fetch(API + "/auth/veridasToken", {
-          method: "POST",
-          headers: JSON_HEADER,
-          body: JSON.stringify({
-            email: form["email"],
-          }),
-        })
-          .then((res) => {
-            if (res.status === 429) {
-              setVeridasError(
-                "You made too many requests. Try again 24 hours later."
-              );
-            } else {
-              return res.json();
-            }
-          })
-          .then((json) => {
-            if (json) {
-              setFormNum(2);
-              setToken(json.veridas.access_token);
-              setCsrfToken(json.signupSecret);
-            }
-          });
+
+        setFormNum(2);
       }
     }
-  }, [stateRef, yearRef, form]);
+  }, [stateRef, yearRef]);
 
   useEffect(() => {
     if (type) {
       const listener = (event) => {
         console.log(event.data);
         if (event.data.code === "ProcessCompleted") {
-          /**
- * {
-  "biometryScores": [
-    {
-      "name": "ValidasScoreLifeProof",
-      "value": 0.5439535341591903
-    },
-    {
-      "name": "ValidasScoreSelfie",
-      "value": 0
-    }
-  ],
-  "documentScores": [
-    {
-      "name": "Score-DocumentGlobal",
-      "value": 0
-    }
-  ]
-}
- */
           if (!checkVeridas(event.data, setBirthday, setFormNum)) {
             fetch(API + "/auth/veridasAttempts", {
               method: "POST",
