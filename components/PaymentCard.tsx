@@ -138,7 +138,7 @@ export default function PaymenCard(props: PaymentCardProps) {
         <button
           className="w-1/2 mr-1 button-light"
           onClick={() => {
-            router.push("/setupCard?edit=" + escape(props.cardId));
+            router.push("/setup_card?edit=" + escape(props.cardId));
           }}
         >
           Edit

@@ -119,8 +119,7 @@ export default function Signup() {
         } else if (res.status === 400) {
           setError1("email", {
             type: "manual",
-            message:
-              "The provided email is not a valid and reachable address.",
+            message: "The provided email is not a valid and reachable address.",
           });
         } else {
           return res.json();
@@ -172,7 +171,7 @@ export default function Signup() {
         headers: JSON_HEADER,
       }).then((res) => {
         if (res.status === 200) {
-          router.push("/setupCard");
+          router.push("/setup_card");
         } else if (res.status == 409) {
           setGeneralError(
             "Email is already registered. Try another email or login instead."

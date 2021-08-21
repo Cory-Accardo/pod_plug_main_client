@@ -85,7 +85,7 @@ export default function Cards() {
             </div>
           )}
           {cards && cards.length < 3 && (
-            <Link href="/setupCard" passHref>
+            <Link href="/setup_card" passHref>
               <a className="m-4 py-4 px-8 bg-white rounded-xl shadow-lg w-96 max-w-full font-bold text-center">
                 Add Card
               </a>
