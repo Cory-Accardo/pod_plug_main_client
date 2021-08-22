@@ -15,9 +15,11 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({ mode: "all" });
   const [generalError, setGeneralError] = useState(undefined);
+  const [generalMsg, setGeneralMsg] = useState(undefined);
   const onSubmit = (values) => {
     setGeneralError(undefined);
     fetch(API + "/auth/login", {
@@ -117,9 +119,7 @@ export default function Login() {
               </div>
               <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold">
-                    EMAIL
-                  </label>
+                  <label className="text-sm font-bold">EMAIL</label>
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="email"
@@ -128,15 +128,11 @@ export default function Login() {
                     })}
                   />
                   {errors.email && (
-                    <div className="text-red-700">
-                      {errors.email.message}
-                    </div>
+                    <div className="text-red-700">{errors.email.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
-                  <label className="text-sm font-bold">
-                    PASSWORD
-                  </label>
+                  <label className="text-sm font-bold">PASSWORD</label>
                   <input
                     className="p-1 border-black rounded-lg border-3"
                     type="password"
@@ -154,10 +150,35 @@ export default function Login() {
                   )}
                 </div>
                 {generalError && (
-                  <div className="text-red-700">
-                    {generalError}
-                  </div>
+                  <div className="text-red-700">{generalError}</div>
                 )}
+                {generalMsg && (
+                  <div className="text-green-700">{generalMsg}</div>
+                )}
+                <button
+                  className="mt-2 self-end"
+                  onClick={() => {
+                    fetch(API + "/users/password_token", {
+                      method: "POST",
+                      headers: JSON_HEADER,
+                      body: JSON.stringify({ email: getValues("email") }),
+                    }).then((res) => {
+                      if (res.status === 200) {
+                        setGeneralMsg("Check your inbox!");
+                      } else if (res.status === 429) {
+                        setGeneralError(
+                          "Too many attempts. Try again in 24 hours or contact support at support@podplug.com."
+                        );
+                      } else {
+                        setGeneralError(
+                          "Something went wrong! Try again or contact support at support@podplug.com."
+                        );
+                      }
+                    });
+                  }}
+                >
+                  Forgot your password?
+                </button>
                 <input
                   className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
                   type="submit"
