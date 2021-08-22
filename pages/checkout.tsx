@@ -14,6 +14,7 @@ import CheckoutHeader from "../components/CheckoutHeader";
 import Footer from "../components/Footer";
 import useSignedInOnly from "../hooks/useSignedInOnly";
 import Image from "../components/Image";
+import { JSON_HEADER } from "../constants";
 
 const SERVER = "http://localhost:2000/";
 
@@ -26,16 +27,20 @@ enum PaymentStates {
   ConnectionRetrying,
   ConnectionError,
   ConnectionLost,
+  PaymentProcessing,
+  PaymentSuccess,
+  ThankYou,
+  AuthorizationRequired,
 }
 
 export default function Checkout() {
-  useSignedInOnly();
   const router = useRouter();
 
   const [state, setState] = useState(PaymentStates.Waiting);
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const [socket, setSocket] = useState(undefined);
   const [retryCount, setRetryCount] = useState(2);
+  const [paymentAmount, setPaymentAmount] = useState(undefined);
 
   useEffect(() => {
     setSocket(io(SERVER, { transports: ["websocket"] }));
@@ -46,6 +51,10 @@ export default function Checkout() {
       if (router.isReady) {
         if (router.query["terminalId"] === undefined) {
           router.push("/");
+          return;
+        }
+        if (!cookies["x-token"] || !cookies["x-refresh-token"]) {
+          router.push("/login");
           return;
         }
         socket.on("connect", () => {
@@ -60,6 +69,7 @@ export default function Checkout() {
               headers: {
                 "x-token": cookies["x-token"],
                 "x-refresh-token": cookies["x-refresh-token"],
+                ...JSON_HEADER,
               },
             }).then((res) => {
               if (res.status === 200) {
