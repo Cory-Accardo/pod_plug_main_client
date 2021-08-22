@@ -8,7 +8,7 @@ import useSignout from "../hooks/useSignout";
 
 export default function MyAccount() {
   const [open, setOpen] = useState(false);
-  const [cookies, , removeCookie] = useCookies(["x-token", "x-refresh-token"]);
+  const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const signOut = useSignout();
   return (
     <div

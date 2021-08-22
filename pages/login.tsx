@@ -155,7 +155,7 @@ export default function Login() {
                 {generalMsg && (
                   <div className="text-green-700">{generalMsg}</div>
                 )}
-                <button
+                <a
                   className="mt-2 self-end"
                   onClick={() => {
                     fetch(API + "/users/password_token", {
@@ -178,7 +178,7 @@ export default function Login() {
                   }}
                 >
                   Forgot your password?
-                </button>
+                </a>
                 <input
                   className="bg-white p-1 px-12 mt-4 text-sm font-bold border-black rounded-lg cursor-pointer border-3 text-black self-end"
                   type="submit"
