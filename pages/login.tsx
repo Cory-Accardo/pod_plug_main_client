@@ -16,6 +16,7 @@ export default function Login() {
     register,
     handleSubmit,
     getValues,
+    setError,
     formState: { errors },
   } = useForm({ mode: "all" });
   const [generalError, setGeneralError] = useState(undefined);
@@ -36,27 +37,34 @@ export default function Login() {
             setGeneralError(
               "Your account and password do not match. Please try again."
             );
+          } else if (res.status == 429) {
+            setGeneralError(
+              "You have unsuccessfully logged in for too many times. Try again later."
+            );
           } else {
             setGeneralError("Something is wrong. Please try again.");
           }
+        } else {
+          return res.json();
         }
-        return res.json();
       })
       .then((json) => {
-        if (json["x-token"] && json["x-refresh-token"]) {
-          setCookie("x-token", json["x-token"], {
-            path: "/",
-            sameSite: "strict",
-          });
-          setCookie("x-refresh-token", json["x-refresh-token"], {
-            path: "/",
-            sameSite: "strict",
-          });
-          router.push("/");
-        } else {
-          setGeneralError(
-            "There is something wrong on our side. Please try again later."
-          );
+        if (json) {
+          if (json["x-token"] && json["x-refresh-token"]) {
+            setCookie("x-token", json["x-token"], {
+              path: "/",
+              sameSite: "strict",
+            });
+            setCookie("x-refresh-token", json["x-refresh-token"], {
+              path: "/",
+              sameSite: "strict",
+            });
+            router.push("/");
+          } else {
+            setGeneralError(
+              "There is something wrong on our side. Please try again later."
+            );
+          }
         }
       });
   };
@@ -156,8 +164,16 @@ export default function Login() {
                   <div className="text-green-700">{generalMsg}</div>
                 )}
                 <a
-                  className="mt-2 self-end"
+                  className="mt-2 self-end cursor-pointer"
                   onClick={() => {
+                    if (!getValues("email") || getValues("email") === "") {
+                      setError("email", {
+                        type: "manual",
+                        message:
+                          "Enter the email you want to reset password for.",
+                      });
+                      return;
+                    }
                     fetch(API + "/users/password_token", {
                       method: "POST",
                       headers: JSON_HEADER,
