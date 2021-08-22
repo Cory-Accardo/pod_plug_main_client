@@ -4,7 +4,8 @@ import { useCallback } from "react";
 export default function useSignout() {
   const [, , removeCookie] = useCookies(["x-token", "x-refresh-token"]);
   return useCallback(() => {
-    removeCookie("x-refresh-token");
-    removeCookie("x-token");
+    console.log("removing cookie!");
+    removeCookie("x-refresh-token", { path: "/", sameSite: "strict" });
+    removeCookie("x-token", { path: "/", sameSite: "strict" });
   }, [removeCookie]);
 }
