@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/router";
 
 import { API, JSON_HEADER } from "../constants";
+import imageFromCardBrand from "../hooks/imageFromCardBrand";
 
 interface PaymentCardProps {
   brand: string;
@@ -51,27 +52,6 @@ function formatCardName(name: string, funding: string) {
       return result + "Prepaid Card";
     default:
       return result + "Card";
-  }
-}
-
-function getImageLink(name: string) {
-  switch (name.toLowerCase()) {
-    case "visa":
-      return "/visa_electron.png";
-    case "mastercard":
-      return "/mastercard.png";
-    case "amex":
-      return "/american_express.png";
-    case "diners":
-      return "/diners_club.png";
-    case "discover":
-      return "/discover.png";
-    case "jcb":
-      return "/jcb.png";
-    case "unionpay":
-      return "/china_union.png";
-    default:
-      return "/credit_card.png";
   }
 }
 
@@ -128,7 +108,7 @@ export default function PaymenCard(props: PaymentCardProps) {
           </div>
         </div>
         <img
-          src={getImageLink(props.brand)}
+          src={imageFromCardBrand(props.brand)}
           alt="Credit card image"
           className="ml-auto self-center"
           style={{ height: "48px", width: "48px" }}

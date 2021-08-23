@@ -12,9 +12,9 @@ import { useCookies } from "react-cookie";
 
 import CheckoutHeader from "../components/CheckoutHeader";
 import Footer from "../components/Footer";
-import useSignedInOnly from "../hooks/useSignedInOnly";
 import Image from "../components/Image";
 import { JSON_HEADER } from "../constants";
+import imageFromCardBrand from "../hooks/imageFromCardBrand";
 
 const SERVER = "http://localhost:2000/";
 
@@ -41,77 +41,86 @@ export default function Checkout() {
   const [socket, setSocket] = useState(undefined);
   const [retryCount, setRetryCount] = useState(2);
   const [paymentAmount, setPaymentAmount] = useState(undefined);
+  const [last4, setLast4] = useState(undefined);
+  const [cardBrand, setCardBrand] = useState(undefined);
 
   useEffect(() => {
-    setSocket(io(SERVER, { transports: ["websocket"] }));
-  }, []);
-
-  useEffect(() => {
-    if (socket) {
-      if (router.isReady) {
-        if (router.query["terminalId"] === undefined) {
-          router.push("/");
-          return;
-        }
-        if (!cookies["x-token"] || !cookies["x-refresh-token"]) {
-          router.push("/login");
-          return;
-        }
-        socket.on("connect", () => {
-          var retry = true;
-          while (retry) {
-            retry = false;
-            fetch(payment_ms_url + "/payments/notify", {
-              method: "POST",
-              body: JSON.stringify({
-                terminalId: router.query["terminalId"],
-              }),
-              headers: {
-                "x-token": cookies["x-token"],
-                "x-refresh-token": cookies["x-refresh-token"],
-                ...JSON_HEADER,
-              },
-            }).then((res) => {
-              if (res.status === 200) {
-                setState(PaymentStates.Connected);
-                setTimeout(() => {
-                  setState(PaymentStates.Success);
-                }, 300);
-              } else {
-                if (retryCount > 0) {
-                  setRetryCount(retryCount - 1);
-                  setState(PaymentStates.ConnectionRetrying);
-                  retry = true;
-                } else {
-                  setState(PaymentStates.ConnectionError);
-                }
-              }
-            });
+    if (!router.isReady) {
+      return;
+    }
+    const socket = io(SERVER, { transports: ["websocket"] });
+    socket.on("connect", () => {
+      var retry = true;
+      while (retry) {
+        retry = false;
+        fetch(payment_ms_url + "/payments/notify", {
+          method: "POST",
+          body: JSON.stringify({
+            terminalId: router.query["terminalId"],
+          }),
+          headers: {
+            "x-token": cookies["x-token"],
+            "x-refresh-token": cookies["x-refresh-token"],
+            ...JSON_HEADER,
+          },
+        }).then((res) => {
+          if (res.status === 200) {
+            setState(PaymentStates.Connected);
+            setTimeout(() => {
+              setState(PaymentStates.Success);
+            }, 300);
+          } else {
+            if (retryCount > 0) {
+              setRetryCount(retryCount - 1);
+              setState(PaymentStates.ConnectionRetrying);
+              retry = true;
+            } else {
+              setState(PaymentStates.ConnectionError);
+            }
           }
         });
-        socket.on("connect_error", () => {
-          setState(PaymentStates.ConnectionError);
-        });
+      }
+    });
+    socket.on("connect_error", () => {
+      setState(PaymentStates.ConnectionError);
+    });
 
-        socket.on("sale-obj", (data) => {
-          const { products, customer, amount } = data;
-          console.log(products);
-          console.log(customer);
-          console.log(amount);
-        });
+    socket.on("sale-obj", (data) => {
+      const { products, paymentMethod, amount } = data;
+      setPaymentAmount(amount);
+      setLast4(paymentMethod.card.last4);
+      setCardBrand(paymentMethod.card.brand);
+      setState(PaymentStates.PaymentProcessing);
+    });
 
-        socket.on("payment-error", (data) => {
-          const { error_code, error } = data;
-          console.log(error_code);
-          console.log(error);
-        });
+    socket.on("payment-error", (data) => {
+      const { error_code, error } = data;
+      console.log(error_code);
+      console.log(error);
+    });
 
-        socket.on("payment-success", () => {
-          console.log("Payment success");
-        });
+    socket.on("payment-success", () => {
+      setState(PaymentStates.PaymentSuccess);
+      setTimeout(() => {
+        setState(PaymentStates.ThankYou);
+      }, 1000);
+    });
+
+    setSocket(socket);
+  }, [cookies, retryCount, router]);
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (router.query["terminalId"] === undefined) {
+        router.push("/");
+        return;
+      }
+      if (!cookies["x-token"] || !cookies["x-refresh-token"]) {
+        router.push("/login");
+        return;
       }
     }
-  }, [router, socket, cookies, retryCount]);
+  }, [cookies, router]);
 
   return (
     <>
@@ -161,9 +170,16 @@ export default function Checkout() {
           />
         </div>
         <div className="pt-32 bg-background-gray"></div>
-        <div className="h-140 relative bg-background-gray px-8">
+        <div className={"h-140 relative bg-background-gray px-8"}>
           <div className="flex flex-col items-center z-content relative">
-            <div className="text-4xl font-black text-center">
+            <div
+              className={
+                "text-4xl font-black text-center " +
+                ((state === PaymentStates.PaymentProcessing ||
+                  state === PaymentStates.PaymentSuccess) &&
+                  "transform -translate-y-6")
+              }
+            >
               {(state === PaymentStates.Waiting ||
                 state === PaymentStates.Connected) &&
                 "Contacting Machine..."}
@@ -172,6 +188,11 @@ export default function Checkout() {
                 state === PaymentStates.ConnectionError) &&
                 "Oops!"}
               {state === PaymentStates.ConnectionLost && "Connection lost!"}
+              {(state === PaymentStates.PaymentProcessing ||
+                state === PaymentStates.PaymentSuccess) &&
+                "Processing payment!"}
+              {state === PaymentStates.ThankYou &&
+                "Thank you for using Pod rewards!"}
             </div>
             <div className="text-xl text-subtitle-gray text-center mt-4">
               {(state === PaymentStates.Waiting ||
@@ -191,16 +212,25 @@ export default function Checkout() {
                 Enjoy Pod Rewards!
               </div>
             )}
-            {state === PaymentStates.Waiting && (
+            {(state === PaymentStates.Waiting ||
+              state === PaymentStates.PaymentProcessing) && (
               <FontAwesomeIcon
                 icon={faSpinner}
-                className="animate-spin-slow w-20 mt-16"
+                className={
+                  "animate-spin-slow w-20 " +
+                  (state === PaymentStates.Waiting ? "mt-16" : "mt-0")
+                }
               />
             )}
-            {state === PaymentStates.Connected && (
+            {(state === PaymentStates.Connected ||
+              state === PaymentStates.PaymentSuccess ||
+              state === PaymentStates.ThankYou) && (
               <FontAwesomeIcon
                 icon={faCheckSquare}
-                className="w-20 mt-16 text-green-600"
+                className={
+                  "w-20 text-green-600 " +
+                  (state === PaymentStates.PaymentSuccess ? "mt-0" : "mt-16")
+                }
               />
             )}
             {(state === PaymentStates.ConnectionError ||
@@ -219,6 +249,28 @@ export default function Checkout() {
                   height={2028}
                   width={1209}
                 />
+              </div>
+            )}
+            {(state === PaymentStates.PaymentProcessing ||
+              state === PaymentStates.PaymentSuccess) && (
+              <div className="h-16 rounded-full shadow-xl bg-white flex flex-row items-center px-8 mt-6">
+                <span className="font-bold mr-4 text-xl">Total:</span>
+                <span className="text-green-700 text-xl">
+                  ${paymentAmount / 100}
+                </span>
+              </div>
+            )}
+            {(state === PaymentStates.PaymentProcessing ||
+              state === PaymentStates.PaymentSuccess) && (
+              <div className="bg-white rounded-xl shadow-xl h-40 w-64 max-w-full mt-6">
+                <img
+                  src={imageFromCardBrand(cardBrand)}
+                  alt="Card brand logo"
+                  className="h-[48px] w-[48px] mt-4 ml-6"
+                ></img>
+                <div className="text-xl text-center tracking-wide mt-8">
+                  **** **** **** {last4}
+                </div>
               </div>
             )}
           </div>
