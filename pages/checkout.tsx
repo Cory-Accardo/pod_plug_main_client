@@ -48,39 +48,43 @@ export default function Checkout() {
     if (!router.isReady) {
       return;
     }
-    const socket = io(SERVER, { transports: ["websocket"] });
+    const socket = io(SERVER, { transports: ["websocket"], reconnection: false, upgrade: false });
     socket.on("connect", () => {
+      console.log(socket.id);
       var retry = true;
       while (retry) {
         retry = false;
-        fetch(payment_ms_url + "/payments/notify", {
-          method: "POST",
-          body: JSON.stringify({
-            terminalId: router.query["terminalId"],
-          }),
-          headers: {
-            "x-token": cookies["x-token"],
-            "x-refresh-token": cookies["x-refresh-token"],
-            ...JSON_HEADER,
-          },
-        }).then((res) => {
-          if (res.status === 200) {
+        socket.emit("notify",
+      {
+        refreshToken: cookies["x-refresh-token"],
+        terminalId: router.query["terminalId"]
+      }
+      , (response) => {
+          if(response.status === "success"){
             setState(PaymentStates.Connected);
             setTimeout(() => {
-              setState(PaymentStates.Success);
-            }, 300);
-          } else {
+            setState(PaymentStates.Success);
+             }, 300);
+          }
+          else{
             if (retryCount > 0) {
               setRetryCount(retryCount - 1);
               setState(PaymentStates.ConnectionRetrying);
               retry = true;
             } else {
               setState(PaymentStates.ConnectionError);
+              socket.disconnect();
             }
-          }
+          } 
         });
+        
       }
     });
+
+    socket.on("disconnect", () => {
+      console.log("DISCONNECTED"); // false
+    });
+    
     socket.on("connect_error", () => {
       setState(PaymentStates.ConnectionError);
     });
@@ -97,10 +101,12 @@ export default function Checkout() {
       const { error_code, error } = data;
       console.log(error_code);
       console.log(error);
+      socket.close();
     });
 
     socket.on("payment-success", () => {
       setState(PaymentStates.PaymentSuccess);
+      socket.close();
       setTimeout(() => {
         setState(PaymentStates.ThankYou);
       }, 1000);
