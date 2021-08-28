@@ -33,7 +33,7 @@ function CardForm() {
 
   const removeCard = useCallback(
     (cardId) => {
-      return new Promise<void>((resolve, reject) => {
+      return new Promise<void>((resolve) => {
         fetch(API + "/auth/remove_card", {
           method: "DELETE",
           headers: {
@@ -205,7 +205,7 @@ function CardForm() {
   );
 }
 
-export default function SetupCard() {
+const SetupCard: React.FC = () => {
   return (
     <>
       <Head>
@@ -266,4 +266,6 @@ export default function SetupCard() {
       </main>
     </>
   );
-}
+};
+
+export default SetupCard;

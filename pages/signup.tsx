@@ -14,8 +14,8 @@ import { dlOptions } from "../veridasOptions";
 // Check is older than 21
 // TODO: now the limit is 18 for testing
 const isOldEnough = (birthday: Date) => {
-  let now = new Date();
-  let yearDiff = now.getFullYear() - birthday.getFullYear();
+  const now = new Date();
+  const yearDiff = now.getFullYear() - birthday.getFullYear();
   if (yearDiff > 18) {
     return true;
   } else if (yearDiff < 18) {
@@ -36,14 +36,14 @@ const isOldEnough = (birthday: Date) => {
 
 // Check veridas return data
 const checkVeridas = (
-  data: any,
-  setBirthday: (birthday: any) => void,
+  data: { additionalData },
+  setBirthday: (birthday: { day; month; year }) => void,
   setFormNum: (num: number) => void
 ) => {
-  let lifeProof = data.additionalData.globalScores.biometryScores.find(
+  const lifeProof = data.additionalData.globalScores.biometryScores.find(
     (node) => node.name === "ValidasScoreLifeProof"
   ).value;
-  let documentScore = data.additionalData.globalScores.documentScores.find(
+  const documentScore = data.additionalData.globalScores.documentScores.find(
     (node) => node.name === "Score-DocumentGlobal"
   ).value;
   console.log("Life proof", lifeProof);
@@ -62,7 +62,7 @@ const checkVeridas = (
     return false;
   }
   // Validate birthday
-  var date = new Date();
+  const date = new Date();
   date.setFullYear(dobFields[2], dobFields[1] - 1, dobFields[0]);
 
   if (
@@ -88,7 +88,7 @@ const checkVeridas = (
   return true;
 };
 
-export default function Signup() {
+const Signup: React.FC = () => {
   const [formNum, setFormNum] = useState(0);
   const [form, setForm] = useState({});
   const [csrfToken, setCsrfToken] = useState(undefined);
@@ -208,7 +208,6 @@ export default function Signup() {
   const yearRef = useRef<HTMLSelectElement>(undefined);
   const veridasRef = useRef<HTMLIFrameElement>(null);
   const [birthday, setBirthday] = useState({ day: -1, month: -1, year: -1 });
-  const [veridasError, setVeridasError] = useState(undefined);
   // 0 No error, 1 Try again, 2 Attempts used up
   const [veridasCompleteError, setVeridasCompleteError] = useState(0);
   const start = useCallback(() => {
@@ -465,7 +464,6 @@ export default function Signup() {
                 ))}
               </select>
             </label>
-            {veridasError && <div className="text-red-700">{veridasError}</div>}
             <button
               className="w-96 max-w-full mt-8 p-1 button-dark"
               onClick={() => start()}
@@ -779,4 +777,6 @@ export default function Signup() {
       </main>
     </>
   );
-}
+};
+
+export default Signup;

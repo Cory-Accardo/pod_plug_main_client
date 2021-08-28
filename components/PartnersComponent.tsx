@@ -1,6 +1,6 @@
 import BrandCard from "./BrandCard";
 
-export default function PartnersComponent() {
+const PartnersComponent: React.FC = () => {
   return (
     <div className="flex flex-col items-center mt-24">
       <div className="w-auto pr-2 overflow-x-hidden md:overflow-y-scroll md:h-140 z-content py-2">
@@ -21,4 +21,6 @@ export default function PartnersComponent() {
       </div>
     </div>
   );
-}
+};
+
+export default PartnersComponent;

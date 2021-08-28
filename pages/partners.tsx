@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import { Location } from "../types/types";
 import Image from "../components/Image";
 import styles from "../styles/Index.module.css";
-import Card from "../components/Card";
+import PartnerCard from "../components/PartnerCard";
 import Procedure from "../components/Procedure";
 import ResizableCard from "../components/ResizableCard";
 import Footer from "../components/Footer";
@@ -35,7 +35,7 @@ const mapOptions = {
 
 const libraries: Libraries = ["places", "geometry"];
 
-export default function Partners() {
+const Partners: React.FC = () => {
   // begin: form
   const {
     register,
@@ -87,7 +87,7 @@ export default function Partners() {
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback(function callback(_) {
+  const onUnmount = useCallback(function callback() {
     setMap(null);
   }, []);
   // end: Google Maps
@@ -277,19 +277,17 @@ export default function Partners() {
         {/* Third page: Did you know */}
         <div className="outer-container flex flex-col items-center pt-32 md:py-32 relative z-content mt-12 sm:mt-24 md:mt-0">
           <div className="container">
-            <div className="font-bold text-4xl text-center">
-              Did you know?
-            </div>
+            <div className="font-bold text-4xl text-center">Did you know?</div>
             <div className="flex flex-col md:flex-row justify-around mt-16 items-center">
-              <Card
+              <PartnerCard
                 title="11%"
                 content="of the US population uses nicotine products"
               />
-              <Card
+              <PartnerCard
                 title="~40%"
                 content="of nightlife participants use nicotine products"
               />
-              <Card
+              <PartnerCard
                 title="~5%"
                 content="of foot traffic at current venues buy from our kiosks"
               />
@@ -440,9 +438,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.manager && (
-                    <div className="text-red-700">
-                      {errors.manager.message}
-                    </div>
+                    <div className="text-red-700">{errors.manager.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
@@ -465,9 +461,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.email && (
-                    <div className="text-red-700">
-                      {errors.email.message}
-                    </div>
+                    <div className="text-red-700">{errors.email.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
@@ -485,9 +479,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.number && (
-                    <div className="text-red-700">
-                      {errors.number.message}
-                    </div>
+                    <div className="text-red-700">{errors.number.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
@@ -547,9 +539,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.address && (
-                    <div className="text-red-700">
-                      {errors.address.message}
-                    </div>
+                    <div className="text-red-700">{errors.address.message}</div>
                   )}
                 </div>
                 <div className="flex flex-col mt-4">
@@ -567,9 +557,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.city && (
-                    <div className="text-red-700">
-                      {errors.city.message}
-                    </div>
+                    <div className="text-red-700">{errors.city.message}</div>
                   )}
                 </div>
                 <div className="flex flex-row">
@@ -588,9 +576,7 @@ export default function Partners() {
                       })}
                     />
                     {errors.state && (
-                      <div className="text-red-700">
-                        {errors.state.message}
-                      </div>
+                      <div className="text-red-700">{errors.state.message}</div>
                     )}
                   </div>
                   <div className="flex flex-col mt-4 w-1/2 pl-2">
@@ -608,9 +594,7 @@ export default function Partners() {
                       })}
                     />
                     {errors.zip && (
-                      <div className="text-red-700">
-                        {errors.zip.message}
-                      </div>
+                      <div className="text-red-700">{errors.zip.message}</div>
                     )}
                   </div>
                 </div>
@@ -629,9 +613,7 @@ export default function Partners() {
                     })}
                   />
                   {errors.country && (
-                    <div className="text-red-700">
-                      {errors.country.message}
-                    </div>
+                    <div className="text-red-700">{errors.country.message}</div>
                   )}
                 </div>
                 <div className="flex flex-row mt-8 md:mt-20 items-center">
@@ -726,4 +708,6 @@ export default function Partners() {
       <Footer />
     </>
   );
-}
+};
+
+export default Partners;

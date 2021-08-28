@@ -3,7 +3,7 @@ interface ProcedureProps {
   caption: string;
 }
 
-export default function Procedure(props: ProcedureProps) {
+const Procedure: React.FC<ProcedureProps> = (props) => {
   return (
     <div className="flex flex-col items-center w-36 my-4 md:my-0">
       <img src={props.svg} alt={props.caption} className="w-24 h-24" />
@@ -14,4 +14,6 @@ export default function Procedure(props: ProcedureProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Procedure;

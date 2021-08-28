@@ -7,23 +7,30 @@
 
 import { Fragment } from "react";
 
-interface ImageProps {
+interface ImagePropsResponsive {
   src: string;
   alt: string;
   className?: string;
-  layout: "responsive" | "fill";
-  height?: number;
-  width?: number;
+  layout: "responsive";
+  height: number;
+  width: number;
 }
 
-export default function Image(props: ImageProps) {
+interface ImagePropsFill {
+  src: string;
+  alt: string;
+  className?: string;
+  layout: "fill";
+}
+
+const Image: React.FC<ImagePropsResponsive | ImagePropsFill> = (props) => {
   return (
     <Fragment>
       {props.layout === "responsive" && (
         <picture className="relative block overflow-hidden">
           <div
             className="block"
-            style={{ paddingTop: `${(100 / props.width!) * props.height!}%` }}
+            style={{ paddingTop: `${(100 / props.width) * props.height}%` }}
           />
           <source
             type="image/webp"
@@ -56,4 +63,6 @@ export default function Image(props: ImageProps) {
       )}
     </Fragment>
   );
-}
+};
+
+export default Image;

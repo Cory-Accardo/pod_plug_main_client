@@ -9,7 +9,6 @@ import {
   faBars,
   faTimes,
   faUser,
-  faSignInAlt,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
@@ -24,7 +23,7 @@ interface HeaderProps {
   current: "/" | "/rewards" | "/partners" | "/about" | "/contact";
 }
 
-export default function Header(props: HeaderProps) {
+const Header: React.FC<HeaderProps> = (props) => {
   const [showMenu, setShowMenu] = useState(false);
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const signOut = useSignout();
@@ -192,4 +191,6 @@ export default function Header(props: HeaderProps) {
       </AnimatePresence>
     </>
   );
-}
+};
+
+export default Header;

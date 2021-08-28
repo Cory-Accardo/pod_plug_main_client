@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import SignupHeader from "../components/SignupHeader";
 import { API, JSON_HEADER } from "../constants";
 
-export default function ChangePassword() {
+const ChangePassword: React.FC = () => {
   const router = useRouter();
   const {
     register,
@@ -176,4 +176,6 @@ export default function ChangePassword() {
       </main>
     </>
   );
-}
+};
+
+export default ChangePassword;

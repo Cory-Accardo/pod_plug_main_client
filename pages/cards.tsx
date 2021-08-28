@@ -8,7 +8,7 @@ import SignupHeader from "../components/SignupHeader";
 import { API } from "../constants";
 import useSignedInOnly from "../hooks/useSignedInOnly";
 
-export default function Cards() {
+const Cards: React.FC = () => {
   useSignedInOnly();
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const [cards, setCards] = useState(undefined);
@@ -95,4 +95,6 @@ export default function Cards() {
       </div>
     </>
   );
-}
+};
+
+export default Cards;

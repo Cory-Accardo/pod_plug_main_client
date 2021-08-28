@@ -12,7 +12,7 @@ interface Job {
   url: string;
 }
 
-export default function Careers() {
+const Careers: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   useEffect(() => {
     fetch(API + "/jobs/listall", {
@@ -141,4 +141,6 @@ export default function Careers() {
       <Footer />
     </>
   );
-}
+};
+
+export default Careers;

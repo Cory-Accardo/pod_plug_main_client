@@ -2,7 +2,7 @@ import Image from "../components/Image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export default function SignupHeader() {
+const SignupHeader: React.FC = () => {
   const router = useRouter();
   return (
     <div className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black">
@@ -13,9 +13,7 @@ export default function SignupHeader() {
         }}
       >
         <img src="/arrow_left.svg" alt="Arrow" className="w-4" />
-        <div className="text-white ml-6 hidden md:block">
-          Exit to home
-        </div>
+        <div className="text-white ml-6 hidden md:block">Exit to home</div>
       </div>
       <div className="relative w-20 mx-auto">
         <Link href="/" passHref>
@@ -32,4 +30,6 @@ export default function SignupHeader() {
       </div>
     </div>
   );
-}
+};
+
+export default SignupHeader;

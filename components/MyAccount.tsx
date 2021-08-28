@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useCookies } from "react-cookie";
 import useSignout from "../hooks/useSignout";
 
-export default function MyAccount() {
+const MyAccount: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const signOut = useSignout();
@@ -68,4 +68,6 @@ export default function MyAccount() {
       )}
     </div>
   );
-}
+};
+
+export default MyAccount;

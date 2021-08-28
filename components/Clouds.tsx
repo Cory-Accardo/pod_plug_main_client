@@ -4,7 +4,7 @@ interface CloudsProps {
   id: number;
 }
 
-export default function Clouds(props: CloudsProps) {
+const Clouds: React.FC<CloudsProps> = (props) => {
   return (
     <div
       className={`relative ${
@@ -115,4 +115,6 @@ export default function Clouds(props: CloudsProps) {
       />
     </div>
   );
-}
+};
+
+export default Clouds;

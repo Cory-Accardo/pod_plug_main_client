@@ -2,7 +2,7 @@ interface BrandCardProps {
   url: string;
 }
 
-export default function BrandCard(props: BrandCardProps) {
+const BrandCard: React.FC<BrandCardProps> = (props) => {
   return (
     <div>
       <div
@@ -21,4 +21,6 @@ export default function BrandCard(props: BrandCardProps) {
       </div>
     </div>
   );
-}
+};
+
+export default BrandCard;

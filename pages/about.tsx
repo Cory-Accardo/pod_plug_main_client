@@ -4,7 +4,7 @@ import Image from "../components/Image";
 
 import Head from "next/head";
 
-export default function About() {
+const About: React.FC = () => {
   return (
     <>
       <Head>
@@ -129,4 +129,6 @@ export default function About() {
       <Footer />
     </>
   );
-}
+};
+
+export default About;

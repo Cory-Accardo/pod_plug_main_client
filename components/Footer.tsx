@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faBuilding, faPhone } from "@fortawesome/free-solid-svg-icons";
 
-export default function Footer() {
+const Footer: React.FC = () => {
   return (
     <div className="flex flex-col outer-container">
       <div className="container">
@@ -70,4 +70,6 @@ export default function Footer() {
       </div>
     </div>
   );
-}
+};
+
+export default Footer;

@@ -32,7 +32,7 @@ const mapOptions = {
 
 const libraries: Libraries = ["places", "geometry"];
 
-export default function Contact() {
+const Contact: React.FC = () => {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
@@ -45,10 +45,10 @@ export default function Contact() {
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback(function callback(_) {
+  const onUnmount = useCallback(function callback() {
     setMap(null);
   }, []);
-  // end: Google Maps
+  // end: Google Maps f
 
   // begin: form
   const emailForm = useRef<HTMLInputElement>();
@@ -96,9 +96,7 @@ export default function Contact() {
       <main className="flex flex-col items-center pt-16 outer-container md:pt-36 bg-background-gray">
         <div className="container flex flex-col items-center md:flex-row">
           <div className="flex flex-col w-full md:pr-16 md:w-1/2">
-            <div className="text-5xl font-bold">
-              Drop us a note
-            </div>
+            <div className="text-5xl font-bold">Drop us a note</div>
             <div className="text-lg">
               <div className="mt-6">
                 Curious to learn more about our product?
@@ -144,18 +142,14 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col mt-4">
-                <label className="text-sm font-bold">
-                  MESSAGE
-                </label>
+                <label className="text-sm font-bold">MESSAGE</label>
                 <textarea
                   className="p-1 border-black rounded-lg border-3"
                   ref={msgForm}
                 />
               </div>
               {formSuccess && (
-                <div className="text-green-800">
-                  Thanks for reaching out!
-                </div>
+                <div className="text-green-800">Thanks for reaching out!</div>
               )}
               {formError && (
                 <div className="text-red-800">
@@ -227,4 +221,6 @@ export default function Contact() {
       <Footer />
     </>
   );
-}
+};
+
+export default Contact;

@@ -8,13 +8,11 @@ import { useRouter } from "next/router";
 
 import Image from "../components/Image";
 
-export default function CheckoutHeader() {
+const CheckoutHeader: React.FC = () => {
   const router = useRouter();
   return (
     <>
-      <div
-        className="flex flex-row items-center px-8 py-4 md:px-32 relative z-content bg-header-black"
-      >
+      <div className="flex flex-row items-center px-8 py-4 md:px-32 relative z-content bg-header-black">
         <Link href="/" passHref>
           <a className="relative w-20 mr-auto cursor-pointer">
             <Image
@@ -40,4 +38,6 @@ export default function CheckoutHeader() {
       </div>
     </>
   );
-}
+};
+
+export default CheckoutHeader;

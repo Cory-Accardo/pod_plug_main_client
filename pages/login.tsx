@@ -8,9 +8,9 @@ import SignupHeader from "../components/SignupHeader";
 import { JSON_HEADER, API } from "../constants";
 import useNotSignedInOnly from "../hooks/useNotSignedInOnly";
 
-export default function Login() {
+const Login: React.FC = () => {
   useNotSignedInOnly();
-  const [cookies, setCookie] = useCookies(["x-token", "x-refresh-token"]);
+  const [, setCookie] = useCookies(["x-token", "x-refresh-token"]);
   const router = useRouter();
   const {
     register,
@@ -208,4 +208,6 @@ export default function Login() {
       </main>
     </>
   );
-}
+};
+
+export default Login;

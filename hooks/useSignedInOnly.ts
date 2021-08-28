@@ -2,7 +2,7 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-export default function useSignedInOnly() {
+export default function useSignedInOnly(): void {
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const router = useRouter();
   useEffect(() => {

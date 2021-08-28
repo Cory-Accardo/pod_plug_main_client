@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import RewardsCard from "../components/RewardsCard";
 
-export default function Rewards() {
+const Rewards: React.FC = () => {
   // begin: signup
   const [formInvalid, setFormInvalid] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
@@ -144,9 +144,7 @@ export default function Rewards() {
                 </div>
               )}
               {formSuccess && (
-                <div className="text-green-800">
-                  Thank you for signing up!
-                </div>
+                <div className="text-green-800">Thank you for signing up!</div>
               )}
             </div>
             <button
@@ -236,4 +234,6 @@ export default function Rewards() {
       <Footer />
     </>
   );
-}
+};
+
+export default Rewards;

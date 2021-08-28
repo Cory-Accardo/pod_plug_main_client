@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { useRouter } from "next/router";
 
 import { API, JSON_HEADER } from "../constants";
@@ -19,7 +19,7 @@ interface PaymentCardProps {
 }
 
 function formatCardName(name: string, funding: string) {
-  var result = "";
+  let result = "";
   switch (name.toLowerCase()) {
     case "visa":
       result += "Visa ";
@@ -55,7 +55,7 @@ function formatCardName(name: string, funding: string) {
   }
 }
 
-export default function PaymenCard(props: PaymentCardProps) {
+const PaymenCard: React.FC<PaymentCardProps> = (props) => {
   const router = useRouter();
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const removeCard = useCallback(
@@ -145,4 +145,6 @@ export default function PaymenCard(props: PaymentCardProps) {
       )}
     </div>
   );
-}
+};
+
+export default PaymenCard;

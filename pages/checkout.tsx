@@ -30,7 +30,7 @@ enum PaymentStates {
   AuthorizationRequired,
 }
 
-export default function Checkout() {
+const Checkout: React.FC = () => {
   const router = useRouter();
 
   const [state, setState] = useState(PaymentStates.Waiting);
@@ -51,7 +51,7 @@ export default function Checkout() {
     });
     socket.on("connect", () => {
       console.log(socket.id);
-      var retry = true;
+      let retry = true;
       while (retry) {
         retry = false;
         socket.emit(
@@ -292,4 +292,6 @@ export default function Checkout() {
       <Footer />
     </>
   );
-}
+};
+
+export default Checkout;

@@ -6,7 +6,7 @@ interface OpeningEntryProps {
   link: string;
 }
 
-export default function OpeningEntry(props: OpeningEntryProps) {
+const OpeningEntry: React.FC<OpeningEntryProps> = (props) => {
   return (
     <div className="border-t-2 border-black px-2 py-8 md:p-8 relative">
       <a href={props.link} target="_blank" rel="noreferrer">
@@ -27,4 +27,6 @@ export default function OpeningEntry(props: OpeningEntryProps) {
       </a>
     </div>
   );
-}
+};
+
+export default OpeningEntry;

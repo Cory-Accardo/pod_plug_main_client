@@ -4,7 +4,10 @@ import { useCookies } from "react-cookie";
 
 const COOKIE_NAME = "age-confirmed";
 
-function MyApp({ Component, pageProps }) {
+const MyApp: React.FC<{ Component; pageProps }> = ({
+  Component,
+  pageProps,
+}) => {
   const [verified, setVerified] = useState(true);
   const [cookies, setCookie] = useCookies([COOKIE_NAME]);
 
@@ -99,6 +102,6 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />{" "}
     </>
   );
-}
+};
 
 export default MyApp;

@@ -38,7 +38,7 @@ const easing = BezierEasing(0.39, 0.08, 0.23, 1.07);
 
 const libraries: Libraries = ["places", "geometry"];
 
-export default function Home() {
+const Home: React.FC = () => {
   // begin: Google Maps
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: GOOGLE_API_KEY,
@@ -51,7 +51,7 @@ export default function Home() {
     setMap(map);
   }, []);
 
-  const onUnmount = useCallback(function callback(_) {
+  const onUnmount = useCallback(function callback() {
     setMap(null);
   }, []);
   // end: Google Maps
@@ -146,8 +146,6 @@ export default function Home() {
   const [currentLocation, setCurrentLocation] = useState<google.maps.LatLng>();
   const searchBox = useRef<HTMLInputElement>();
   const [coords, setCoords] = useState<google.maps.LatLng[]>([]);
-  const [autocomplete, setAutocomplete] =
-    useState<google.maps.places.Autocomplete>();
 
   const submitSearch = useCallback(() => {
     if (searchBox.current.value === "") {
@@ -173,12 +171,10 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    setAutocomplete(
-      new google.maps.places.Autocomplete(searchBox.current, {
-        types: ["(cities)"],
-        componentRestrictions: { country: "us" },
-      })
-    );
+    new google.maps.places.Autocomplete(searchBox.current, {
+      types: ["(cities)"],
+      componentRestrictions: { country: "us" },
+    });
   }, [isLoaded, searchBox]);
 
   useEffect(() => {
@@ -295,9 +291,7 @@ export default function Home() {
                 </div>
               )}
               {formSuccess && (
-                <div className="text-green-800">
-                  Thank you for signing up!
-                </div>
+                <div className="text-green-800">Thank you for signing up!</div>
               )}
               <button
                 className="self-start w-full mt-3 text-base font-semibold button-dark md:button-light px-6 py-1 md:bg-white md:w-auto lg:text-lg"
@@ -311,7 +305,7 @@ export default function Home() {
             <div className={`relative h-full z-content ${styles.image_width}`}>
               <div
                 className={` ${styles.image_width} transform scale-75 md:scale-100`}
-                style={{ ["--tw-translate-y" as any]: kioskTransform }}
+                style={{ ["--tw-translate-y" as never]: kioskTransform }}
               >
                 <Image
                   src="/kiosk_full"
@@ -555,4 +549,6 @@ export default function Home() {
       <Footer />
     </>
   );
-}
+};
+
+export default Home;

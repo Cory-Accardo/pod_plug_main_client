@@ -4,7 +4,7 @@ interface RewardsCardProps {
   image: string;
 }
 
-export default function RewardsCard(props: RewardsCardProps) {
+const RewardsCard: React.FC<RewardsCardProps> = (props) => {
   return (
     <div className="rounded-3xl bg-white shadow-xl flex flex-col lg:flex-row h-80 items-center my-4 overflow-hidden w-72 sm:w-96 lg:w-184">
       <div className="flex flex-row items-center py-2 lg:py-0 w-full lg:w-auto">
@@ -25,4 +25,6 @@ export default function RewardsCard(props: RewardsCardProps) {
       ></div>
     </div>
   );
-}
+};
+
+export default RewardsCard;
