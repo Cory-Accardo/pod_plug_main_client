@@ -13,12 +13,9 @@ import { useCookies } from "react-cookie";
 import CheckoutHeader from "../components/CheckoutHeader";
 import Footer from "../components/Footer";
 import Image from "../components/Image";
-import { JSON_HEADER } from "../constants";
 import imageFromCardBrand from "../hooks/imageFromCardBrand";
 
-const SERVER = "http://localhost:2000/";
-
-const payment_ms_url = "http://localhost:8080"; //change as needed
+const SERVER = "https://payment.podplug.com:2000/";
 
 enum PaymentStates {
   Waiting = 0,
@@ -38,7 +35,6 @@ export default function Checkout() {
 
   const [state, setState] = useState(PaymentStates.Waiting);
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
-  const [socket, setSocket] = useState(undefined);
   const [retryCount, setRetryCount] = useState(2);
   const [paymentAmount, setPaymentAmount] = useState(undefined);
   const [last4, setLast4] = useState(undefined);
@@ -48,49 +44,53 @@ export default function Checkout() {
     if (!router.isReady) {
       return;
     }
-    const socket = io(SERVER, { transports: ["websocket"], reconnection: false, upgrade: false });
+    const socket = io(SERVER, {
+      transports: ["websocket"],
+      reconnection: false,
+      upgrade: false,
+    });
     socket.on("connect", () => {
       console.log(socket.id);
       var retry = true;
       while (retry) {
         retry = false;
-        socket.emit("notify",
-      {
-        refreshToken: cookies["x-refresh-token"],
-        terminalId: router.query["terminalId"]
-      }
-      , (response) => {
-          if(response.status === "success"){
-            setState(PaymentStates.Connected);
-            setTimeout(() => {
-            setState(PaymentStates.Success);
-             }, 300);
-          }
-          else{
-            if (retryCount > 0) {
-              setRetryCount(retryCount - 1);
-              setState(PaymentStates.ConnectionRetrying);
-              retry = true;
+        socket.emit(
+          "notify",
+          {
+            refreshToken: cookies["x-refresh-token"],
+            terminalId: router.query["terminalId"],
+          },
+          (response) => {
+            if (response.status === "success") {
+              setState(PaymentStates.Connected);
+              setTimeout(() => {
+                setState(PaymentStates.Success);
+              }, 300);
             } else {
-              setState(PaymentStates.ConnectionError);
-              socket.disconnect();
+              if (retryCount > 0) {
+                setRetryCount(retryCount - 1);
+                setState(PaymentStates.ConnectionRetrying);
+                retry = true;
+              } else {
+                setState(PaymentStates.ConnectionError);
+                socket.disconnect();
+              }
             }
-          } 
-        });
-        
+          }
+        );
       }
     });
 
     socket.on("disconnect", () => {
       console.log("DISCONNECTED"); // false
     });
-    
+
     socket.on("connect_error", () => {
       setState(PaymentStates.ConnectionError);
     });
 
     socket.on("sale-obj", (data) => {
-      const { products, paymentMethod, amount } = data;
+      const { paymentMethod, amount } = data;
       setPaymentAmount(amount);
       setLast4(paymentMethod.card.last4);
       setCardBrand(paymentMethod.card.brand);
@@ -111,8 +111,6 @@ export default function Checkout() {
         setState(PaymentStates.ThankYou);
       }, 1000);
     });
-
-    setSocket(socket);
   }, [cookies, retryCount, router]);
 
   useEffect(() => {
