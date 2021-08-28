@@ -16,7 +16,7 @@ import Image from "../components/Image";
 import { JSON_HEADER } from "../constants";
 import imageFromCardBrand from "../hooks/imageFromCardBrand";
 
-const SERVER = "http://payment.podplug.com:2000/";
+const SERVER = "https://payment.podplug.com:2000/";
 
 const payment_ms_url = "https://payment.podplug.com:8443"; //change as needed
 
