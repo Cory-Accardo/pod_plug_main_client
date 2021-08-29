@@ -58,7 +58,7 @@ const ChangePassword: React.FC = () => {
         <link rel="shortcut icon" href="/favicon.png" />
         <title>Checkout - Pod Plug</title>
       </Head>
-      <SignupHeader />
+      <SignupHeader text="home" link="/" />
       <main className="relative">
         {/* Clouds */}
         <div className="absolute top-0 z-clouds w-full">

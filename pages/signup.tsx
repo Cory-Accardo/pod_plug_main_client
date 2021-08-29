@@ -266,7 +266,7 @@ const Signup: React.FC = () => {
         <title>Sign Up - Pod Plug</title>
       </Head>
       {/* Header */}
-      <SignupHeader />
+      <SignupHeader text="home" link="/" />
 
       <main className="relative overflow-hidden">
         {/* Clouds */}
