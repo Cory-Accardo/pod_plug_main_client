@@ -9,7 +9,7 @@ import { API } from "../constants";
 import useSignedInOnly from "../hooks/useSignedInOnly";
 
 const Cards: React.FC = () => {
-  useSignedInOnly();
+  useSignedInOnly("/cards");
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const [cards, setCards] = useState(undefined);
   const [defaultCard, setDefaultCard] = useState(undefined);

@@ -59,7 +59,11 @@ const Login: React.FC = () => {
               path: "/",
               sameSite: "strict",
             });
-            router.push("/");
+            if (router.query["origin"]) {
+              router.push(router.query["origin"] as string);
+            } else {
+              router.push("/");
+            }
           } else {
             setGeneralError(
               "There is something wrong on our side. Please try again later."

@@ -23,7 +23,7 @@ const stripePromise = loadStripe(
 
 function CardForm() {
   // Ensure signed in
-  useSignedInOnly();
+  useSignedInOnly("/setup_card");
 
   const router = useRouter();
   const stripe = useStripe();
