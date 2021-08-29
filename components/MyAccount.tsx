@@ -42,7 +42,7 @@ const MyAccount: React.FC = () => {
       {(!cookies["x-token"] || !cookies["x-refresh-token"]) && (
         <>
           <motion.div
-            className="rounded-lg border-2 border-header-black bg-myaccount-gray absolute top-0 left-0 right-0 overflow-hidden z-content"
+            className="rounded-lg border-2 border-header-black bg-myaccount-gray absolute top-0 left-0 right-0 overflow-hidden"
             initial={{ bottom: "0rem" }}
             animate={{ bottom: open ? "-5rem" : "0rem" }}
           >

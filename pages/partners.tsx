@@ -224,9 +224,9 @@ const Partners: React.FC = () => {
           />
         </div>
         <div className="outer-container flex flex-col items-center">
-          <div className="page container relative z-content">
+          <div className="page container relative">
             <div className="w-full h-full flex flex-col md:flex-row items-center relative">
-              <div className="flex flex-col text-center flex-grow mt-24 sm:mt-32 md:mt-0">
+              <div className="flex flex-col text-center flex-grow mt-24 sm:mt-32 md:mt-0 relative z-content">
                 <div className="text-4xl sm:text-5xl md:text-5xl xl:text-7xl font-bold text-title-blue-dark">
                   Partner with us
                 </div>
@@ -238,7 +238,7 @@ const Partners: React.FC = () => {
                 </div>
               </div>
               <div
-                className={`${styles.image_width} transform scale-75 -translate-y-8 md:translate-y-0 md:scale-100`}
+                className={`${styles.image_width} transform scale-75 -translate-y-8 md:translate-y-0 md:scale-100 relative z-content`}
               >
                 <Image
                   src="/kiosk_full"
