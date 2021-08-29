@@ -12,13 +12,12 @@ import { JSON_HEADER, API, VERIDAS_URL } from "../constants";
 import { dlOptions } from "../veridasOptions";
 
 // Check is older than 21
-// TODO: now the limit is 18 for testing
 const isOldEnough = (birthday: Date) => {
   const now = new Date();
   const yearDiff = now.getFullYear() - birthday.getFullYear();
-  if (yearDiff > 18) {
+  if (yearDiff > 21) {
     return true;
-  } else if (yearDiff < 18) {
+  } else if (yearDiff < 21) {
     return false;
   } else {
     if (now.getMonth() > birthday.getMonth()) {
