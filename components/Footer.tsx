@@ -57,7 +57,7 @@ const Footer: React.FC = () => {
               <Link href="/">Home</Link>
             </div>
             <div className="self-center mx-2 lg:mx-5">
-              <Link href="/rewards">Rewards Venues</Link>
+              <Link href="/rewards">Rewards</Link>
             </div>
             <div className="self-center mx-2 lg:mx-5">
               <Link href="/about">About Us</Link>
