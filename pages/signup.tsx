@@ -314,6 +314,12 @@ const Signup: React.FC = () => {
                     if (country) {
                       setValue2("country", country.short_name);
                     }
+                    const zip = json.results[0].address_components.find(
+                      (component) => component.types[0] === "postal_code"
+                    );
+                    if (zip) {
+                      setValue2("zip", zip.long_name);
+                    }
                   }
                 });
             }
