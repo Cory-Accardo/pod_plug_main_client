@@ -8,7 +8,7 @@ import { faCheckSquare } from "@fortawesome/free-regular-svg-icons";
 import { useForm } from "react-hook-form";
 
 import SignupHeader from "../components/SignupHeader";
-import { JSON_HEADER, API, VERIDAS_URL } from "../constants";
+import { JSON_HEADER, API, VERIDAS_URL, GOOGLE_API_KEY } from "../constants";
 import { dlOptions } from "../veridasOptions";
 
 // Check is older than 21
@@ -87,6 +87,13 @@ const checkVeridas = (
   return true;
 };
 
+const capitalize = (str: string): string => {
+  return str
+    .trim()
+    .toLowerCase()
+    .replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()));
+};
+
 const Signup: React.FC = () => {
   const [formNum, setFormNum] = useState(0);
   const [form, setForm] = useState({});
@@ -145,6 +152,7 @@ const Signup: React.FC = () => {
   const {
     register: register2,
     handleSubmit: handleSubmit2,
+    setValue: setValue2,
     formState: { errors: errors2 },
   } = useForm({ mode: "all" });
   const onSubmit2 = (values) => {
@@ -245,6 +253,70 @@ const Signup: React.FC = () => {
               });
           } else {
             setFormNum(3);
+            const fname = event.data.additionalData.ocr.nodes.find(
+              (node) => node.fieldName === "Name"
+            );
+            if (fname && fname.text) {
+              setValue2("fname", capitalize(fname.text));
+            }
+            const lname = event.data.additionalData.ocr.nodes.find(
+              (node) => node.fieldName === "Name"
+            );
+            if (lname && lname.text) {
+              setValue2("lname", capitalize(lname.text));
+            }
+            const address = event.data.additionalData.ocr.nodes.find(
+              (node) => node.fieldName === "Address"
+            );
+            if (address && address.text) {
+              fetch(
+                `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+                  address.text
+                )}&key=${GOOGLE_API_KEY}`
+              )
+                .then((res) => {
+                  return res.json();
+                })
+                .then((json) => {
+                  if (json.results.length > 0) {
+                    const streetNumber =
+                      json.results[0].address_components.find(
+                        (component) => component.types[0] === "street_number"
+                      );
+                    const streetAddress =
+                      json.results[0].address_components.find(
+                        (component) => component.types[0] === "route"
+                      );
+                    if (streetNumber && streetAddress) {
+                      setValue2(
+                        "address",
+                        [streetAddress.long_name, streetNumber.long_name].join(
+                          " "
+                        )
+                      );
+                    }
+                    const city = json.results[0].address_components.find(
+                      (component) => component.types[0] === "locality"
+                    );
+                    if (city) {
+                      setValue2("city", city.long_name);
+                    }
+                    const state = json.results[0].address_components.find(
+                      (component) =>
+                        component.types[0] === "administrative_area_level_1"
+                    );
+                    if (state) {
+                      setValue2("state", state.long_name);
+                    }
+                    const country = json.results[0].address_components.find(
+                      (component) => component.types[0] === "country"
+                    );
+                    if (country) {
+                      setValue2("country", country.short_name);
+                    }
+                  }
+                });
+            }
           }
         }
       };
@@ -255,7 +327,7 @@ const Signup: React.FC = () => {
         window.removeEventListener("message", listener);
       };
     }
-  }, [form, type]);
+  }, [form, setValue2, type]);
   // end: veridas
 
   return (
