@@ -6,7 +6,7 @@ import {
   faInstagramSquare,
   faFacebookSquare,
 } from "@fortawesome/free-brands-svg-icons";
-import { faBuilding, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 
 const Footer: React.FC = () => {
   return (
@@ -34,22 +34,26 @@ const Footer: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-row mt-6 text-theme-dark z-content">
-              <FontAwesomeIcon
-                icon={faInstagramSquare}
-                className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              />
-              <FontAwesomeIcon
-                icon={faFacebookSquare}
-                className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              />
-              <FontAwesomeIcon
-                icon={faBuilding}
-                className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
-              />
-              <FontAwesomeIcon
-                icon={faPhone}
-                className="w-4 h-4 md:w-6 md:h-6"
-              />
+              <a href="https://www.instagram.com/podplugofficial/?hl=en">
+                <FontAwesomeIcon
+                  icon={faInstagramSquare}
+                  className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
+                />
+              </a>
+              <a href="https://www.facebook.com/podplugofficial/">
+                <FontAwesomeIcon
+                  icon={faFacebookSquare}
+                  className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
+                />
+              </a>
+              <Link href="/contact" passHref>
+                <a>
+                  <FontAwesomeIcon
+                    icon={faBuilding}
+                    className="w-4 h-4 mr-2 md:mr-3 md:w-6 md:h-6"
+                  />
+                </a>
+              </Link>
             </div>
           </div>
           <div className="flex-row self-center hidden z-content md:flex">
@@ -57,7 +61,7 @@ const Footer: React.FC = () => {
               <Link href="/">Home</Link>
             </div>
             <div className="self-center mx-2 lg:mx-5">
-              <Link href="/rewards">Rewards Venues</Link>
+              <Link href="/rewards">Rewards</Link>
             </div>
             <div className="self-center mx-2 lg:mx-5">
               <Link href="/about">About Us</Link>

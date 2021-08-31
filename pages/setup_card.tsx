@@ -23,7 +23,7 @@ const stripePromise = loadStripe(
 
 function CardForm() {
   // Ensure signed in
-  useSignedInOnly();
+  useSignedInOnly("/setup_card");
 
   const router = useRouter();
   const stripe = useStripe();
@@ -212,7 +212,7 @@ const SetupCard: React.FC = () => {
         <link rel="shortcut icon" href="/favicon.png" />
         <title>Edit Payment Method - Pod Plug</title>
       </Head>
-      <SignupHeader />
+      <SignupHeader text="my cards" link="/cards" />
       <main className="relative overflow-hidden">
         {/* Clouds */}
         <div className="absolute z-clouds w-full">

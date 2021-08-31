@@ -2,18 +2,25 @@ import Image from "../components/Image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-const SignupHeader: React.FC = () => {
+interface SignupHeaderProps {
+  link: string;
+  text: string;
+}
+
+const SignupHeader: React.FC<SignupHeaderProps> = (props) => {
   const router = useRouter();
   return (
     <div className="flex flex-row items-center px-16 py-4 md:px-32 relative z-content bg-header-black">
       <div
         className="absolute h-full flex flex-row items-center cursor-pointer"
         onClick={() => {
-          router.push("/");
+          router.push(props.link);
         }}
       >
         <img src="/arrow_left.svg" alt="Arrow" className="w-4" />
-        <div className="text-white ml-6 hidden md:block">Exit to home</div>
+        <div className="text-white ml-6 hidden md:block">
+          Exit to {props.text}
+        </div>
       </div>
       <div className="relative w-20 mx-auto">
         <Link href="/" passHref>

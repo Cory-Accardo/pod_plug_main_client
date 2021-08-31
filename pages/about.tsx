@@ -60,16 +60,16 @@ const About: React.FC = () => {
             style={{ top: "40rem", left: "-25vw" }}
           />
         </div>
-        <div className="outer-container flex flex-col items-center pt-8 md:pt-24 pb-12 relative z-content">
+        <div className="outer-container flex flex-col items-center pt-8 md:pt-24 pb-12">
           <div className="container flex flex-col-reverse md:flex-row items-center">
             <div className="flex flex-col items-center md:items-start md:w-1/2">
               <div className="inline-block my-auto">
-                <div className="font-bold text-6xl md:text-4.9xl lg:text-6xl xl:text-7xl text-center md:text-left leading-tight">
+                <div className="font-bold text-6xl md:text-4.9xl lg:text-6xl xl:text-7xl text-center md:text-left leading-tight relative z-content">
                   Get to <br className="block sm:hidden" /> know us
                 </div>
               </div>
             </div>
-            <div className="w-full md:w-1/2 max-w-32 md:max-w-none px-4 py-8 md:p-24 flex flex-row items-center">
+            <div className="w-full md:w-1/2 max-w-32 md:max-w-none px-4 py-8 md:p-24 flex flex-row items-center relative z-content">
               <div
                 className="relative mx-auto w-full"
                 style={{ maxWidth: "18rem" }}

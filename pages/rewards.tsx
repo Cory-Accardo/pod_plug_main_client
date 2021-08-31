@@ -107,15 +107,15 @@ const Rewards: React.FC = () => {
           />
         </div>
         {/* Top */}
-        <div className="outer-container flex flex-col items-center md:h-page_md lg:h-page relative z-content">
-          <div className="absolute right-0 bottom-32 top-32 2xl:right-16 flex-col items-end hidden lg:flex">
+        <div className="outer-container flex flex-col items-center md:h-page_md lg:h-page relative">
+          <div className="absolute right-0 bottom-32 top-32 2xl:right-16 flex-col items-end hidden lg:flex z-content">
             <img
               src="/rewards.svg"
               alt="Rewards illustration"
               className="h-full"
             ></img>
           </div>
-          <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-full">
+          <div className="container flex flex-col items-center md:items-start mt-24 mb-24 md:mb-0 md:mt-64 w-full relative z-content">
             <div className="font-bold text-4xl md:text-4.5xl xl:text-5xl mb-4 mt-auto text-center md:text-left">
               Enhance you evening out
             </div>

@@ -12,7 +12,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faBuilding,
-  faPhone,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
@@ -176,9 +175,9 @@ const Contact: React.FC = () => {
                 />
               )}
             </div>
-            <div className="flex-row justify-around hidden w-full mt-6 text-theme-dark md:flex">
+            <div className="flex-row justify-around hidden w-full mt-8 text-theme-dark md:flex">
               <div className="flex flex-col">
-                <div className="flex flex-row justify-between h-full">
+                <div className="flex flex-row justify-between h-full mb-4">
                   <FontAwesomeIcon icon={faBuilding} className="w-6 h-6 mr-8" />
                   <div className="text-black">
                     7411 Hines Pl
@@ -193,24 +192,20 @@ const Contact: React.FC = () => {
                     icon={faFacebookSquare}
                     className="w-6 h-6 mr-8"
                   />
-                  <div className="text-black">@podplug</div>
+                  <div className="text-black">@podplugofficial</div>
                 </div>
               </div>
               <div className="flex flex-col justify-between">
                 <div className="flex flex-row">
-                  <FontAwesomeIcon icon={faPhone} className="w-6 h-6 mr-8" />
-                  <div className="text-black">+1 310-430-0031</div>
-                </div>
-                <div className="flex flex-row">
                   <FontAwesomeIcon icon={faEnvelope} className="w-6 h-6 mr-8" />
-                  <div className="text-black">hi@podplug.com</div>
+                  <div className="text-black">contact@podplug.com</div>
                 </div>
                 <div className="flex flex-row">
                   <FontAwesomeIcon
                     icon={faInstagramSquare}
                     className="w-6 h-6 mr-8"
                   />
-                  <div className="text-black">@podplug</div>
+                  <div className="text-black">@podplugofficial</div>
                 </div>
               </div>
             </div>

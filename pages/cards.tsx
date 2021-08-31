@@ -9,7 +9,7 @@ import { API } from "../constants";
 import useSignedInOnly from "../hooks/useSignedInOnly";
 
 const Cards: React.FC = () => {
-  useSignedInOnly();
+  useSignedInOnly("/cards");
   const [cookies] = useCookies(["x-token", "x-refresh-token"]);
   const [cards, setCards] = useState(undefined);
   const [defaultCard, setDefaultCard] = useState(undefined);
@@ -58,7 +58,7 @@ const Cards: React.FC = () => {
           <link rel="shortcut icon" href="/favicon.png" />
           <title>Your Cards - Pod Plug</title>
         </Head>
-        <SignupHeader />
+        <SignupHeader text="home" link="/" />
         <main className="bg-background-gray flex-grow flex flex-col items-center px-8 pt-12">
           {defaultCard &&
             cards &&
