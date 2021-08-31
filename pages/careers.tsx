@@ -62,7 +62,7 @@ const Careers: React.FC = () => {
               Let&apos;s work together
             </div>
             <div className="text-theme-dark md:text-subtitle-gray font-semibold text-2xl text-center mt-4">
-              Discover your dream job with Pod Plug
+              Come help us build a WOW experience for Customers and Consumers
             </div>
             <div className="w-2/5 md:w-64 bg-white rounded-xl p-3 self-center mt-6">
               <div className="relative w-full h-full">
@@ -95,23 +95,26 @@ const Careers: React.FC = () => {
             <div className="font-bold text-4xl md:text-5xl text-center">
               Why Pod Plug?
             </div>
-            <div className="text-center mt-10">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui non
-              assumenda nam excepturi voluptatum ea incidunt in velit magni
-              ullam. Odio deserunt quisquam nesciunt dolorum. Sint ipsum sit
-              itaque alias!
+            <div className="mt-10">
+            We believe hardwork and top-tier customer service provide the WOW experience that is the main pillar
+            to our success. As a start-up we are looking for team members to help champion this simple vision.
             </div>
-            <div className="text-center mt-6">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui non
-              assumenda nam excepturi voluptatum ea incidunt in velit magni
-              ullam. Odio deserunt quisquam nesciunt dolorum. Sint ipsum sit
-              itaque alias!
+            <div className="mt-6">
+            What we are looking for:
             </div>
-            <div className="text-center mt-6">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui non
-              assumenda nam excepturi voluptatum ea incidunt in velit magni
-              ullam. Odio deserunt quisquam nesciunt dolorum. Sint ipsum sit
-              itaque alias!
+            <div className="mt-4 ml-5">
+            <ul className="list-disc">
+              <li>Positive attitudes</li>
+              <li>Trustworthy individuals</li>
+              <li>Full-time salaried sales, customer success, and operations positions</li>
+              <li>Part-time merchandisers</li>
+            </ul>
+            </div>
+            <div className="mt-6">
+            We offer competitive wages, unlimited PTO, best-in-class training, and career growth opportunities in a
+            supportive and highly collaborative environment. Our management team trusts our team members to
+            get their job done and rewards you for going above and beyond.
+            Plug into an opportunity with us today!”
             </div>
           </div>
         </div>
