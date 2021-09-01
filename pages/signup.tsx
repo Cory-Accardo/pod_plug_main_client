@@ -47,7 +47,7 @@ const checkVeridas = (
   ).value;
   console.log("Life proof", lifeProof);
   console.log("Document score", documentScore);
-  if (lifeProof < 0.65 || documentScore < 0.65) {
+  if (lifeProof < 0.50 || documentScore < 0.50) {
     return false;
   }
   const dobNode = data.additionalData.ocr.nodes.find(
