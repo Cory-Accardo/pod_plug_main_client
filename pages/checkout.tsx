@@ -5,7 +5,7 @@ import {
   faCheckSquare,
   faTimesCircle,
 } from "@fortawesome/free-regular-svg-icons";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
@@ -14,13 +14,14 @@ import CheckoutHeader from "../components/CheckoutHeader";
 import Footer from "../components/Footer";
 import Image from "../components/Image";
 import imageFromCardBrand from "../hooks/imageFromCardBrand";
-import { loadStripe } from "@stripe/stripe-js";
+import {loadStripe} from '@stripe/stripe-js';
 
-const stripePromise = loadStripe(
-  "pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs"
-);
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe('pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs');
 
-const SERVER = "https://payment.podplug.com:2000/";
+// const SERVER = "https://payment.podplug.com:2000/";
+const SERVER = "http://localhost:2000";
 
 enum PaymentStates {
   Waiting = 0,
@@ -45,7 +46,7 @@ const Checkout: React.FC = () => {
   const [paymentAmount, setPaymentAmount] = useState(undefined);
   const [last4, setLast4] = useState(undefined);
   const [cardBrand, setCardBrand] = useState(undefined);
-  const [paymentError, setPaymentError] = useState(undefined);
+  const [paymentError, setPaymentError] = useState(undefined)
 
   useEffect(() => {
     if (!router.isReady) {
@@ -68,14 +69,12 @@ const Checkout: React.FC = () => {
             terminalId: router.query["terminalId"],
           },
           (response) => {
-            if (response.status === "no_default_payment") {
-              //user has no default payment enabled
+            if(response.status === "no_default_payment"){ //user has no default payment enabled
               socket.disconnect();
               router.push("/cards");
               return;
             }
-            if (response.status === "unauthorized") {
-              //user is not logged in, or has a bad session
+            if(response.status === "unauthorized"){ //user is not logged in, or has a bad session
               socket.disconnect();
               router.push("/login");
               return;
@@ -124,33 +123,33 @@ const Checkout: React.FC = () => {
       console.log(error);
       setPaymentError(error);
 
-      if (error_code === "authentication_required") {
+      if(error_code === "authentication_required"){
         const { intent } = data;
         console.log(intent);
         const stripe = await stripePromise;
-        stripe
-          .confirmCardPayment(intent.client_secret, {
-            payment_method: intent.last_payment_error.payment_method.id,
-          })
-          .then((result) => {
-            if (result.error) {
-              setPaymentError(result.error.message);
-              setState(PaymentStates.PaymentFailure);
-              socket.disconnect();
-            } else {
-              if (result.paymentIntent.status === "succeeded") {
-                setState(PaymentStates.PaymentSuccess);
-                setTimeout(() => {
-                  setState(PaymentStates.ThankYou);
-                  socket.disconnect();
-                }, 1000);
-              }
+        stripe.confirmCardPayment(intent.client_secret, {
+          payment_method: intent.last_payment_error.payment_method.id
+        }).then((result) => {
+          if (result.error) {
+            setPaymentError(result.error.message)
+            setState(PaymentStates.PaymentFailure)
+            socket.disconnect();
+          } else {
+            if (result.paymentIntent.status === 'succeeded') {
+              setState(PaymentStates.PaymentSuccess);
+              setTimeout(() => {
+                setState(PaymentStates.ThankYou);
+                socket.disconnect();
+              }, 1000);
             }
-          });
-      } else {
+          }
+        });
+      }
+      else{
         setState(PaymentStates.PaymentFailure);
         socket.disconnect();
       }
+
     });
 
     socket.on("payment-success", () => {
@@ -160,7 +159,8 @@ const Checkout: React.FC = () => {
         socket.disconnect();
       }, 3000);
     });
-  }, [cookies, retryCount, router, state]);
+  }, [cookies, retryCount, router]);
+
 
   return (
     <>
@@ -313,7 +313,7 @@ const Checkout: React.FC = () => {
                 </div>
               </div>
             )}
-            {state === PaymentStates.PaymentFailure && (
+            {(state === PaymentStates.PaymentFailure) && (
               <div>
                 <div className="text-xl font-bold text-center mr-4 text-red-700 w-64 max-w-full mt-6">
                   {paymentError}
@@ -328,15 +328,10 @@ const Checkout: React.FC = () => {
                     **** **** **** {last4}
                   </div>
                 </div>
-                <button
-                  onClick={() => {
-                    router.push("/cards");
-                    return;
-                  }}
-                  className="shadow-xl bg-blue-700 hover:bg-blue-600 w-64 max-w-full mt-6 text-center text-white py-2 px-4 rounded"
-                >
-                  Resolve
-                </button>
+                <button onClick={() =>{
+                  router.push("/cards")
+                  return
+                }}className="shadow-xl bg-blue-700 hover:bg-blue-600 w-64 max-w-full mt-6 text-center text-white py-2 px-4 rounded">Resolve</button>
               </div>
             )}
           </div>
