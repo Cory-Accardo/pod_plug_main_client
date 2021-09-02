@@ -67,12 +67,31 @@ const Checkout: React.FC = () => {
             refreshToken: cookies["x-refresh-token"],
             terminalId: router.query["terminalId"],
           },
-          (response) => {
+          async (response) => {
             if (response.status === "no_default_payment") {
               //user has no default payment enabled
-              socket.disconnect();
-              router.push("/cards");
-              return;
+              const stripe = await stripePromise;
+              const paymentRequest = stripe.paymentRequest({
+                country: 'US',
+                currency: 'usd',
+                total: {
+                  label: 'Demo total',
+                  amount: 1099,
+                },
+                requestPayerName: true,
+                requestPayerEmail: true,
+              });
+              console.log(paymentRequest)
+              const result = await paymentRequest.canMakePayment();
+              console.log(result)
+              if (result) {
+                console.log("WE CAN APPLE PAY")
+              } else {
+                console.log("NO APPLE PAY")
+              }
+              // socket.disconnect();
+              // router.push("/cards");
+              // return;
             }
             if (response.status === "unauthorized") {
               //user is not logged in, or has a bad session
