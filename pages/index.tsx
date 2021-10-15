@@ -17,7 +17,7 @@ import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { useCallback, useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";
 import BezierEasing from "bezier-easing";
-import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+import { Libraries } from '@react-google-maps/api/src/utils/make-load-script-url';
 import { useRouter } from "next/router";
 
 import styles from "../styles/Index.module.css";

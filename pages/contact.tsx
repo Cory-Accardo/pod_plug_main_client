@@ -14,7 +14,8 @@ import {
   faBuilding,
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
-import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+
+import { Libraries } from '@react-google-maps/api/src/utils/make-load-script-url'
 
 const containerStyle = {
   height: "100%",
@@ -29,7 +30,7 @@ const mapOptions = {
   zoom: 10,
 };
 
-const libraries: Libraries = ["places", "geometry"];
+const libraries : Libraries = ["places", "geometry"];
 
 const Contact: React.FC = () => {
   // begin: Google Maps

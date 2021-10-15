@@ -19,7 +19,7 @@ import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useState, useCallback, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
-import { Libraries } from "@react-google-maps/api/dist/utils/make-load-script-url";
+import { Libraries } from "@react-google-maps/api/src/utils/make-load-script-url";
 import { useForm } from "react-hook-form";
 
 const containerStyle = {

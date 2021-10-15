@@ -19,7 +19,7 @@ import { STRIPE_PK } from "../constants";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(STRIPE_PK);
+// const stripePromise = loadStripe(STRIPE_PK);
 
 const SERVER = "https://payment.podplug.com:2000/";
 // const SERVER = "http://localhost:2000";
