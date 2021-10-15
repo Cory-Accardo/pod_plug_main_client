@@ -15,10 +15,11 @@ import Footer from "../components/Footer";
 import Image from "../components/Image";
 import imageFromCardBrand from "../hooks/imageFromCardBrand";
 import {loadStripe} from '@stripe/stripe-js';
+import { STRIPE_PK } from "../constants";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs');
+const stripePromise = loadStripe(STRIPE_PK);
 
 const SERVER = "https://payment.podplug.com:2000/";
 // const SERVER = "http://localhost:2000";

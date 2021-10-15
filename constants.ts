@@ -9,3 +9,5 @@ export const JSON_HEADER = {
 };
 
 export const VERIDAS_URL = "xpressid.us.veri-das.com";
+
+export const STRIPE_PK = 'pk_test_51JjuaNKrxWPxSH1HhUtt2yyrDs6W5guGPbEmw6EKeyQzcSYQmPbFzwyQDbcYJwjPcJGErdEfF2mGxUbZVC8BAvef00EyYdtSXj'
