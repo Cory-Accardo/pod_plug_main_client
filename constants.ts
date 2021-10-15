@@ -8,4 +8,4 @@ export const JSON_HEADER = {
   "Content-Type": "application/json",
 };
 
-export const VERIDAS_URL = "xpressid-work.eu.veri-das.com";
+export const VERIDAS_URL = "xpressid.us.veri-das.com";
