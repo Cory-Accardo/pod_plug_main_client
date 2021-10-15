@@ -20,8 +20,8 @@ import {loadStripe} from '@stripe/stripe-js';
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs');
 
-// const SERVER = "https://payment.podplug.com:2000/";
-const SERVER = "http://localhost:2000";
+const SERVER = "https://payment.podplug.com:2000/";
+// const SERVER = "http://localhost:2000";
 
 enum PaymentStates {
   Waiting = 0,
@@ -111,7 +111,7 @@ const Checkout: React.FC = () => {
 
     socket.on("sale-obj", (data) => {
       const { paymentMethod, amount } = data;
-      setPaymentAmount(amount);
+      setPaymentAmount(amount * 100);
       setLast4(paymentMethod.card.last4);
       setCardBrand(paymentMethod.card.brand);
       setState(PaymentStates.PaymentProcessing);
