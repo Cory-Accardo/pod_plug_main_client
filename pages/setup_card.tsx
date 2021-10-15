@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useState, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { STRIPE_PK } from "../constants";
 
 import Head from "next/head";
 import {
@@ -18,7 +19,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useCookies } from "react-cookie";
 
 const stripePromise = loadStripe(
-  "pk_test_51IqWoeJsYPVWfSRXUGgucGNsp7DkKcis89HjqiV6WhqHFd7AXCJBaQrBuntDYKlAMvae3IinpH6Fx6xt6Nv7iwiX00lVd7NgKs"
+  STRIPE_PK
 );
 
 function CardForm() {
