@@ -19,10 +19,10 @@ import { STRIPE_PK } from "../constants";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-// const stripePromise = loadStripe(STRIPE_PK);
+const stripePromise = loadStripe(STRIPE_PK);
 
-const SERVER = "https://payment.podplug.com:2000/";
-// const SERVER = "http://localhost:2000";
+const SERVER = "https://payment.podplug.com:2000/"
+// const SERVER = 'http://localhost:2000';
 
 enum PaymentStates {
   Waiting = 0,
@@ -63,6 +63,7 @@ const Checkout: React.FC = () => {
       let retry = true;
       while (retry) {
         retry = false;
+        console.log('test');
         socket.emit(
           "notify",
           {
@@ -71,11 +72,13 @@ const Checkout: React.FC = () => {
           },
           (response) => {
             if(response.status === "no_default_payment"){ //user has no default payment enabled
+              console.log('no default');
               socket.disconnect();
               router.push("/cards");
               return;
             }
             if(response.status === "unauthorized"){ //user is not logged in, or has a bad session
+              console.log('unauth');
               socket.disconnect();
               router.push("/login");
               return;
@@ -136,21 +139,21 @@ const Checkout: React.FC = () => {
       //       setState(PaymentStates.PaymentFailure)
       //       socket.disconnect();
       //     }
-      //     // else {
-      //     //   if (result.paymentIntent.status === 'succeeded') {
-      //     //     setState(PaymentStates.PaymentSuccess);
-      //     //     setTimeout(() => {
-      //     //       setState(PaymentStates.ThankYou);
-      //     //       socket.disconnect();
-      //     //     }, 1000);
-      //     //   }
-      //     // }
+      //     else {
+      //       if (result.paymentIntent.status === 'succeeded') {
+      //         setState(PaymentStates.PaymentSuccess);
+      //         setTimeout(() => {
+      //           setState(PaymentStates.ThankYou);
+      //           socket.disconnect();
+      //         }, 1000);
+      //       }
+      //     }
       //   });
       // }
-      // else{
+
         setState(PaymentStates.PaymentFailure);
         socket.disconnect();
-      // }
+      
 
     });
 
